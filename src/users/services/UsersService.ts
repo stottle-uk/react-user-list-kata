@@ -15,7 +15,7 @@ export class UsersService implements IGetUsers, IUpdateUsers {
   }
 
   update(user: Partial<User>) {
-    return Observable.create(user);
+    return Axios.post<User>(`${this.baseUrl}/users/${user.id}`, user).pipe(map(response => response.data));
   }
 
   private getWithRetry<T>(url: string): Observable<T> {

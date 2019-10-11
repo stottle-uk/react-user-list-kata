@@ -7,12 +7,12 @@ interface OwnProps {
   onCancel: () => void;
 }
 
-const UserProfileForm = ({ user, onSubmit, onCancel }: OwnProps) => {
+const UserProfileForm: React.FC<OwnProps> = ({ user, onSubmit, onCancel }: OwnProps) => {
   const [userData, setUserData] = useState<User>(user);
 
   const formItems = ['firstName', 'lastName', 'email', 'address', 'county', 'country'];
 
-  const onChange = (field: string) => (e: React.FormEvent<HTMLInputElement>) =>
+  const onChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) =>
     setUserData({ ...userData, [field]: e.currentTarget.value });
 
   const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {

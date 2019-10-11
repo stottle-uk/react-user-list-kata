@@ -9,12 +9,15 @@ interface OwnProps {
   onCancel: () => void;
 }
 
-const UserProfile = ({ user, onCancel }: OwnProps) => {
+const UserProfile: React.FC<OwnProps> = ({ user, onCancel }: OwnProps) => {
   const [userData, setUserData] = useState<User>();
   const { usersService } = useContext(UsersServiceContext);
 
   const onSubmit = (user: User) => {
-    console.log(user);
+    usersService
+      .update(user)
+      .pipe(tap(() => onCancel()))
+      .subscribe();
   };
 
   const userDataEffect = () => {

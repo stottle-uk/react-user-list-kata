@@ -7,7 +7,7 @@ interface OwnProps {
   onUserClick: (user: BaseUser) => void;
 }
 
-const UsersList = ({ onUserClick }: OwnProps) => {
+const UsersList: React.FC<OwnProps> = ({ onUserClick }: OwnProps) => {
   const [usersData, setUsersData] = useState<BaseUser[]>([]);
   const { usersService } = useContext(UsersServiceContext);
 
