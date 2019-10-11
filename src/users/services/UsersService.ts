@@ -15,7 +15,7 @@ export class UsersService implements IGetUsers, IUpdateUsers {
   private baseUrl = 'http://localhost:3000';
 
   getAll() {
-    return this.getWithRetry(`${this.baseUrl}/users`);
+    return this.getWithRetry(`/users`);
   }
 
   getById() {
@@ -27,7 +27,7 @@ export class UsersService implements IGetUsers, IUpdateUsers {
   }
 
   private getWithRetry(url: string): Observable<any> {
-    return Axios.get(`${this.baseUrl}/users`).pipe(
+    return Axios.get(`${this.baseUrl}${url}`).pipe(
       retryWhen(errors =>
         errors.pipe(
           scan(errorCount => ++errorCount, 0),

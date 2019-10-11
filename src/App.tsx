@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import './App.css';
 import logo from './logo.svg';
-import { UsersService } from './users/services/UsersService';
+import { UsersServiceContext } from './users/services/UsersServiceContext';
 
 const App: React.FC = () => {
-  const getStuff = (url: string) => () => {
-    const thing = new UsersService();
+  const { usersService } = useContext(UsersServiceContext);
 
-    thing.getAll().subscribe(response => console.log(response), error => console.log(error));
+  const usersDataEffect = () => {
+    const subscription = usersService
+      .getAll()
+      .subscribe(response => console.log(response), error => console.log(error));
+    return () => subscription.unsubscribe();
   };
+
+  useEffect(usersDataEffect, []);
+
   return (
-    <div className="App" onClick={getStuff('/users')}>
+    <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
