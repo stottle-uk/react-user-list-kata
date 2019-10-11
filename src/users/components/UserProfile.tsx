@@ -25,7 +25,14 @@ const UserProfile: React.FC<OwnProps> = ({ user, onCancel }: OwnProps) => {
 
   useEffect(userDataEffect, []);
 
-  return userData ? <UserProfileForm user={userData} onCancel={onCancel} onSubmit={onSubmit} /> : <></>;
+  return (
+    <div className="section">
+      <div className="content">
+        <h1>{user.username}</h1>
+      </div>
+      {userData && <UserProfileForm user={userData} onCancel={onCancel} onSubmit={onSubmit} />}{' '}
+    </div>
+  );
 };
 
 export default UserProfile;

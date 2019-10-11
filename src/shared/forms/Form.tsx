@@ -32,27 +32,44 @@ const Form = <T extends {}>({ initialFormData, formItems, formStatus, onSubmit, 
   };
 
   const renderFormItem = (item: FormInputItem) => (
-    <div key={item.name}>
-      <label htmlFor={item.name}>{item.label}</label>
-      <input
-        id={item.name}
-        type={item.type || 'text'}
-        defaultValue={(formData as any)[item.name]}
-        name={item.name}
-        onChange={onChange(item.name)}
-        disabled={formStatus.isSubmitting}
-        required
-      />
+    <div key={item.name} className="field">
+      <label className="label" htmlFor={item.name}>
+        {item.label}
+      </label>
+      <div className="control">
+        <input
+          id={item.name}
+          className="input"
+          type={item.type || 'text'}
+          defaultValue={(formData as any)[item.name]}
+          name={item.name}
+          onChange={onChange(item.name)}
+          disabled={formStatus.isSubmitting}
+          required
+        />
+      </div>
+    </div>
+  );
+
+  const renderButtons = () => (
+    <div className="field is-grouped">
+      <div className="control">
+        <button className="button is-link" type="submit">
+          Save
+        </button>
+      </div>
+      <div className="control">
+        <button className="button is-text" type="button" onClick={onCancel}>
+          Cancel
+        </button>
+      </div>
     </div>
   );
 
   return (
     <form onSubmit={onFormSubmit}>
       {formItems.map(renderFormItem)}
-      <button type="submit">Save</button>
-      <button type="button" onClick={onCancel}>
-        Cancel
-      </button>
+      {renderButtons()}
     </form>
   );
 };

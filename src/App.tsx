@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Container } from 'react-bulma-components';
 import './App.css';
 import UserProfile from './users/components/UserProfile';
 import UsersList from './users/components/UsersList';
@@ -12,10 +13,10 @@ const App: React.FC = () => {
   const onUserCancel = () => setSelectedUser(undefined);
 
   return (
-    <div className="App">
+    <Container>
       {!selectedUser && <UsersList onUserClick={onUserClick} />}
       {selectedUser && <UserProfile user={selectedUser} onCancel={onUserCancel} />}
-    </div>
+    </Container>
   );
 };
 
