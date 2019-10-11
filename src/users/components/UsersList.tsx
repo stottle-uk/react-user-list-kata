@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { map, tap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 import { BaseUser } from '../models/User';
 import { UsersServiceContext } from '../services/UsersServiceContext';
 
@@ -31,6 +32,10 @@ const UsersList: React.FC<OwnProps> = ({ onUserClick }: OwnProps) => {
     const subscription = usersService
       .getAll()
       .pipe(
+        catchError(error => {
+          console.log(error);
+          return of([]);
+        }),
         map(users => users.sort(byUsername)),
         tap(users => setUsersData(users))
       )
