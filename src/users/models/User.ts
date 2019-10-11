@@ -1,8 +1,11 @@
 import { Observable } from 'rxjs';
 
-export interface User {
+export interface BaseUser {
   id: string;
   username: string;
+}
+
+export interface User extends BaseUser {
   firstName: string;
   lastName: string;
   email: string;
@@ -13,7 +16,7 @@ export interface User {
 }
 
 export interface IGetUsers {
-  getAll: () => Observable<User[]>;
+  getAll: () => Observable<BaseUser[]>;
   getById: (userId: string) => Observable<User>;
 }
 
