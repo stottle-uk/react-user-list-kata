@@ -3,7 +3,11 @@ import { map, tap } from 'rxjs/operators';
 import { BaseUser } from '../models/User';
 import { UsersServiceContext } from '../services/UsersServiceContext';
 
-const UsersList: React.FC = () => {
+interface OwnProps {
+  onUserClick: (user: BaseUser) => void;
+}
+
+const UsersList = ({ onUserClick }: OwnProps) => {
   const [usersData, setUsersData] = useState<BaseUser[]>([]);
   const { usersService } = useContext(UsersServiceContext);
 
@@ -17,7 +21,11 @@ const UsersList: React.FC = () => {
     return 0;
   };
 
-  const renderUser = (user: BaseUser) => <li key={user.id}>{user.username}</li>;
+  const renderUser = (user: BaseUser) => (
+    <li key={user.id} onClick={() => onUserClick(user)}>
+      {user.username}
+    </li>
+  );
 
   const usersDataEffect = () => {
     const subscription = usersService
