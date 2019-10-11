@@ -1,39 +1,46 @@
 import React, { useState } from 'react';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
+import Form, { FormInputItem, FormStatus } from '../../shared/forms/Form';
 import { User } from '../models/User';
 
 interface OwnProps {
   user: User;
-  onSubmit: (user: User) => void;
+  onSubmit: (user: User) => Observable<User>;
   onCancel: () => void;
 }
 
 const UserProfileForm: React.FC<OwnProps> = ({ user, onSubmit, onCancel }: OwnProps) => {
-  const [userData, setUserData] = useState<User>(user);
+  const [formStatus, setFormStatus] = useState<FormStatus>({
+    isSubmitting: false,
+    isSubmitted: false,
+    isDirty: false
+  });
 
-  const formItems = ['firstName', 'lastName', 'email', 'address', 'county', 'country'];
+  const formItems: FormInputItem[] = [
+    { name: 'firstName', label: 'First Name' },
+    { name: 'lastName', label: 'Last Name' },
+    { name: 'email', label: 'Email', type: 'email' },
+    { name: 'address', label: 'Address' },
+    { name: 'county', label: 'County' },
+    { name: 'country', label: 'Country' }
+  ];
 
-  const onChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) =>
-    setUserData({ ...userData, [field]: e.currentTarget.value });
-
-  const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    onSubmit(userData);
+  const onFormSubmit = (user: User) => {
+    setFormStatus({ ...formStatus, isSubmitting: true, isSubmitted: false, isDirty: true });
+    onSubmit(user)
+      .pipe(tap(() => setFormStatus({ ...formStatus, isSubmitting: false, isSubmitted: true })))
+      .subscribe();
   };
 
   return (
-    <form onSubmit={onFormSubmit}>
-      <pre>{JSON.stringify(user, undefined, 2)}</pre>
-      {formItems.map(item => (
-        <div key={item}>
-          <input type="text" defaultValue={(user as any)[item]} name={item} onChange={onChange(item)} />
-        </div>
-      ))}
-      <button type="submit">Save</button>
-      <button type="button" onClick={onCancel}>
-        Cancel
-      </button>
-      <pre>{JSON.stringify(userData, undefined, 2)}</pre>
-    </form>
+    <Form
+      initialFormData={user}
+      formItems={formItems}
+      formStatus={formStatus}
+      onCancel={onCancel}
+      onSubmit={onFormSubmit}
+    />
   );
 };
 

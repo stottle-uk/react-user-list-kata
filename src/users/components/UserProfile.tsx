@@ -13,12 +13,7 @@ const UserProfile: React.FC<OwnProps> = ({ user, onCancel }: OwnProps) => {
   const [userData, setUserData] = useState<User>();
   const { usersService } = useContext(UsersServiceContext);
 
-  const onSubmit = (user: User) => {
-    usersService
-      .update(user)
-      .pipe(tap(() => onCancel()))
-      .subscribe();
-  };
+  const onSubmit = (user: User) => usersService.update(user).pipe(tap(() => onCancel()));
 
   const userDataEffect = () => {
     const subscription = usersService
