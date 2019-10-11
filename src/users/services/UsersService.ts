@@ -1,16 +1,7 @@
 import Axios from 'axios-observable';
 import { Observable, throwError, timer } from 'rxjs';
 import { delayWhen, map, retryWhen, scan } from 'rxjs/operators';
-import { User } from '../models/User';
-
-interface IGetUsers {
-  getAll: () => Observable<User[]>;
-  getById: (userId: string) => Observable<User>;
-}
-
-interface IUpdateUsers {
-  updateUser: (user: Partial<User>) => Observable<User>;
-}
+import { IGetUsers, IUpdateUsers, User } from '../models/User';
 
 export class UsersService implements IGetUsers, IUpdateUsers {
   private baseUrl = 'http://localhost:3000';
@@ -23,7 +14,7 @@ export class UsersService implements IGetUsers, IUpdateUsers {
     return this.getWithRetry<User>(`/users/${userId}`);
   }
 
-  updateUser(user: Partial<User>) {
+  update(user: Partial<User>) {
     return Observable.create(user);
   }
 
