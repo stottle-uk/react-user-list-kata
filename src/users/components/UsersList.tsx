@@ -1,20 +1,25 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { GetAllUsersStart, UsersAction } from '../+store/actions';
 import { BaseUser } from '../models/User';
-import { UsersServiceContext } from '../services/UsersServiceContext';
 
 interface OwnProps {
   onUserClick: (user: BaseUser) => void;
 }
 
-interface CardState {}
+interface StoreProps {
+  users: BaseUser[];
+}
 
-const UsersList: React.FC<OwnProps> = ({ onUserClick }: OwnProps) => {
-  const [usersData, setUsersData] = useState<BaseUser[]>([]);
+interface DispatchProps {
+  getUsers: () => void;
+}
+
+type AllProps = OwnProps & StoreProps & DispatchProps;
+
+const UsersList: React.FC<AllProps> = ({ onUserClick, getUsers, users }: AllProps) => {
   const [activeCard, setActiveCard] = useState<string>();
-
-  const { usersService } = useContext(UsersServiceContext);
 
   const byUsername = (a: BaseUser, b: BaseUser) => {
     if (a.username < b.username) {
@@ -26,22 +31,9 @@ const UsersList: React.FC<OwnProps> = ({ onUserClick }: OwnProps) => {
     return 0;
   };
 
-  const usersDataEffect = () => {
-    const subscription = usersService
-      .getAll()
-      .pipe(
-        catchError(error => {
-          console.log(error);
-          return of([]);
-        }),
-        map(users => users.sort(byUsername)),
-        tap(users => setUsersData(users))
-      )
-      .subscribe();
-    return () => subscription.unsubscribe();
-  };
-
-  useEffect(usersDataEffect, []);
+  useEffect(() => {
+    getUsers();
+  }, []);
 
   const getCardClass = (id: string) => `card ${id === activeCard ? 'has-background-light' : 'has-background-white'}`;
 
@@ -69,7 +61,18 @@ const UsersList: React.FC<OwnProps> = ({ onUserClick }: OwnProps) => {
     </div>
   );
 
-  return <>{usersData.map(renderUser)}</>;
+  return <>{users.map(renderUser)}</>;
 };
 
-export default UsersList;
+const mapStateToProps = ({ users }: any): StoreProps => ({
+  users: users.users
+});
+
+const mapDispatchToProps = (dispatch: Dispatch<UsersAction>): DispatchProps => ({
+  getUsers: () => dispatch(new GetAllUsersStart())
+});
+
+export default connect<StoreProps, DispatchProps, OwnProps>(
+  mapStateToProps,
+  mapDispatchToProps
+)(UsersList);

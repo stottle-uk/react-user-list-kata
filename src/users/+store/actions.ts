@@ -1,4 +1,5 @@
 import { Action } from 'redux';
+import { BaseUser } from '../models/User';
 
 export enum UsersActionTypes {
   GetAllUsersStart = '[Users] Get All Users Start',
@@ -12,10 +13,14 @@ export class GetAllUsersStart implements Action {
 
 export class GetAllUsersSuccess implements Action {
   readonly type = UsersActionTypes.GetAllUsersSuccess;
+
+  constructor(public payload: { users: BaseUser[] }) {}
 }
 
 export class GetAllUsersFailure implements Action {
   readonly type = UsersActionTypes.GetAllUsersFailure;
+
+  constructor(public payload: { error: any }) {}
 }
 
 export type UsersAction = GetAllUsersStart | GetAllUsersSuccess | GetAllUsersFailure;

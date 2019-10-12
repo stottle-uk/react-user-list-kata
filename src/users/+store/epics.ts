@@ -1,14 +1,32 @@
 import { Action } from 'redux';
 import { ActionsObservable, ofType } from 'redux-observable';
-import { Observable } from 'rxjs';
-import { delay, mapTo } from 'rxjs/operators';
-import { GetAllUsersSuccess, UsersActionTypes } from './actions';
+import { Observable, of } from 'rxjs';
+import { catchError, map, switchMap } from 'rxjs/operators';
+import { UsersService } from '../services/UsersService';
+import { GetAllUsersFailure, GetAllUsersSuccess, UsersActionTypes } from './actions';
 
-const getAllUsers = (action$: ActionsObservable<Action>): Observable<GetAllUsersSuccess> =>
+interface Dependencies {
+  usersService: UsersService;
+}
+
+const getAllUsers = (
+  action$: ActionsObservable<Action>,
+  state$: Observable<any>,
+  { usersService }: Dependencies
+): Observable<GetAllUsersSuccess | GetAllUsersFailure> =>
   action$.pipe(
     ofType(UsersActionTypes.GetAllUsersStart),
-    delay(1000),
-    mapTo(new GetAllUsersSuccess())
+    switchMap(() =>
+      usersService.getAll().pipe(
+        map(
+          users =>
+            new GetAllUsersSuccess({
+              users
+            })
+        ),
+        catchError(error => of(new GetAllUsersFailure(error)))
+      )
+    )
   );
 
 export const usersEpics = [getAllUsers];
