@@ -5,8 +5,8 @@ import { delayWhen, map, retryWhen, scan } from 'rxjs/operators';
 
 export interface HttpServiceOptions {
   baseUrl: string;
-  maxRetryCount: number;
-  defaulDelay: number;
+  defaultMaxRetryCount: number;
+  defaultRetryDelay: number;
 }
 
 export class HttpService {
@@ -29,8 +29,8 @@ export class HttpService {
   }
 
   private retryStrategy<T>(
-    maxRetryCount = this.options.maxRetryCount,
-    delayTimer = this.options.defaulDelay
+    maxRetryCount = this.options.defaultMaxRetryCount,
+    delayTimer = this.options.defaultRetryDelay
   ): (source: Observable<AxiosResponse<T>>) => Observable<T> {
     return source =>
       source.pipe(

@@ -9,9 +9,9 @@ interface UsersServiceContext {
 export const UsersServiceContext = createContext<UsersServiceContext>({
   usersService: new UsersService(
     new HttpService({
-      baseUrl: 'http://localhost:3000',
-      maxRetryCount: 10,
-      defaulDelay: 200
+      baseUrl: 'http://localhost:3000', // todo: use ENV VARS for these values
+      defaultMaxRetryCount: 10,
+      defaultRetryDelay: 200
     })
   )
 });
