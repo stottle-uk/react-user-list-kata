@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { GetAllUsersStart, ShowUserProfile, UsersAction } from '../+store/users.actions';
+import { RootState } from '../../store/store.modal';
 import { BaseUser } from '../models/User';
 
 interface StoreProps {
   users: BaseUser[];
-  selectedUser: BaseUser;
 }
 
 interface DispatchProps {
@@ -18,16 +18,6 @@ type AllProps = StoreProps & DispatchProps;
 
 const UsersList: React.FC<AllProps> = ({ showUserProfile, getUsers, users }: AllProps) => {
   const [activeCard, setActiveCard] = useState<string>();
-
-  // const byUsername = (a: BaseUser, b: BaseUser) => {
-  //   if (a.username < b.username) {
-  //     return -1;
-  //   }
-  //   if (a.username > b.username) {
-  //     return 1;
-  //   }
-  //   return 0;
-  // };
 
   const usersDataEffect = () => {
     getUsers();
@@ -64,9 +54,8 @@ const UsersList: React.FC<AllProps> = ({ showUserProfile, getUsers, users }: All
   return <>{users.map(renderUser)}</>;
 };
 
-const mapStateToProps = ({ users }: any): StoreProps => ({
-  users: users.users,
-  selectedUser: users.selectedUser
+const mapStateToProps = ({ users }: RootState): StoreProps => ({
+  users: users.users
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<UsersAction>): DispatchProps => ({
@@ -74,7 +63,7 @@ const mapDispatchToProps = (dispatch: Dispatch<UsersAction>): DispatchProps => (
   showUserProfile: (user: BaseUser) => dispatch(new ShowUserProfile({ user }))
 });
 
-export default connect<StoreProps, DispatchProps>(
+export default connect<StoreProps, DispatchProps, {}, RootState>(
   mapStateToProps,
   mapDispatchToProps
 )(UsersList);

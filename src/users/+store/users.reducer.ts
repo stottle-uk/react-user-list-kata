@@ -1,12 +1,16 @@
 import { BaseUser, User } from '../models/User';
 import { UsersAction, UsersActionTypes } from './users.actions';
 
+export interface RootUsersState {
+  users: UsersState;
+}
+
 export interface UsersState {
   users: User[];
-  selectedUser: BaseUser | undefined;
+  selectedUser?: BaseUser;
   isLoading: boolean;
   isLoaded: boolean;
-  error: any | undefined;
+  error: any;
 }
 
 const initialState: UsersState = {
@@ -17,7 +21,7 @@ const initialState: UsersState = {
   error: undefined
 };
 
-export const usersReducer = (state = initialState, action: UsersAction) => {
+export const usersReducer = (state = initialState, action: UsersAction): UsersState => {
   switch (action.type) {
     case UsersActionTypes.ShowUserProfile:
       return {
@@ -44,7 +48,7 @@ export const usersReducer = (state = initialState, action: UsersAction) => {
     case UsersActionTypes.GetAllUsersSuccess:
       return {
         ...state,
-        users: action.payload.users,
+        users: action.payload.users as User[],
         isLoading: false,
         isLoaded: true
       };

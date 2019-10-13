@@ -4,13 +4,14 @@ import { connect } from 'react-redux';
 import { HideUserProfile, UpdateUserStart, UsersAction } from '../+store/users.actions';
 import { FormStatus } from '../../shared/forms/Form';
 import spinner from '../../shared/icons/spinner.svg';
+import { RootState } from '../../store/store.modal';
 import { User } from '../models/User';
 import UserProfileForm from './UserProfileForm';
 
 interface StoreProps {
-  selectedUser: User;
-  isLoading: false;
-  isLoaded: false;
+  selectedUser?: User;
+  isLoading: boolean;
+  isLoaded: boolean;
 }
 
 interface DispatchProps {
@@ -46,7 +47,7 @@ const UserProfile: React.FC<AllProps> = ({
     </>
   );
 
-  const renderForm = (
+  const renderForm = selectedUser && (
     <UserProfileForm user={selectedUser} formStatus={formStatus} onCancel={hideUserProfile} onSubmit={onSubmit} />
   );
 
@@ -60,18 +61,20 @@ const UserProfile: React.FC<AllProps> = ({
   );
 };
 
-const mapStateToProps = ({ users }: any): StoreProps => ({
-  selectedUser: !!users.selectedUser && users.users.find((u: User) => u.id === users.selectedUser.id),
-  isLoading: users.isLoading,
-  isLoaded: users.isLoaded
-});
+const mapStateToProps = ({ users }: RootState): StoreProps => {
+  return {
+    selectedUser: users.users.find((u: User) => !!users.selectedUser && u.id === users.selectedUser.id),
+    isLoading: users.isLoading,
+    isLoaded: users.isLoaded
+  };
+};
 
 const mapDispatchToProps = (dispatch: Dispatch<UsersAction>): DispatchProps => ({
   updateUser: (user: User) => dispatch(new UpdateUserStart({ user })),
   hideUserProfile: () => dispatch(new HideUserProfile())
 });
 
-export default connect<StoreProps, DispatchProps>(
+export default connect<StoreProps, DispatchProps, {}, RootState>(
   mapStateToProps,
   mapDispatchToProps
 )(UserProfile);
