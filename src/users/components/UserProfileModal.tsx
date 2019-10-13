@@ -9,6 +9,7 @@ import UserProfileForm from './UserProfileForm';
 
 interface StoreProps {
   selectedUser?: User;
+  showModal: boolean;
   isLoaded: boolean;
   errors: any[];
 }
@@ -22,6 +23,7 @@ type AllProps = StoreProps & DispatchProps;
 
 const UserProfileModal: React.FC<AllProps> = ({
   selectedUser,
+  showModal,
   isLoaded,
   errors,
   updateUser,
@@ -56,7 +58,7 @@ const UserProfileModal: React.FC<AllProps> = ({
   const renderModalContent = isLoaded ? renderForm : renderSpinner;
 
   return (
-    <Modal show={!!selectedUser} showClose={false} closeOnEsc={true} onClose={hideUserProfile}>
+    <Modal show={showModal} showClose={false} closeOnEsc={true} onClose={hideUserProfile}>
       {renderModalContent}
     </Modal>
   );
@@ -64,7 +66,8 @@ const UserProfileModal: React.FC<AllProps> = ({
 
 const mapStateToProps = ({ users }: RootState): StoreProps => {
   return {
-    selectedUser: users.users.find((u: User) => !!users.selectedUser && u.id === users.selectedUser.id),
+    selectedUser: users.selectedUser,
+    showModal: users.showUserProfileModal,
     isLoaded: users.isLoaded,
     errors: users.errors
   };

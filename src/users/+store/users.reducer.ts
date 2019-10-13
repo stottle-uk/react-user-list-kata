@@ -6,8 +6,9 @@ export interface RootUsersState {
 }
 
 export interface UsersState {
-  users: User[];
-  selectedUser?: BaseUser;
+  users: BaseUser[];
+  showUserProfileModal: boolean;
+  selectedUser?: User;
   isLoading: boolean;
   isLoaded: boolean;
   errors: any[]; // todo: create typescript interface for errors
@@ -15,6 +16,7 @@ export interface UsersState {
 
 const initialState: UsersState = {
   users: [],
+  showUserProfileModal: false,
   selectedUser: undefined,
   isLoading: false,
   isLoaded: false,
@@ -26,12 +28,13 @@ export const usersReducer = (state = initialState, action: UsersAction): UsersSt
     case UsersActionTypes.ShowUserProfile:
       return {
         ...state,
-        selectedUser: action.payload.user
+        showUserProfileModal: true
       };
 
     case UsersActionTypes.HideUserProfile:
       return {
         ...state,
+        showUserProfileModal: false,
         selectedUser: undefined
       };
 
@@ -48,7 +51,7 @@ export const usersReducer = (state = initialState, action: UsersAction): UsersSt
     case UsersActionTypes.GetAllUsersSuccess:
       return {
         ...state,
-        users: action.payload.users as User[],
+        users: action.payload.users,
         isLoading: false,
         isLoaded: true
       };
@@ -57,7 +60,7 @@ export const usersReducer = (state = initialState, action: UsersAction): UsersSt
     case UsersActionTypes.GetUserByIdSuccess:
       return {
         ...state,
-        users: state.users.map(u => (u.id === action.payload.user.id ? action.payload.user : u)),
+        selectedUser: action.payload.user,
         isLoading: false,
         isLoaded: true
       };
