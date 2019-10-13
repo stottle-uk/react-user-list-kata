@@ -59,6 +59,24 @@ export class GetUserByIdFailure implements Action {
   constructor(public payload: { error: any }) {}
 }
 
+export class UpdateUserStart implements Action {
+  readonly type = UsersActionTypes.UpdateUserStart;
+
+  constructor(public payload: { user: User }) {}
+}
+
+export class UpdateUserSuccess implements Action {
+  readonly type = UsersActionTypes.UpdateUserSuccess;
+
+  constructor(public payload: { user: User }) {}
+}
+
+export class UpdateUserFailure implements Action {
+  readonly type = UsersActionTypes.UpdateUserFailure;
+
+  constructor(public payload: { error: any }) {}
+}
+
 export type UsersAction =
   | ShowUserProfile
   | HideUserProfile
@@ -67,4 +85,7 @@ export type UsersAction =
   | GetAllUsersFailure
   | GetUserByIdStart
   | GetUserByIdSuccess
-  | GetUserByIdFailure;
+  | GetUserByIdFailure
+  | UpdateUserStart
+  | UpdateUserSuccess
+  | UpdateUserFailure;

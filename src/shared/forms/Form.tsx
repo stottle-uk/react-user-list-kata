@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 export interface FormInputItem {
   name: string;
@@ -16,20 +16,12 @@ interface OwnProps<T> {
   initialFormData: T;
   formItems: FormInputItem[];
   formStatus: FormStatus;
-  onSubmit: (user: T) => void;
-  onCancel: () => void;
+  onChange: (data: T) => void;
 }
 
-const Form = <T extends {}>({ initialFormData, formItems, formStatus, onSubmit, onCancel }: OwnProps<T>) => {
-  const [formData, setFormData] = useState<T>(initialFormData);
-
-  const onChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement>) =>
-    setFormData({ ...formData, [field]: e.currentTarget.value });
-
-  const onFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    onSubmit(formData);
-  };
+const Form = <T extends {}>({ initialFormData, formItems, formStatus, onChange }: OwnProps<T>) => {
+  const onFieldChange = (e: React.ChangeEvent<HTMLInputElement>) =>
+    onChange({ ...initialFormData, [e.currentTarget.name]: e.currentTarget.value });
 
   const renderFormItem = (item: FormInputItem) => (
     <div key={item.name} className="field">
@@ -41,35 +33,18 @@ const Form = <T extends {}>({ initialFormData, formItems, formStatus, onSubmit, 
           id={item.name}
           className="input"
           type={item.type || 'text'}
-          defaultValue={(formData as any)[item.name]}
+          defaultValue={(initialFormData as any)[item.name]}
           name={item.name}
-          onChange={onChange(item.name)}
-          disabled={formStatus.isSubmitting}
+          onChange={onFieldChange}
           required
         />
       </div>
     </div>
   );
 
-  const renderButtons = () => (
-    <div className="field is-grouped">
-      <div className="control">
-        <button className="button is-link" type="submit">
-          Save
-        </button>
-      </div>
-      <div className="control">
-        <button className="button is-text" type="button" onClick={onCancel}>
-          Cancel
-        </button>
-      </div>
-    </div>
-  );
-
   return (
-    <form onSubmit={onFormSubmit}>
-      {formItems.map(renderFormItem)}
-      {renderButtons()}
+    <form>
+      <fieldset disabled={formStatus.isSubmitting}>{formItems.map(renderFormItem)}</fieldset>
     </form>
   );
 };

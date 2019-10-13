@@ -1,7 +1,7 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import Axios from 'axios-observable';
 import { Observable, throwError, timer } from 'rxjs';
-import { delayWhen, map, retryWhen, scan } from 'rxjs/operators';
+import { delay, delayWhen, map, retryWhen, scan } from 'rxjs/operators';
 
 export interface HttpServiceOptions {
   baseUrl: string;
@@ -35,6 +35,7 @@ export class HttpService {
     return source =>
       source.pipe(
         map(response => response.data),
+        delay(3000),
         retryWhen((errors: Observable<AxiosError<T>>) =>
           errors.pipe(
             scan<AxiosError<T>, AxiosError<T>[]>((errorLogs, error) => [...errorLogs, error], []),

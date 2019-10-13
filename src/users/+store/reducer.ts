@@ -33,6 +33,7 @@ export const usersReducer = (state = initialState, action: UsersAction) => {
         users: action.payload.users
       };
 
+    case UsersActionTypes.UpdateUserSuccess:
     case UsersActionTypes.GetUserByIdSuccess:
       return {
         ...state,
@@ -41,6 +42,7 @@ export const usersReducer = (state = initialState, action: UsersAction) => {
 
     case UsersActionTypes.GetAllUsersFailure:
     case UsersActionTypes.GetUserByIdFailure:
+    case UsersActionTypes.UpdateUserFailure:
       return {
         ...state,
         error: action.payload.error

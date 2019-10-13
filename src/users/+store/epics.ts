@@ -9,7 +9,11 @@ import {
   GetUserByIdFailure,
   GetUserByIdStart,
   GetUserByIdSuccess,
+  HideUserProfile,
   ShowUserProfile,
+  UpdateUserFailure,
+  UpdateUserStart,
+  UpdateUserSuccess,
   UsersActionTypes
 } from './actions';
 
@@ -22,6 +26,12 @@ const showUser = (action$: ActionsObservable<Action>): Observable<Action> =>
     ofType<Action, ShowUserProfile>(UsersActionTypes.ShowUserProfile),
     map(action => action.payload.user.id),
     map(userId => new GetUserByIdStart({ userId }))
+  );
+
+const hideUser = (action$: ActionsObservable<Action>): Observable<Action> =>
+  action$.pipe(
+    ofType<Action, UpdateUserSuccess>(UsersActionTypes.UpdateUserSuccess),
+    map(() => new HideUserProfile())
   );
 
 const getAllUsers = (
@@ -39,7 +49,7 @@ const getAllUsers = (
               users
             })
         ),
-        catchError(error => of(new GetAllUsersFailure(error)))
+        catchError(error => of(new GetAllUsersFailure({ error })))
       )
     )
   );
@@ -59,29 +69,29 @@ const getUserById = (
               user
             })
         ),
-        catchError(error => of(new GetUserByIdFailure(error)))
+        catchError(error => of(new GetUserByIdFailure({ error })))
       )
     )
   );
 
-// const updateUser = (
-//   action$: ActionsObservable<Action>,
-//   state$: Observable<any>,
-//   { usersService }: UsersDependencies
-// ): Observable<Action> =>
-//   action$.pipe(
-//     ofType<Action, GetUserByIdStart>(UsersActionTypes.GetUserByIdStart),
-//     switchMap(action =>
-//       usersService.getById(action.payload.userId).pipe(
-//         map(
-//           user =>
-//             new GetUserByIdSuccess({
-//               user
-//             })
-//         ),
-//         catchError(error => of(new GetUserByIdFailure(error)))
-//       )
-//     )
-//   );
+const updateUser = (
+  action$: ActionsObservable<Action>,
+  state$: Observable<any>,
+  { usersService }: UsersDependencies
+): Observable<Action> =>
+  action$.pipe(
+    ofType<Action, UpdateUserStart>(UsersActionTypes.UpdateUserStart),
+    switchMap(action =>
+      usersService.update(action.payload.user).pipe(
+        map(
+          user =>
+            new UpdateUserSuccess({
+              user
+            })
+        ),
+        catchError(error => of(new UpdateUserFailure({ error })))
+      )
+    )
+  );
 
-export const usersEpics = [showUser, getAllUsers, getUserById];
+export const usersEpics = [showUser, hideUser, getAllUsers, getUserById, updateUser];

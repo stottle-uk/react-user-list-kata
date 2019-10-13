@@ -14,6 +14,7 @@ const UserProfileForm: React.FC<OwnProps> = ({ user, onSubmit, onCancel }: OwnPr
     isSubmitted: false,
     isDirty: false
   });
+  const [formData, setFormData] = useState<User>(user);
 
   const formItems: FormInputItem[] = [
     { name: 'firstName', label: 'First Name' },
@@ -24,23 +25,29 @@ const UserProfileForm: React.FC<OwnProps> = ({ user, onSubmit, onCancel }: OwnPr
     { name: 'country', label: 'Country' }
   ];
 
-  const onFormSubmit = (user: User) => {
+  const onFormSubmit = () => {
     setFormStatus({ ...formStatus, isSubmitting: true, isSubmitted: false, isDirty: true });
-    onSubmit(user);
-    // .pipe(tap(() => setFormStatus({ ...formStatus, isSubmitting: false, isSubmitted: true })))
-    // .subscribe();
+    onSubmit({ ...user, ...formData });
   };
 
-  console.log(user);
-
   return user.firstName ? (
-    <Form
-      initialFormData={user}
-      formItems={formItems}
-      formStatus={formStatus}
-      onCancel={onCancel}
-      onSubmit={onFormSubmit}
-    />
+    <div className="modal-card">
+      <header className="modal-card-head">
+        <p className="modal-card-title">Modal title</p>
+        <button className="delete" aria-label="close"></button>
+      </header>
+      <section className="modal-card-body">
+        <Form initialFormData={user} formItems={formItems} formStatus={formStatus} onChange={setFormData} />
+      </section>
+      <footer className="modal-card-foot">
+        <button className="button is-success" onClick={onFormSubmit}>
+          Save changes
+        </button>
+        <button className="button" onClick={onCancel}>
+          Cancel
+        </button>
+      </footer>
+    </div>
   ) : (
     <span></span>
   );
