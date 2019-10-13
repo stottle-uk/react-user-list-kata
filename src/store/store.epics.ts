@@ -1,6 +1,6 @@
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
 import { HttpService } from '../shared/services/HttpService';
-import { UsersDependencies, usersEpics } from '../users/+store/users.epics';
+import { UsersDependencies, usersEpicsAsArray } from '../users/+store/users.epics';
 import { UsersService } from '../users/services/UsersService';
 
 const usersService = new UsersService(
@@ -17,7 +17,7 @@ const dependencies: Dependencies = {
   usersService
 };
 
-export const rootEpic = combineEpics(...usersEpics);
+export const rootEpic = combineEpics(...usersEpicsAsArray);
 
 export const epicMiddleware = createEpicMiddleware({
   dependencies

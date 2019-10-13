@@ -2,7 +2,7 @@ import { Action } from 'redux';
 import { ActionsObservable, ofType } from 'redux-observable';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { UsersService } from '../services/UsersService';
+import { IGetUsers, IUpdateUsers } from '../models/User';
 import {
   GetAllUsersFailure,
   GetAllUsersSuccess,
@@ -18,7 +18,7 @@ import {
 } from './users.actions';
 
 export interface UsersDependencies {
-  usersService: UsersService;
+  usersService: IGetUsers & IUpdateUsers;
 }
 
 const showUser = (action$: ActionsObservable<Action>): Observable<Action> =>
@@ -94,4 +94,5 @@ const updateUser = (
     )
   );
 
-export const usersEpics = [showUser, hideUser, getAllUsers, getUserById, updateUser];
+export const usersEpics = { showUser, hideUser, getAllUsers, getUserById, updateUser };
+export const usersEpicsAsArray = Object.values(usersEpics);
