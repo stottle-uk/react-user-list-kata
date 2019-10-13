@@ -1,7 +1,7 @@
 import { Reducer } from 'react';
 import { combineReducers } from 'redux';
-import { UsersAction } from '../users/+store/actions';
-import { usersReducer } from '../users/+store/reducer';
+import { UsersAction } from '../users/+store/users.actions';
+import { usersReducer } from '../users/+store/users.reducer';
 import { RootState } from './store.modal';
 
 type AllActions = UsersAction;

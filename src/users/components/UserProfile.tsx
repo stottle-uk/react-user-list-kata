@@ -1,7 +1,7 @@
 import React, { Dispatch, useState } from 'react';
 import { Modal } from 'react-bulma-components';
 import { connect } from 'react-redux';
-import { HideUserProfile, UpdateUserStart, UsersAction } from '../+store/actions';
+import { HideUserProfile, UpdateUserStart, UsersAction } from '../+store/users.actions';
 import { FormStatus } from '../../shared/forms/Form';
 import spinner from '../../shared/icons/spinner.svg';
 import { User } from '../models/User';

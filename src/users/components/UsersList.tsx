@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { GetAllUsersStart, ShowUserProfile, UsersAction } from '../+store/actions';
+import { GetAllUsersStart, ShowUserProfile, UsersAction } from '../+store/users.actions';
 import { BaseUser } from '../models/User';
 
 interface StoreProps {

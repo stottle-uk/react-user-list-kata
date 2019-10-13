@@ -15,7 +15,7 @@ import {
   UpdateUserStart,
   UpdateUserSuccess,
   UsersActionTypes
-} from './actions';
+} from './users.actions';
 
 export interface UsersDependencies {
   usersService: UsersService;
