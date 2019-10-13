@@ -19,7 +19,14 @@ export const usersReducer = (state = initialState, action: UsersAction) => {
         users: action.payload.users
       };
 
+    case UsersActionTypes.GetUserByIdSuccess:
+      return {
+        ...state,
+        users: state.users.map(u => (u.id === action.payload.user.id ? action.payload.user : u))
+      };
+
     case UsersActionTypes.GetAllUsersFailure:
+    case UsersActionTypes.GetUserByIdFailure:
       return {
         ...state,
         error: action.payload.error

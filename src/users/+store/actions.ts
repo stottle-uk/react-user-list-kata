@@ -1,10 +1,16 @@
 import { Action } from 'redux';
-import { BaseUser } from '../models/User';
+import { BaseUser, User } from '../models/User';
 
 export enum UsersActionTypes {
   GetAllUsersStart = '[Users] Get All Users Start',
   GetAllUsersSuccess = '[Users] Get All Users Success',
-  GetAllUsersFailure = '[Users] Get All Users Failre'
+  GetAllUsersFailure = '[Users] Get All Users Failre',
+  GetUserByIdStart = '[Users] Get User By Id Start',
+  GetUserByIdSuccess = '[Users] Get User By Id Success',
+  GetUserByIdFailure = '[Users] Get User By Id Failre',
+  UpdateUserStart = '[Users] Update User Start',
+  UpdateUserSuccess = '[Users] Update User Success',
+  UpdateUserFailure = '[Users] Update User Failre'
 }
 
 export class GetAllUsersStart implements Action {
@@ -23,4 +29,28 @@ export class GetAllUsersFailure implements Action {
   constructor(public payload: { error: any }) {}
 }
 
-export type UsersAction = GetAllUsersStart | GetAllUsersSuccess | GetAllUsersFailure;
+export class GetUserByIdStart implements Action {
+  readonly type = UsersActionTypes.GetUserByIdStart;
+
+  constructor(public payload: { userId: string }) {}
+}
+
+export class GetUserByIdSuccess implements Action {
+  readonly type = UsersActionTypes.GetUserByIdSuccess;
+
+  constructor(public payload: { user: User }) {}
+}
+
+export class GetUserByIdFailure implements Action {
+  readonly type = UsersActionTypes.GetUserByIdFailure;
+
+  constructor(public payload: { error: any }) {}
+}
+
+export type UsersAction =
+  | GetAllUsersStart
+  | GetAllUsersSuccess
+  | GetAllUsersFailure
+  | GetUserByIdStart
+  | GetUserByIdSuccess
+  | GetUserByIdFailure;
