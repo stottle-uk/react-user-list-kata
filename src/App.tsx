@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Navbar } from 'react-bulma-components';
 import './App.css';
-import UserProfile from './users/components/UserProfile';
+import UserProfileModal from './users/components/UserProfileModal';
 import UsersList from './users/components/UsersList';
 
 const App: React.FC = () => {
@@ -19,7 +19,7 @@ const App: React.FC = () => {
       <Container>
         <UsersList />
       </Container>
-      <UserProfile />
+      <UserProfileModal />
     </>
   );
 };

@@ -21,7 +21,7 @@ interface DispatchProps {
 
 type AllProps = StoreProps & DispatchProps;
 
-const UserProfile: React.FC<AllProps> = ({
+const UserProfileModal: React.FC<AllProps> = ({
   selectedUser,
   isLoading,
   isLoaded,
@@ -77,4 +77,4 @@ const mapDispatchToProps = (dispatch: Dispatch<UsersAction>): DispatchProps => (
 export default connect<StoreProps, DispatchProps, {}, RootState>(
   mapStateToProps,
   mapDispatchToProps
-)(UserProfile);
+)(UserProfileModal);
