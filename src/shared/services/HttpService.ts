@@ -35,7 +35,7 @@ export class HttpService {
     return source =>
       source.pipe(
         map(response => response.data),
-        delay(3000),
+        delay(500),
         retryWhen((errors: Observable<AxiosError<T>>) =>
           errors.pipe(
             scan<AxiosError<T>, AxiosError<T>[]>((errorLogs, error) => [...errorLogs, error], []),
