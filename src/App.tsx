@@ -1,16 +1,25 @@
-import React, { useState } from 'react';
-import { Container, Navbar } from 'react-bulma-components';
+import React from 'react';
+import { Container, Modal, Navbar } from 'react-bulma-components';
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 import './App.css';
+import { HideUserProfile, UsersAction } from './users/+store/actions';
 import UserProfile from './users/components/UserProfile';
 import UsersList from './users/components/UsersList';
 import { BaseUser } from './users/models/User';
 
-const App: React.FC = () => {
-  const [selectedUser, setSelectedUser] = useState<BaseUser>();
+interface StoreProps {
+  selectedUser: BaseUser;
+}
 
-  const onUserClick = (user: BaseUser) => setSelectedUser(user);
+interface DispatchProps {
+  hideUserProfile: () => void;
+}
 
-  const onUserCancel = () => setSelectedUser(undefined);
+type AllProps = StoreProps & DispatchProps;
+
+const App: React.FC<AllProps> = ({ selectedUser, hideUserProfile }: AllProps) => {
+  const onUserCancel = () => hideUserProfile();
 
   return (
     <>
@@ -24,11 +33,37 @@ const App: React.FC = () => {
         </Container>
       </Navbar>
       <Container>
-        {!selectedUser && <UsersList onUserClick={onUserClick} />}
-        {selectedUser && <UserProfile user={selectedUser} onCancel={onUserCancel} />}
+        <UsersList />
       </Container>
+      <Modal show={!!selectedUser} onClose={hideUserProfile}>
+        {/* <div className="modal-background"></div> */}
+        <div className="modal-card">
+          <header className="modal-card-head">
+            <p className="modal-card-title">Modal title</p>
+            <button className="delete" aria-label="close"></button>
+          </header>
+          <section className="modal-card-body">
+            <UserProfile user={selectedUser} onCancel={onUserCancel} />
+          </section>
+          <footer className="modal-card-foot">
+            <button className="button is-success">Save changes</button>
+            <button className="button">Cancel</button>
+          </footer>
+        </div>
+      </Modal>
     </>
   );
 };
 
-export default App;
+const mapStateToProps = ({ users }: any): StoreProps => ({
+  selectedUser: users.selectedUser
+});
+
+const mapDispatchToProps = (dispatch: Dispatch<UsersAction>): DispatchProps => ({
+  hideUserProfile: () => dispatch(new HideUserProfile())
+});
+
+export default connect<StoreProps, DispatchProps>(
+  mapStateToProps,
+  mapDispatchToProps
+)(App);

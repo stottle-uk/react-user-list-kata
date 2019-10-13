@@ -2,6 +2,8 @@ import { Action } from 'redux';
 import { BaseUser, User } from '../models/User';
 
 export enum UsersActionTypes {
+  ShowUserProfile = '[Users] Show User Profile',
+  HideUserProfile = '[Users] Hide User Profile',
   GetAllUsersStart = '[Users] Get All Users Start',
   GetAllUsersSuccess = '[Users] Get All Users Success',
   GetAllUsersFailure = '[Users] Get All Users Failre',
@@ -11,6 +13,16 @@ export enum UsersActionTypes {
   UpdateUserStart = '[Users] Update User Start',
   UpdateUserSuccess = '[Users] Update User Success',
   UpdateUserFailure = '[Users] Update User Failre'
+}
+
+export class ShowUserProfile implements Action {
+  readonly type = UsersActionTypes.ShowUserProfile;
+
+  constructor(public payload: { user: BaseUser }) {}
+}
+
+export class HideUserProfile implements Action {
+  readonly type = UsersActionTypes.HideUserProfile;
 }
 
 export class GetAllUsersStart implements Action {
@@ -48,6 +60,8 @@ export class GetUserByIdFailure implements Action {
 }
 
 export type UsersAction =
+  | ShowUserProfile
+  | HideUserProfile
   | GetAllUsersStart
   | GetAllUsersSuccess
   | GetAllUsersFailure

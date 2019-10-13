@@ -1,25 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { GetAllUsersStart, GetUserByIdStart, UsersAction } from '../+store/actions';
+import { GetAllUsersStart, ShowUserProfile, UsersAction } from '../+store/actions';
 import { BaseUser } from '../models/User';
-
-interface OwnProps {
-  onUserClick: (user: BaseUser) => void;
-}
 
 interface StoreProps {
   users: BaseUser[];
+  selectedUser: BaseUser;
 }
 
 interface DispatchProps {
   getUsers: () => void;
-  goToUser: (user: BaseUser) => void;
+  showUserProfile: (user: BaseUser) => void;
 }
 
-type AllProps = OwnProps & StoreProps & DispatchProps;
+type AllProps = StoreProps & DispatchProps;
 
-const UsersList: React.FC<AllProps> = ({ goToUser, getUsers, users }: AllProps) => {
+const UsersList: React.FC<AllProps> = ({ showUserProfile, getUsers, users }: AllProps) => {
   const [activeCard, setActiveCard] = useState<string>();
 
   // const byUsername = (a: BaseUser, b: BaseUser) => {
@@ -46,7 +43,7 @@ const UsersList: React.FC<AllProps> = ({ goToUser, getUsers, users }: AllProps) 
       className={getCardClass(user.id)}
       onMouseEnter={() => setActiveCard(user.id)}
       onMouseLeave={() => setActiveCard(undefined)}
-      onClick={() => goToUser(user)}
+      onClick={() => showUserProfile(user)}
     >
       <div className="card-content">
         <div className="media">
@@ -68,15 +65,16 @@ const UsersList: React.FC<AllProps> = ({ goToUser, getUsers, users }: AllProps) 
 };
 
 const mapStateToProps = ({ users }: any): StoreProps => ({
-  users: users.users
+  users: users.users,
+  selectedUser: users.selectedUser
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<UsersAction>): DispatchProps => ({
   getUsers: () => dispatch(new GetAllUsersStart()),
-  goToUser: (user: BaseUser) => dispatch(new GetUserByIdStart({ userId: user.id }))
+  showUserProfile: (user: BaseUser) => dispatch(new ShowUserProfile({ user }))
 });
 
-export default connect<StoreProps, DispatchProps, OwnProps>(
+export default connect<StoreProps, DispatchProps>(
   mapStateToProps,
   mapDispatchToProps
 )(UsersList);

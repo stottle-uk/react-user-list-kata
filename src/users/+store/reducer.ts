@@ -1,18 +1,32 @@
-import { User } from '../models/User';
+import { BaseUser, User } from '../models/User';
 import { UsersAction, UsersActionTypes } from './actions';
 
 export interface UsersState {
   users: User[];
-  error: any;
+  selectedUser: BaseUser | undefined;
+  error: any | undefined;
 }
 
 const initialState: UsersState = {
   users: [],
+  selectedUser: undefined,
   error: undefined
 };
 
 export const usersReducer = (state = initialState, action: UsersAction) => {
   switch (action.type) {
+    case UsersActionTypes.ShowUserProfile:
+      return {
+        ...state,
+        selectedUser: action.payload.user
+      };
+
+    case UsersActionTypes.HideUserProfile:
+      return {
+        ...state,
+        selectedUser: undefined
+      };
+
     case UsersActionTypes.GetAllUsersSuccess:
       return {
         ...state,
