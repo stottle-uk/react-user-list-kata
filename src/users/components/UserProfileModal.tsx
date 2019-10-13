@@ -54,7 +54,7 @@ const UserProfileModal: React.FC<AllProps> = ({
   const renderModalContent = isLoaded ? renderForm : renderSpinner;
 
   return (
-    <Modal show={!!selectedUser} onClose={hideUserProfile}>
+    <Modal show={!!selectedUser} showClose={false} onClose={hideUserProfile}>
       {/* <div className="modal-background"></div> */}
       {renderModalContent}
     </Modal>
