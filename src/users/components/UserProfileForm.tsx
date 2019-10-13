@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import Form, { FormInputItem, FormStatus } from '../../shared/forms/Form';
 import { User } from '../models/User';
 
 interface OwnProps {
   user: User;
-  onSubmit: (user: User) => Observable<User>;
+  onSubmit: (user: User) => void;
   onCancel: () => void;
 }
 
@@ -28,12 +26,14 @@ const UserProfileForm: React.FC<OwnProps> = ({ user, onSubmit, onCancel }: OwnPr
 
   const onFormSubmit = (user: User) => {
     setFormStatus({ ...formStatus, isSubmitting: true, isSubmitted: false, isDirty: true });
-    onSubmit(user)
-      .pipe(tap(() => setFormStatus({ ...formStatus, isSubmitting: false, isSubmitted: true })))
-      .subscribe();
+    onSubmit(user);
+    // .pipe(tap(() => setFormStatus({ ...formStatus, isSubmitting: false, isSubmitted: true })))
+    // .subscribe();
   };
 
-  return (
+  console.log(user);
+
+  return user.firstName ? (
     <Form
       initialFormData={user}
       formItems={formItems}
@@ -41,6 +41,8 @@ const UserProfileForm: React.FC<OwnProps> = ({ user, onSubmit, onCancel }: OwnPr
       onCancel={onCancel}
       onSubmit={onFormSubmit}
     />
+  ) : (
+    <span></span>
   );
 };
 
