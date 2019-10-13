@@ -38,7 +38,7 @@ export class GetAllUsersSuccess implements Action {
 export class GetAllUsersFailure implements Action {
   readonly type = UsersActionTypes.GetAllUsersFailure;
 
-  constructor(public payload: { error: any }) {}
+  constructor(public payload: { errors: any[] }) {}
 }
 
 export class GetUserByIdStart implements Action {
@@ -56,7 +56,7 @@ export class GetUserByIdSuccess implements Action {
 export class GetUserByIdFailure implements Action {
   readonly type = UsersActionTypes.GetUserByIdFailure;
 
-  constructor(public payload: { error: any }) {}
+  constructor(public payload: { errors: any[] }) {}
 }
 
 export class UpdateUserStart implements Action {
@@ -74,7 +74,7 @@ export class UpdateUserSuccess implements Action {
 export class UpdateUserFailure implements Action {
   readonly type = UsersActionTypes.UpdateUserFailure;
 
-  constructor(public payload: { error: any }) {}
+  constructor(public payload: { errors: any[] }) {}
 }
 
 export type UsersAction =

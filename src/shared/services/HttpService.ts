@@ -39,9 +39,16 @@ export class HttpService {
         retryWhen((errors: Observable<AxiosError<T>>) =>
           errors.pipe(
             scan<AxiosError<T>, AxiosError<T>[]>((errorLogs, error) => [...errorLogs, error], []),
-            delayWhen(logs => (logs.length < maxRetryCount ? timer(delayTimer) : throwError(logs)))
+            delayWhen(logs =>
+              this.doRetry(logs, maxRetryCount) ? timer(delayTimer) : throwError(logs.map(l => l.response))
+            )
           )
         )
       );
   }
+
+  private doRetry = <T>(logs: AxiosError<T>[], maxRetryCount: number) => {
+    const lastLog = logs[logs.length - 1];
+    return lastLog.response && lastLog.response.status === 500 && logs.length < maxRetryCount;
+  };
 }

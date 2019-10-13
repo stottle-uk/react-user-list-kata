@@ -49,7 +49,7 @@ const getAllUsers = (
               users
             })
         ),
-        catchError(error => of(new GetAllUsersFailure({ error })))
+        catchError(errors => of(new GetAllUsersFailure({ errors })))
       )
     )
   );
@@ -69,7 +69,7 @@ const getUserById = (
               user
             })
         ),
-        catchError(error => of(new GetUserByIdFailure({ error })))
+        catchError(errors => of(new GetUserByIdFailure({ errors })))
       )
     )
   );
@@ -89,7 +89,7 @@ const updateUser = (
               user
             })
         ),
-        catchError(error => of(new UpdateUserFailure({ error })))
+        catchError(errors => of(new UpdateUserFailure({ errors })))
       )
     )
   );

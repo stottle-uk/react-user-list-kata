@@ -6,20 +6,13 @@ export interface FormInputItem {
   type?: string;
 }
 
-export interface FormStatus {
-  isSubmitting: boolean;
-  isSubmitted: boolean;
-  isDirty: boolean;
-}
-
 interface OwnProps<T> {
   initialFormData: T;
   formItems: FormInputItem[];
-  formStatus: FormStatus;
   onChange: (data: T) => void;
 }
 
-const Form = <T extends {}>({ initialFormData, formItems, formStatus, onChange }: OwnProps<T>) => {
+const Form = <T extends {}>({ initialFormData, formItems, onChange }: OwnProps<T>) => {
   const onFieldChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     onChange({ ...initialFormData, [e.currentTarget.name]: e.currentTarget.value });
 
@@ -44,7 +37,7 @@ const Form = <T extends {}>({ initialFormData, formItems, formStatus, onChange }
 
   return (
     <form>
-      <fieldset disabled={formStatus.isSubmitting}>{formItems.map(renderFormItem)}</fieldset>
+      <fieldset>{formItems.map(renderFormItem)}</fieldset>
     </form>
   );
 };

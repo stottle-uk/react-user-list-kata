@@ -10,7 +10,7 @@ export interface UsersState {
   selectedUser?: BaseUser;
   isLoading: boolean;
   isLoaded: boolean;
-  error: any;
+  errors: any[]; // todo: create typescript interface for errors
 }
 
 const initialState: UsersState = {
@@ -18,7 +18,7 @@ const initialState: UsersState = {
   selectedUser: undefined,
   isLoading: false,
   isLoaded: false,
-  error: undefined
+  errors: []
 };
 
 export const usersReducer = (state = initialState, action: UsersAction): UsersState => {
@@ -42,7 +42,7 @@ export const usersReducer = (state = initialState, action: UsersAction): UsersSt
         ...state,
         isLoading: true,
         isLoaded: false,
-        error: undefined
+        errors: []
       };
 
     case UsersActionTypes.GetAllUsersSuccess:
@@ -69,7 +69,7 @@ export const usersReducer = (state = initialState, action: UsersAction): UsersSt
         ...state,
         isLoading: false,
         isLoaded: true,
-        error: action.payload.error
+        errors: action.payload.errors
       };
 
     default:

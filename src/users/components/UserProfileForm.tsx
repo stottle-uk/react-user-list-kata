@@ -1,27 +1,34 @@
 import React, { useState } from 'react';
-import Form, { FormInputItem, FormStatus } from '../../shared/forms/Form';
+import Form, { FormInputItem } from '../../shared/forms/Form';
 import { User } from '../models/User';
+
+const formItems: FormInputItem[] = [
+  { name: 'firstName', label: 'First Name' },
+  { name: 'lastName', label: 'Last Name' },
+  { name: 'email', label: 'Email', type: 'email' },
+  { name: 'address', label: 'Address' },
+  { name: 'county', label: 'County' },
+  { name: 'country', label: 'Country' }
+];
 
 interface OwnProps {
   user: User;
-  formStatus: FormStatus;
+  errors: any[];
   onSubmit: (user: User) => void;
   onCancel: () => void;
 }
 
-const UserProfileForm: React.FC<OwnProps> = ({ user, formStatus, onSubmit, onCancel }: OwnProps) => {
+const UserProfileForm: React.FC<OwnProps> = ({ user, errors, onSubmit, onCancel }: OwnProps) => {
   const [formData, setFormData] = useState<User>(user);
 
-  const formItems: FormInputItem[] = [
-    { name: 'firstName', label: 'First Name' },
-    { name: 'lastName', label: 'Last Name' },
-    { name: 'email', label: 'Email', type: 'email' },
-    { name: 'address', label: 'Address' },
-    { name: 'county', label: 'County' },
-    { name: 'country', label: 'Country' }
-  ];
-
   const onFormSubmit = () => onSubmit({ ...user, ...formData });
+
+  const renderErrors = !!errors.length && (
+    <article className="message is-danger">
+      <div className="message-body">{errors[errors.length - 1].data}</div>
+      {/* todo: show something nice when max retries fails */}
+    </article>
+  );
 
   return (
     <div className="modal-card">
@@ -30,17 +37,16 @@ const UserProfileForm: React.FC<OwnProps> = ({ user, formStatus, onSubmit, onCan
         <button className="delete" aria-label="close" onClick={onCancel}></button>
       </header>
       <section className="modal-card-body">
-        <Form initialFormData={user} formItems={formItems} formStatus={formStatus} onChange={setFormData} />
+        {renderErrors}
+        <Form initialFormData={user} formItems={formItems} onChange={setFormData} />
       </section>
       <footer className="modal-card-foot">
-        <fieldset disabled={formStatus.isSubmitting}>
-          <button className="button is-success" onClick={onFormSubmit}>
-            Save changes
-          </button>
-          <button className="button" onClick={onCancel}>
-            Cancel
-          </button>
-        </fieldset>
+        <button className="button is-success" onClick={onFormSubmit}>
+          Save changes
+        </button>
+        <button className="button" onClick={onCancel}>
+          Cancel
+        </button>
       </footer>
     </div>
   );

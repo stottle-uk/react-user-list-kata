@@ -1,8 +1,7 @@
-import React, { Dispatch, useState } from 'react';
+import React, { Dispatch, useEffect, useState } from 'react';
 import { Modal } from 'react-bulma-components';
 import { connect } from 'react-redux';
 import { HideUserProfile, UpdateUserStart, UsersAction } from '../+store/users.actions';
-import { FormStatus } from '../../shared/forms/Form';
 import spinner from '../../shared/icons/spinner.svg';
 import { RootState } from '../../store/store.modal';
 import { User } from '../models/User';
@@ -10,8 +9,8 @@ import UserProfileForm from './UserProfileForm';
 
 interface StoreProps {
   selectedUser?: User;
-  isLoading: boolean;
   isLoaded: boolean;
+  errors: any[];
 }
 
 interface DispatchProps {
@@ -23,39 +22,41 @@ type AllProps = StoreProps & DispatchProps;
 
 const UserProfileModal: React.FC<AllProps> = ({
   selectedUser,
-  isLoading,
   isLoaded,
+  errors,
   updateUser,
   hideUserProfile
 }: AllProps) => {
-  const [formStatus, setFormStatus] = useState<FormStatus>({
-    isSubmitting: false,
-    isSubmitted: false,
-    isDirty: false
-  });
+  const [isSubmitted, setIsSubmittedStatus] = useState<boolean>(false);
+
+  const resetFormDataEffect = () => {
+    setIsSubmittedStatus(false);
+  };
+
+  useEffect(resetFormDataEffect, [selectedUser]);
 
   const onSubmit = (user: User) => {
-    console.log(user);
     updateUser(user);
-    setFormStatus({ ...formStatus, isSubmitted: true });
+    setIsSubmittedStatus(true);
   };
 
   const renderSpinner = (
     <>
       <img src={spinner} className="spinner is-in-modal" alt="logo" />
-      {formStatus.isSubmitted && <p className="is-size-3 has-text-white is-in-modal">Saving</p>}
+      {isSubmitted && <p className="is-size-3 has-text-white is-in-modal">Saving</p>}
     </>
   );
 
-  const renderForm = selectedUser && (
-    <UserProfileForm user={selectedUser} formStatus={formStatus} onCancel={hideUserProfile} onSubmit={onSubmit} />
+  const renderForm = selectedUser ? (
+    <UserProfileForm user={selectedUser} errors={errors} onCancel={hideUserProfile} onSubmit={onSubmit} />
+  ) : (
+    <></>
   );
 
   const renderModalContent = isLoaded ? renderForm : renderSpinner;
 
   return (
-    <Modal show={!!selectedUser} showClose={false} onClose={hideUserProfile}>
-      {/* <div className="modal-background"></div> */}
+    <Modal show={!!selectedUser} showClose={false} closeOnEsc={true} onClose={hideUserProfile}>
       {renderModalContent}
     </Modal>
   );
@@ -64,8 +65,8 @@ const UserProfileModal: React.FC<AllProps> = ({
 const mapStateToProps = ({ users }: RootState): StoreProps => {
   return {
     selectedUser: users.users.find((u: User) => !!users.selectedUser && u.id === users.selectedUser.id),
-    isLoading: users.isLoading,
-    isLoaded: users.isLoaded
+    isLoaded: users.isLoaded,
+    errors: users.errors
   };
 };
 
