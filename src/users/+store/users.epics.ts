@@ -2,7 +2,7 @@ import { Action } from 'redux';
 import { ActionsObservable, ofType } from 'redux-observable';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { IGetUsers, IUpdateUsers } from '../models/User';
+import { BaseUser, IGetUsers, IUpdateUsers } from '../models/User';
 import {
   GetAllUsersFailure,
   GetAllUsersSuccess,
@@ -17,9 +17,19 @@ import {
   UsersActionTypes
 } from './users.actions';
 
-export interface UsersDependencies {
+export interface UsersEpicDependencies {
   usersService: IGetUsers & IUpdateUsers;
 }
+
+const byUsername = (a: BaseUser, b: BaseUser) => {
+  if (a.username < b.username) {
+    return -1;
+  }
+  if (a.username > b.username) {
+    return 1;
+  }
+  return 0;
+};
 
 const showUser = (action$: ActionsObservable<Action>): Observable<Action> =>
   action$.pipe(
@@ -37,12 +47,13 @@ const hideUser = (action$: ActionsObservable<Action>): Observable<Action> =>
 const getAllUsers = (
   action$: ActionsObservable<Action>,
   state$: Observable<any>,
-  { usersService }: UsersDependencies
+  { usersService }: UsersEpicDependencies
 ): Observable<Action> =>
   action$.pipe(
     ofType(UsersActionTypes.GetAllUsersStart),
     switchMap(() =>
       usersService.getAll().pipe(
+        map(users => users.sort(byUsername)), // FYI, sorting here
         map(
           users =>
             new GetAllUsersSuccess({
@@ -57,7 +68,7 @@ const getAllUsers = (
 const getUserById = (
   action$: ActionsObservable<Action>,
   state$: Observable<any>,
-  { usersService }: UsersDependencies
+  { usersService }: UsersEpicDependencies
 ): Observable<Action> =>
   action$.pipe(
     ofType<Action, GetUserByIdStart>(UsersActionTypes.GetUserByIdStart),
@@ -77,7 +88,7 @@ const getUserById = (
 const updateUser = (
   action$: ActionsObservable<Action>,
   state$: Observable<any>,
-  { usersService }: UsersDependencies
+  { usersService }: UsersEpicDependencies
 ): Observable<Action> =>
   action$.pipe(
     ofType<Action, UpdateUserStart>(UsersActionTypes.UpdateUserStart),
