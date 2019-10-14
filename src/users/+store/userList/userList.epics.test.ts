@@ -1,8 +1,9 @@
 import { ActionsObservable } from 'redux-observable';
 import { of } from 'rxjs';
+import { UsersEpicDependencies } from '../+shared/users.store.models';
 import { BaseUser, User } from '../../models/User';
 import { GetAllUsersStart, GetAllUsersSuccess } from './userList.actions';
-import { userListEpics, UsersEpicDependencies } from './userList.epics';
+import { userListEpics } from './userList.epics';
 
 const userA: BaseUser = {
   id: '1',
