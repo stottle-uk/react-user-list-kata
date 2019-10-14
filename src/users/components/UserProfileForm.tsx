@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Form, { FormInputItem } from '../../shared/forms/Form';
 import { User } from '../models/User';
 
+// todo: add validation methods to the formItems
+
 const formItems: FormInputItem[] = [
   { name: 'firstName', label: 'First Name' },
   { name: 'lastName', label: 'Last Name' },
