@@ -2,12 +2,9 @@ import { Action } from 'redux';
 import { ActionsObservable, ofType } from 'redux-observable';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { BaseUser, IGetUsers, IUpdateUsers } from '../../models/User';
+import { UsersEpicDependencies } from '../+shared/users.store.models';
+import { BaseUser } from '../../models/User';
 import { GetAllUsersFailure, GetAllUsersSuccess, UserListActionTypes } from './userList.actions';
-
-export interface UsersEpicDependencies {
-  usersService: IGetUsers & IUpdateUsers;
-}
 
 const byUsername = (a: BaseUser, b: BaseUser) => {
   if (a.username < b.username) {
