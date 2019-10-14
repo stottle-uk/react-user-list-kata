@@ -1,23 +1,16 @@
 import React from 'react';
-import { Container, Navbar } from 'react-bulma-components';
+import { Container } from 'react-bulma-components';
 import './App.css';
-import UserList from './users/components/UserList';
+import Header from './shared/layout/Header';
 import UserProfileModal from './users/components/UserProfileModal';
+import Users from './users/components/Users';
 
 const App: React.FC = () => {
   return (
     <>
-      <Navbar className="is-fixed-top has-shadow">
-        <Container>
-          <div className="navbar-start">
-            <div className="navbar-brand">
-              <span className="navbar-item">User List Kata</span>
-            </div>
-          </div>
-        </Container>
-      </Navbar>
+      <Header />
       <Container>
-        <UserList />
+        <Users />
       </Container>
       <UserProfileModal />
     </>

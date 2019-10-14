@@ -33,7 +33,7 @@ const UserProfileModal: React.FC<AllProps> = ({
 }: AllProps) => {
   const renderSpinner = (
     <>
-      <img src={spinner} className="spinner is-in-modal" alt="logo" />
+      <img src={spinner} className="spinner is-in-modal" alt="spinner" />
       {isSubmitted && <p className="is-size-3 has-text-white is-in-modal">Saving</p>}
     </>
   );

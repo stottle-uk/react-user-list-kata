@@ -7,6 +7,8 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 import configureStore from './store/configureStore';
 
+// todo: add SSR
+
 ReactDOM.render(
   <Provider store={configureStore()}>
     <App />
