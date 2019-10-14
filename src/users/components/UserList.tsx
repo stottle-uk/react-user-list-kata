@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { ProfileAction, ShowUserProfile } from '../+store/profile/profile.actions';
 import { GetAllUsersStart, UserListAction } from '../+store/userList/userList.actions';
+import { ShowUserProfile, UserProfileAction } from '../+store/userProfile/userProfile.actions';
 import { RootState } from '../../store/store.modal';
 import { BaseUser } from '../models/User';
 
@@ -52,14 +52,14 @@ const UsersList: React.FC<AllProps> = ({ showUserProfile, getUsers, users }: All
     </div>
   );
 
-  return <>{users.map(renderUser)}</>;
+  return <>{users.map(renderUser)}</>; // todo: paginate the list and/or load more on scroll down
 };
 
 const mapStateToProps = ({ userList: users }: RootState): StoreProps => ({
   users: users.users
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<UserListAction | ProfileAction>): DispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch<UserListAction | UserProfileAction>): DispatchProps => ({
   getUsers: () => dispatch(new GetAllUsersStart()),
   showUserProfile: (user: BaseUser) => dispatch(new ShowUserProfile({ user }))
 });

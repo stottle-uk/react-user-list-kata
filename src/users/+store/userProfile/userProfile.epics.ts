@@ -8,23 +8,23 @@ import {
   GetUserByIdStart,
   GetUserByIdSuccess,
   HideUserProfile,
-  ProfileActionTypes,
   ShowUserProfile,
   UpdateUserFailure,
   UpdateUserStart,
-  UpdateUserSuccess
-} from './profile.actions';
+  UpdateUserSuccess,
+  UserProfileActionTypes
+} from './userProfile.actions';
 
 const showUser = (action$: ActionsObservable<Action>): Observable<Action> =>
   action$.pipe(
-    ofType<Action, ShowUserProfile>(ProfileActionTypes.ShowUserProfile),
+    ofType<Action, ShowUserProfile>(UserProfileActionTypes.ShowUserProfile),
     map(action => action.payload.user.id),
     map(userId => new GetUserByIdStart({ userId }))
   );
 
 const hideUser = (action$: ActionsObservable<Action>): Observable<Action> =>
   action$.pipe(
-    ofType<Action, UpdateUserSuccess>(ProfileActionTypes.UpdateUserSuccess),
+    ofType<Action, UpdateUserSuccess>(UserProfileActionTypes.UpdateUserSuccess),
     map(() => new HideUserProfile())
   );
 
@@ -34,7 +34,7 @@ const getUserById = (
   { usersService }: UsersEpicDependencies
 ): Observable<Action> =>
   action$.pipe(
-    ofType<Action, GetUserByIdStart>(ProfileActionTypes.GetUserByIdStart),
+    ofType<Action, GetUserByIdStart>(UserProfileActionTypes.GetUserByIdStart),
     switchMap(action =>
       usersService.getById(action.payload.userId).pipe(
         map(
@@ -54,7 +54,7 @@ const updateUser = (
   { usersService }: UsersEpicDependencies
 ): Observable<Action> =>
   action$.pipe(
-    ofType<Action, UpdateUserStart>(ProfileActionTypes.UpdateUserStart),
+    ofType<Action, UpdateUserStart>(UserProfileActionTypes.UpdateUserStart),
     switchMap(action =>
       usersService.update(action.payload.user).pipe(
         map(
@@ -68,5 +68,5 @@ const updateUser = (
     )
   );
 
-export const profileEpics = { showUser, hideUser, getUserById, updateUser };
-export const profileEpicsAsArray = Object.values(profileEpics);
+export const userProfileEpics = { showUser, hideUser, getUserById, updateUser };
+export const userProfileEpicsAsArray = Object.values(userProfileEpics);

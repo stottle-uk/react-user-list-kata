@@ -1,7 +1,7 @@
-import React, { Dispatch, useEffect, useState } from 'react';
+import React, { Dispatch } from 'react';
 import { Modal } from 'react-bulma-components';
 import { connect } from 'react-redux';
-import { HideUserProfile, ProfileAction, UpdateUserStart } from '../+store/profile/profile.actions';
+import { HideUserProfile, UpdateUserStart, UserProfileAction } from '../+store/userProfile/userProfile.actions';
 import spinner from '../../shared/icons/spinner.svg';
 import { RootState } from '../../store/store.modal';
 import { User } from '../models/User';
@@ -10,6 +10,7 @@ import UserProfileForm from './UserProfileForm';
 interface StoreProps {
   selectedUser?: User;
   showModal: boolean;
+  isSubmitted: boolean;
   isLoaded: boolean;
   errors: any[];
 }
@@ -24,24 +25,12 @@ type AllProps = StoreProps & DispatchProps;
 const UserProfileModal: React.FC<AllProps> = ({
   selectedUser,
   showModal,
+  isSubmitted,
   isLoaded,
   errors,
   updateUser,
   hideUserProfile
 }: AllProps) => {
-  const [isSubmitted, setIsSubmittedStatus] = useState<boolean>(false);
-
-  const resetFormDataEffect = () => {
-    setIsSubmittedStatus(false);
-  };
-
-  useEffect(resetFormDataEffect, [selectedUser]);
-
-  const onSubmit = (user: User) => {
-    updateUser(user);
-    setIsSubmittedStatus(true);
-  };
-
   const renderSpinner = (
     <>
       <img src={spinner} className="spinner is-in-modal" alt="logo" />
@@ -50,7 +39,7 @@ const UserProfileModal: React.FC<AllProps> = ({
   );
 
   const renderForm = selectedUser ? (
-    <UserProfileForm user={selectedUser} errors={errors} onCancel={hideUserProfile} onSubmit={onSubmit} />
+    <UserProfileForm user={selectedUser} errors={errors} onCancel={hideUserProfile} onSubmit={updateUser} />
   ) : (
     <></>
   );
@@ -64,16 +53,17 @@ const UserProfileModal: React.FC<AllProps> = ({
   );
 };
 
-const mapStateToProps = ({ profile }: RootState): StoreProps => {
+const mapStateToProps = ({ userProfile }: RootState): StoreProps => {
   return {
-    selectedUser: profile.selectedUser,
-    showModal: profile.showUserProfileModal,
-    isLoaded: profile.isLoaded,
-    errors: profile.errors
+    selectedUser: userProfile.selectedUser,
+    showModal: userProfile.showUserProfileModal,
+    isSubmitted: userProfile.isSubmitted,
+    isLoaded: userProfile.isLoaded,
+    errors: userProfile.errors
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<ProfileAction>): DispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch<UserProfileAction>): DispatchProps => ({
   updateUser: (user: User) => dispatch(new UpdateUserStart({ user })),
   hideUserProfile: () => dispatch(new HideUserProfile())
 });

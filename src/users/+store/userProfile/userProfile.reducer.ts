@@ -1,7 +1,7 @@
 import { User } from '../../models/User';
-import { ProfileAction, ProfileActionTypes } from './profile.actions';
+import { UserProfileAction, UserProfileActionTypes } from './userProfile.actions';
 
-export interface ProfileState {
+export interface userProfileState {
   selectedUser?: User;
   showUserProfileModal: boolean;
   isSubmitted: boolean;
@@ -10,7 +10,7 @@ export interface ProfileState {
   errors: any[]; // todo: create typescript interface for errors
 }
 
-const initialState: ProfileState = {
+const initialState: userProfileState = {
   showUserProfileModal: false,
   selectedUser: undefined,
   isSubmitted: false,
@@ -19,24 +19,23 @@ const initialState: ProfileState = {
   errors: []
 };
 
-export const profileReducer = (state = initialState, action: ProfileAction): ProfileState => {
+export const userProfileReducer = (state = initialState, action: UserProfileAction): userProfileState => {
   switch (action.type) {
-    case ProfileActionTypes.ShowUserProfile:
+    case UserProfileActionTypes.ShowUserProfile:
       return {
         ...state,
         showUserProfileModal: true,
         isSubmitted: false
       };
 
-    case ProfileActionTypes.HideUserProfile:
+    case UserProfileActionTypes.HideUserProfile:
       return {
         ...state,
         showUserProfileModal: false,
         selectedUser: undefined
       };
 
-    case ProfileActionTypes.UpdateUserStart:
-    case ProfileActionTypes.GetUserByIdStart:
+    case UserProfileActionTypes.GetUserByIdStart:
       return {
         ...state,
         isLoading: true,
@@ -44,8 +43,17 @@ export const profileReducer = (state = initialState, action: ProfileAction): Pro
         errors: []
       };
 
-    case ProfileActionTypes.UpdateUserSuccess:
-    case ProfileActionTypes.GetUserByIdSuccess:
+    case UserProfileActionTypes.UpdateUserStart:
+      return {
+        ...state,
+        isSubmitted: true,
+        isLoading: true,
+        isLoaded: false,
+        errors: []
+      };
+
+    case UserProfileActionTypes.UpdateUserSuccess:
+    case UserProfileActionTypes.GetUserByIdSuccess:
       return {
         ...state,
         selectedUser: action.payload.user,
@@ -53,8 +61,8 @@ export const profileReducer = (state = initialState, action: ProfileAction): Pro
         isLoaded: true
       };
 
-    case ProfileActionTypes.GetUserByIdFailure:
-    case ProfileActionTypes.UpdateUserFailure:
+    case UserProfileActionTypes.GetUserByIdFailure:
+    case UserProfileActionTypes.UpdateUserFailure:
       return {
         ...state,
         isLoading: false,
