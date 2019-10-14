@@ -13,7 +13,7 @@ export const getIsSubmitted = createSelector(
   state => state.isSubmitted
 );
 
-export const getErrors = createSelector(
+export const getUserProfileErrors = createSelector(
   [getState],
   state => state.errors
 );

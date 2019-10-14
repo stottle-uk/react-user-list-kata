@@ -5,11 +5,11 @@
 .spinner {
   height: 100px;
   width: 100px;
+  padding-bottom: 10px;
 }
 
 .is-in-modal {
   z-index: 99;
-  padding: 10px 0;
 }
 
 .loading-users {

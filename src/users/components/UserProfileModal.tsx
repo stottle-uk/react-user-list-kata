@@ -2,10 +2,11 @@ import React, { Dispatch } from 'react';
 import { Modal } from 'react-bulma-components';
 import { connect } from 'react-redux';
 import { HideUserProfile, UpdateUserStart, UserProfileAction } from '../+store/userProfile/userProfile.actions';
-import { getErrors, getIsSubmitted, getSelectedUser } from '../+store/userProfile/userProfile.selectors';
+import { getIsSubmitted, getSelectedUser, getUserProfileErrors } from '../+store/userProfile/userProfile.selectors';
 import spinner from '../../shared/icons/spinner.svg';
 import { RootState } from '../../store/store.modal';
 import { User } from '../models/User';
+import UserErrors from './UserErrors';
 import UserProfileForm from './UserProfileForm';
 
 interface StoreProps {
@@ -42,7 +43,7 @@ const UserProfileModal: React.FC<AllProps> = ({
   const renderForm = selectedUser ? (
     <UserProfileForm user={selectedUser} errors={errors} onCancel={hideUserProfile} onSubmit={updateUser} />
   ) : (
-    <></>
+    <UserErrors errors={errors} retry={hideUserProfile} retryText="Click to close" />
   );
 
   const renderModalContent = isLoaded ? renderForm : renderSpinner;
@@ -60,7 +61,7 @@ const mapStateToProps = ({ userProfile }: RootState): StoreProps => {
     showModal: userProfile.showUserProfileModal,
     isSubmitted: getIsSubmitted(userProfile),
     isLoaded: userProfile.isLoaded,
-    errors: getErrors(userProfile)
+    errors: getUserProfileErrors(userProfile)
   };
 };
 
