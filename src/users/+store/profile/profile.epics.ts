@@ -2,7 +2,7 @@ import { Action } from 'redux';
 import { ActionsObservable, ofType } from 'redux-observable';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { UsersEpicDependencies } from '../users/users.epics';
+import { UsersEpicDependencies } from '../userList/userList.epics';
 import {
   GetUserByIdFailure,
   GetUserByIdStart,

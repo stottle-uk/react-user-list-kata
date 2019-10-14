@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { ProfileAction, ShowUserProfile } from '../+store/profile/profile.actions';
-import { GetAllUsersStart, UsersAction } from '../+store/users/users.actions';
+import { GetAllUsersStart, UserListAction } from '../+store/userList/userList.actions';
 import { RootState } from '../../store/store.modal';
 import { BaseUser } from '../models/User';
 
@@ -55,11 +55,11 @@ const UsersList: React.FC<AllProps> = ({ showUserProfile, getUsers, users }: All
   return <>{users.map(renderUser)}</>;
 };
 
-const mapStateToProps = ({ users }: RootState): StoreProps => ({
+const mapStateToProps = ({ userList: users }: RootState): StoreProps => ({
   users: users.users
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<UsersAction | ProfileAction>): DispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch<UserListAction | ProfileAction>): DispatchProps => ({
   getUsers: () => dispatch(new GetAllUsersStart()),
   showUserProfile: (user: BaseUser) => dispatch(new ShowUserProfile({ user }))
 });

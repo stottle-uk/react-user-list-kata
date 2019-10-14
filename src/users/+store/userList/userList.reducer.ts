@@ -1,23 +1,23 @@
 import { BaseUser } from '../../models/User';
-import { UsersAction, UsersActionTypes } from './users.actions';
+import { UserListAction, UserListActionTypes } from './userList.actions';
 
-export interface UsersState {
+export interface UserListState {
   users: BaseUser[];
   isLoading: boolean;
   isLoaded: boolean;
   errors: any[]; // todo: create typescript interface for errors
 }
 
-const initialState: UsersState = {
+const initialState: UserListState = {
   users: [],
   isLoading: false,
   isLoaded: false,
   errors: []
 };
 
-export const usersReducer = (state = initialState, action: UsersAction): UsersState => {
+export const userListReducer = (state = initialState, action: UserListAction): UserListState => {
   switch (action.type) {
-    case UsersActionTypes.GetAllUsersStart:
+    case UserListActionTypes.GetAllUsersStart:
       return {
         ...state,
         isLoading: true,
@@ -25,7 +25,7 @@ export const usersReducer = (state = initialState, action: UsersAction): UsersSt
         errors: []
       };
 
-    case UsersActionTypes.GetAllUsersSuccess:
+    case UserListActionTypes.GetAllUsersSuccess:
       return {
         ...state,
         users: action.payload.users,
@@ -33,7 +33,7 @@ export const usersReducer = (state = initialState, action: UsersAction): UsersSt
         isLoaded: true
       };
 
-    case UsersActionTypes.GetAllUsersFailure:
+    case UserListActionTypes.GetAllUsersFailure:
       return {
         ...state,
         isLoading: false,

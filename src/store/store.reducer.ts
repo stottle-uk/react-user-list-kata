@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux';
 import { ProfileAction } from '../users/+store/profile/profile.actions';
 import { profileReducer } from '../users/+store/profile/profile.reducer';
-import { UsersAction } from '../users/+store/users/users.actions';
-import { usersReducer } from '../users/+store/users/users.reducer';
+import { UserListAction } from '../users/+store/userList/userList.actions';
+import { userListReducer } from '../users/+store/userList/userList.reducer';
 import { RootState } from './store.modal';
 
-type AllActions = UsersAction & ProfileAction;
+type AllActions = UserListAction & ProfileAction;
 
 export const rootReducer = combineReducers<RootState, AllActions>({
-  users: usersReducer,
+  userList: userListReducer,
   profile: profileReducer
 });

@@ -3,7 +3,7 @@ import { ActionsObservable, ofType } from 'redux-observable';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { BaseUser, IGetUsers, IUpdateUsers } from '../../models/User';
-import { GetAllUsersFailure, GetAllUsersSuccess, UsersActionTypes } from './users.actions';
+import { GetAllUsersFailure, GetAllUsersSuccess, UserListActionTypes } from './userList.actions';
 
 export interface UsersEpicDependencies {
   usersService: IGetUsers & IUpdateUsers;
@@ -25,7 +25,7 @@ const getAllUsers = (
   { usersService }: UsersEpicDependencies
 ): Observable<Action> =>
   action$.pipe(
-    ofType(UsersActionTypes.GetAllUsersStart),
+    ofType(UserListActionTypes.GetAllUsersStart),
     switchMap(() =>
       usersService.getAll().pipe(
         map(users => users.sort(byUsername)), // FYI, sorting here
@@ -40,5 +40,5 @@ const getAllUsers = (
     )
   );
 
-export const usersEpics = { getAllUsers };
-export const usersEpicsAsArray = Object.values(usersEpics);
+export const userListEpics = { getAllUsers };
+export const userListEpicsAsArray = Object.values(userListEpics);

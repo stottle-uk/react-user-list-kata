@@ -1,7 +1,7 @@
 import { ProfileState } from '../users/+store/profile/profile.reducer';
-import { UsersState } from '../users/+store/users/users.reducer';
+import { UserListState } from '../users/+store/userList/userList.reducer';
 
 export interface RootState {
-  users: UsersState;
+  userList: UserListState;
   profile: ProfileState;
 }
