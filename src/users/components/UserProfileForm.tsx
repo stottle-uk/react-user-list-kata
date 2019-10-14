@@ -31,7 +31,7 @@ const UserProfileForm: React.FC<OwnProps> = ({ user, errors, onSubmit, onCancel 
   );
 
   return (
-    <div className="modal-card">
+    <div className="modal-card" data-e2e="user-profile-form">
       <header className="modal-card-head">
         <p className="modal-card-title">{user.username}</p>
         <button className="delete" aria-label="close" onClick={onCancel}></button>
@@ -41,7 +41,7 @@ const UserProfileForm: React.FC<OwnProps> = ({ user, errors, onSubmit, onCancel 
         <Form initialFormData={user} formItems={formItems} onChange={setFormData} />
       </section>
       <footer className="modal-card-foot">
-        <button className="button is-success" onClick={onFormSubmit}>
+        <button className="button is-success" onClick={onFormSubmit} data-e2e="user-profile-submit">
           Save changes
         </button>
         <button className="button" onClick={onCancel}>

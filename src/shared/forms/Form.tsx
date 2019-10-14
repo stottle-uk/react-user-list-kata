@@ -24,6 +24,7 @@ const Form = <T extends {}>({ initialFormData, formItems, onChange }: OwnProps<T
       <div className="control">
         <input
           id={item.name}
+          data-e2e={`form-input-${item.name}`}
           className="input"
           type={item.type || 'text'}
           defaultValue={(initialFormData as any)[item.name]}

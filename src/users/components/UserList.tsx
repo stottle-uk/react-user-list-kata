@@ -31,6 +31,7 @@ const UsersList: React.FC<AllProps> = ({ showUserProfile, getUsers, users }: All
   const renderUser = (user: BaseUser) => (
     <div
       key={user.id}
+      data-e2e="user-list"
       className={getCardClass(user.id)}
       onMouseEnter={() => setActiveCard(user.id)}
       onMouseLeave={() => setActiveCard(undefined)}
@@ -44,7 +45,9 @@ const UsersList: React.FC<AllProps> = ({ showUserProfile, getUsers, users }: All
             </figure>
           </div>
           <div className="media-content">
-            <p className="title is-5">{user.username}</p>
+            <p className="title is-5" data-e2e="user-list-username">
+              {user.username}
+            </p>
             <p className="subtitle is-7">{user.id}</p>
           </div>
         </div>
