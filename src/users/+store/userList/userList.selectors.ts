@@ -12,3 +12,8 @@ export const getIsLoadingUsers = createSelector(
   [getState],
   state => state.isLoading
 );
+
+export const getErrors = createSelector(
+  [getState],
+  state => state.errors
+);

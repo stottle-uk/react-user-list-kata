@@ -4,7 +4,7 @@ import { BaseUser } from '../../models/User';
 export enum UserListActionTypes {
   GetAllUsersStart = '[UserList] Get All Users Start',
   GetAllUsersSuccess = '[UserList] Get All Users Success',
-  GetAllUsersFailure = '[UserList] Get All Users Failre'
+  GetAllUsersFailure = '[UserList] Get All Users Failure'
 }
 
 export class GetAllUsersStart implements Action {

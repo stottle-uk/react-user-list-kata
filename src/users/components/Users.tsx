@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { GetAllUsersStart, UserListAction } from '../+store/userList/userList.actions';
-import { getIsLoadingUsers, getUsers } from '../+store/userList/userList.selectors';
+import { getErrors, getIsLoadingUsers, getUsers } from '../+store/userList/userList.selectors';
 import { ShowUserProfile, UserProfileAction } from '../+store/userProfile/userProfile.actions';
 import spinner from '../../shared/icons/spinner.svg';
 import { RootState } from '../../store/store.modal';
@@ -12,6 +12,7 @@ import UsersList from './UserList';
 interface StoreProps {
   users: BaseUser[];
   isLoading: boolean;
+  errors: any[];
 }
 
 interface DispatchProps {
@@ -21,7 +22,7 @@ interface DispatchProps {
 
 type AllProps = StoreProps & DispatchProps;
 
-const Users: React.FC<AllProps> = ({ users, isLoading, showUserProfile, getUsers }: AllProps) => {
+const Users: React.FC<AllProps> = ({ users, isLoading, errors, showUserProfile, getUsers }: AllProps) => {
   const usersDataEffect = () => {
     getUsers();
   };
@@ -34,12 +35,17 @@ const Users: React.FC<AllProps> = ({ users, isLoading, showUserProfile, getUsers
     </div>
   );
 
+  if (!!errors.length) {
+    return <pre>errors: {JSON.stringify(errors, undefined, 2)}</pre>; // todo: make the errors look nice and make sense
+  }
+
   return isLoading ? renderSpinner : <UsersList users={users} onUserSelected={showUserProfile} />;
 };
 
 const mapStateToProps = ({ userList }: RootState): StoreProps => ({
   users: getUsers(userList),
-  isLoading: getIsLoadingUsers(userList)
+  isLoading: getIsLoadingUsers(userList),
+  errors: getErrors(userList)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<UserListAction | UserProfileAction>): DispatchProps => ({
