@@ -24,6 +24,8 @@ All the data is stored in redux state and components have split responsibilities
 
 There are a few todo's scattered around for functionality or features i would add in the 'real world'
 
+The `httpService` also has a retry strategy to handle 500 responses from the API - it will retry up to 10 times before it throws an error. The retry strategy is very basic at the moment but could be updated to have a linear or exponential back-off strategy.
+
 ## State
 
 The pattern I have created uses a lot of boilerplate, but everything is strongly typed for TypeScript and each part of the state has its own file - actions, reducer, epics and selectors.

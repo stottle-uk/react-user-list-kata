@@ -6,7 +6,7 @@ export class UsersService implements IGetUsers, IUpdateUsers {
   constructor(private httpService: HttpService) {}
 
   getAll(): Observable<BaseUser[]> {
-    return this.httpService.get<BaseUser[]>(`/users`);
+    return this.httpService.get(`/users`);
   }
 
   getById(userId: string): Observable<User> {
