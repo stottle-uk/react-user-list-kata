@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Section } from 'react-bulma-components';
 import { BaseUser } from '../models/User';
 
 interface OwnProps {
@@ -38,7 +39,15 @@ const UsersList: React.FC<OwnProps> = ({ users, onUserSelected }: OwnProps) => {
     </div>
   );
 
-  return <>{users.map(renderUser)}</>; // todo: paginate the list and/or load more on scroll down
+  return (
+    <Section>
+      <div className="content">
+        <h1>User List</h1>
+      </div>
+      {/* todo: add some user filtering */}
+      {users.map(renderUser)}
+    </Section>
+  ); // todo: paginate the list and/or load more on scroll down
 };
 
 export default UsersList;

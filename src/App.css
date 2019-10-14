@@ -13,7 +13,6 @@
 }
 
 .loading-users {
-  background-color: rgba(0, 0, 0, 0.3);
-  margin: 0 auto;
+  margin-top: 100px;
   text-align: center;
 }
