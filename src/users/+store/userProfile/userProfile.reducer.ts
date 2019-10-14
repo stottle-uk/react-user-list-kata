@@ -1,7 +1,7 @@
 import { User } from '../../models/User';
 import { UserProfileAction, UserProfileActionTypes } from './userProfile.actions';
 
-export interface userProfileState {
+export interface UserProfileState {
   selectedUser?: User;
   showUserProfileModal: boolean;
   isSubmitted: boolean;
@@ -10,7 +10,7 @@ export interface userProfileState {
   errors: any[]; // todo: create typescript interface for errors
 }
 
-const initialState: userProfileState = {
+const initialState: UserProfileState = {
   showUserProfileModal: false,
   selectedUser: undefined,
   isSubmitted: false,
@@ -19,7 +19,7 @@ const initialState: userProfileState = {
   errors: []
 };
 
-export const userProfileReducer = (state = initialState, action: UserProfileAction): userProfileState => {
+export const userProfileReducer = (state = initialState, action: UserProfileAction): UserProfileState => {
   switch (action.type) {
     case UserProfileActionTypes.ShowUserProfile:
       return {

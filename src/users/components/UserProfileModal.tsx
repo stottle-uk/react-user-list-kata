@@ -2,6 +2,7 @@ import React, { Dispatch } from 'react';
 import { Modal } from 'react-bulma-components';
 import { connect } from 'react-redux';
 import { HideUserProfile, UpdateUserStart, UserProfileAction } from '../+store/userProfile/userProfile.actions';
+import { getErrors, getIsSubmitted, getSelectedUser } from '../+store/userProfile/userProfile.selectors';
 import spinner from '../../shared/icons/spinner.svg';
 import { RootState } from '../../store/store.modal';
 import { User } from '../models/User';
@@ -55,11 +56,11 @@ const UserProfileModal: React.FC<AllProps> = ({
 
 const mapStateToProps = ({ userProfile }: RootState): StoreProps => {
   return {
-    selectedUser: userProfile.selectedUser,
+    selectedUser: getSelectedUser(userProfile),
     showModal: userProfile.showUserProfileModal,
-    isSubmitted: userProfile.isSubmitted,
+    isSubmitted: getIsSubmitted(userProfile),
     isLoaded: userProfile.isLoaded,
-    errors: userProfile.errors
+    errors: getErrors(userProfile)
   };
 };
 

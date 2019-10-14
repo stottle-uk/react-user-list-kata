@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { GetAllUsersStart, UserListAction } from '../+store/userList/userList.actions';
+import { getIsLoadingUsers, getUsers } from '../+store/userList/userList.selectors';
 import { ShowUserProfile, UserProfileAction } from '../+store/userProfile/userProfile.actions';
 import spinner from '../../shared/icons/spinner.svg';
 import { RootState } from '../../store/store.modal';
@@ -37,8 +38,8 @@ const Users: React.FC<AllProps> = ({ users, isLoading, showUserProfile, getUsers
 };
 
 const mapStateToProps = ({ userList }: RootState): StoreProps => ({
-  users: userList.users,
-  isLoading: userList.isLoading
+  users: getUsers(userList),
+  isLoading: getIsLoadingUsers(userList)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<UserListAction | UserProfileAction>): DispatchProps => ({
