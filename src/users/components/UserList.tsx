@@ -55,8 +55,8 @@ const UsersList: React.FC<AllProps> = ({ showUserProfile, getUsers, users }: All
   return <>{users.map(renderUser)}</>; // todo: paginate the list and/or load more on scroll down
 };
 
-const mapStateToProps = ({ userList: users }: RootState): StoreProps => ({
-  users: users.users
+const mapStateToProps = ({ userList }: RootState): StoreProps => ({
+  users: userList.users
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<UserListAction | UserProfileAction>): DispatchProps => ({
