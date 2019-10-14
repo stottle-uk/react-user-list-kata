@@ -1,6 +1,6 @@
 import { ActionsObservable } from 'redux-observable';
 import { of } from 'rxjs';
-import { BaseUser, User } from '../models/User';
+import { BaseUser, User } from '../../models/User';
 import { GetAllUsersStart, GetAllUsersSuccess } from './users.actions';
 import { UsersEpicDependencies, usersEpics } from './users.epics';
 

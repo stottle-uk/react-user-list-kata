@@ -1,7 +1,7 @@
 import React, { Dispatch, useEffect, useState } from 'react';
 import { Modal } from 'react-bulma-components';
 import { connect } from 'react-redux';
-import { HideUserProfile, UpdateUserStart, UsersAction } from '../+store/users.actions';
+import { HideUserProfile, ProfileAction, UpdateUserStart } from '../+store/profile/profile.actions';
 import spinner from '../../shared/icons/spinner.svg';
 import { RootState } from '../../store/store.modal';
 import { User } from '../models/User';
@@ -64,16 +64,16 @@ const UserProfileModal: React.FC<AllProps> = ({
   );
 };
 
-const mapStateToProps = ({ users }: RootState): StoreProps => {
+const mapStateToProps = ({ profile }: RootState): StoreProps => {
   return {
-    selectedUser: users.selectedUser,
-    showModal: users.showUserProfileModal,
-    isLoaded: users.isLoaded,
-    errors: users.errors
+    selectedUser: profile.selectedUser,
+    showModal: profile.showUserProfileModal,
+    isLoaded: profile.isLoaded,
+    errors: profile.errors
   };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<UsersAction>): DispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch<ProfileAction>): DispatchProps => ({
   updateUser: (user: User) => dispatch(new UpdateUserStart({ user })),
   hideUserProfile: () => dispatch(new HideUserProfile())
 });
