@@ -1,8 +1,8 @@
 import React from 'react';
 import { Container, Navbar } from 'react-bulma-components';
 import './App.css';
+import UserList from './users/components/UserList';
 import UserProfileModal from './users/components/UserProfileModal';
-import UsersList from './users/components/UsersList';
 
 const App: React.FC = () => {
   return (
@@ -17,7 +17,7 @@ const App: React.FC = () => {
         </Container>
       </Navbar>
       <Container>
-        <UsersList />
+        <UserList />
       </Container>
       <UserProfileModal />
     </>

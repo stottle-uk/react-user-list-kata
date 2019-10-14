@@ -2,9 +2,9 @@ import { Action } from 'redux';
 import { BaseUser } from '../../models/User';
 
 export enum UserListActionTypes {
-  GetAllUsersStart = '[Users] Get All Users Start',
-  GetAllUsersSuccess = '[Users] Get All Users Success',
-  GetAllUsersFailure = '[Users] Get All Users Failre'
+  GetAllUsersStart = '[UserList] Get All Users Start',
+  GetAllUsersSuccess = '[UserList] Get All Users Success',
+  GetAllUsersFailure = '[UserList] Get All Users Failre'
 }
 
 export class GetAllUsersStart implements Action {
