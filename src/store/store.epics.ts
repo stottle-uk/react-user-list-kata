@@ -8,7 +8,7 @@ import { UsersService } from '../users/services/UsersService';
 const usersService = new UsersService(
   new HttpService({
     baseUrl: 'http://localhost:3000', // todo: use ENV VARS for these values
-    defaultMaxRetryCount: 10,
+    defaultMaxRetryCount: 4,
     defaultRetryDelay: 200
   })
 );
