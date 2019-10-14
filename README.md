@@ -12,7 +12,7 @@ Run `yarn start` to run the app on port 3001 (make sure you also have the API ru
 
 Run `yarn test` to run the unit tests
 
-The e2e tests are in a seperate repo
+The e2e tests are in a seperate repo [e2e tests repo](https://github.com/stottle-uk/react-user-list-kata-e2e)
 
 ## Info
 
@@ -56,4 +56,4 @@ I've used Bulma CSS for styling and a react library that wraps the bulmas compon
 
 ## Testing
 
-I only added one unit-test for the `userList` epic as it contained some business logic for sorted the list - i could add more tests, but I’ve also created e2e tests using cypress in this ADD REPO URL
+I only added one unit-test for the `userList` epic as it contained some business logic for sorted the list - i could add more tests, but I’ve also created e2e tests using cypress in this [e2e tests repo](https://github.com/stottle-uk/react-user-list-kata-e2e)
