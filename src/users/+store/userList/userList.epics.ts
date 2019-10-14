@@ -1,10 +1,9 @@
-import { Action } from 'redux';
 import { ActionsObservable, ofType } from 'redux-observable';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { UsersEpicDependencies } from '../+shared/users.store.models';
 import { BaseUser } from '../../models/User';
-import { GetAllUsersFailure, GetAllUsersSuccess, UserListActionTypes } from './userList.actions';
+import { GetAllUsersFailure, GetAllUsersStart, GetAllUsersSuccess, UserListActionTypes } from './userList.actions';
 
 const byUsername = (a: BaseUser, b: BaseUser) => {
   if (a.username < b.username) {
@@ -17,10 +16,10 @@ const byUsername = (a: BaseUser, b: BaseUser) => {
 };
 
 const getAllUsers = (
-  action$: ActionsObservable<Action>,
+  action$: ActionsObservable<GetAllUsersStart>,
   state$: Observable<any>,
   { usersService }: UsersEpicDependencies
-): Observable<Action> =>
+) =>
   action$.pipe(
     ofType(UserListActionTypes.GetAllUsersStart),
     switchMap(() =>
