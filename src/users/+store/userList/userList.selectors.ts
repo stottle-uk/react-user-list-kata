@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { UserListState } from './userList.reducer';
+import { UserListState } from '../+shared/users.store.models';
 
 const getState = (state: UserListState) => state;
 

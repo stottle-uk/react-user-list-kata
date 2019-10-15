@@ -1,12 +1,5 @@
-import { BaseUser } from '../../models/User';
+import { UserListState } from '../+shared/users.store.models';
 import { UserListAction, UserListActionTypes } from './userList.actions';
-
-export interface UserListState {
-  users: BaseUser[];
-  isLoading: boolean;
-  isLoaded: boolean;
-  errors: any[]; // todo: create typescript interface for errors
-}
 
 const initialState: UserListState = {
   users: [],

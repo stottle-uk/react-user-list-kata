@@ -38,13 +38,13 @@ I've used a similar pattern to NGRX for Angular to create the `actions`. All `ac
 
 ### Reducers
 
-The reducer files contain the interface for the state and the reducer - nothing else.
+The reducer files contain the initial state and the reducer - nothing else.
 
 ### Epics
 
 Epics are like effects in NGRX and dependencies are injected for business logic and making API calls etc. The dependencies can also be mocked for unit testing.
 
-Epics use `rxjs` to manage the streams of data and also handle the subscription to observables to not clutter the components with cleanup code. Each epic has a Start, Success, Failure action for async methods which looks good in the devTools and is a consistant pattern. It also means other semi-related actions can be dispatched within the epics and all the logic can be kept in one place.
+Epics use `rxjs` to manage the streams of data and also handle the subscription to observables to not clutter the components with cleanup code. Each epic has a Start, Success, Failure action for async methods which looks good in the devTools and is a consistant pattern. It also means other semi-related actions can be dispatched within the epics and all the logic can be kept in one place (like showing a toast to the user when something has happened).
 
 Along with `selectors`, this is where business logic is normally found.
 

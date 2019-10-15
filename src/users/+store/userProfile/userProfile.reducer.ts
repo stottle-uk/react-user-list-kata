@@ -1,14 +1,5 @@
-import { User } from '../../models/User';
+import { UserProfileState } from '../+shared/users.store.models';
 import { UserProfileAction, UserProfileActionTypes } from './userProfile.actions';
-
-export interface UserProfileState {
-  selectedUser?: User;
-  showUserProfileModal: boolean;
-  isSubmitted: boolean;
-  isLoading: boolean;
-  isLoaded: boolean;
-  errors: any[]; // todo: create typescript interface for errors
-}
 
 const initialState: UserProfileState = {
   showUserProfileModal: false,

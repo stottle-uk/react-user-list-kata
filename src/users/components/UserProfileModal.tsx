@@ -2,7 +2,13 @@ import React, { Dispatch } from 'react';
 import { Modal } from 'react-bulma-components';
 import { connect } from 'react-redux';
 import { HideUserProfile, UpdateUserStart, UserProfileAction } from '../+store/userProfile/userProfile.actions';
-import { getIsSubmitted, getSelectedUser, getUserProfileErrors } from '../+store/userProfile/userProfile.selectors';
+import {
+  getIsLoaded,
+  getIsSubmitted,
+  getSelectedUser,
+  getShowUserProfileModal,
+  getUserProfileErrors
+} from '../+store/userProfile/userProfile.selectors';
 import spinner from '../../shared/icons/spinner.svg';
 import { RootState } from '../../store/store.modal';
 import { User } from '../models/User';
@@ -11,7 +17,7 @@ import UserProfileForm from './UserProfileForm';
 
 interface StoreProps {
   selectedUser?: User;
-  showModal: boolean;
+  isModalVisible: boolean;
   isSubmitted: boolean;
   isLoaded: boolean;
   errors: any[];
@@ -26,7 +32,7 @@ type AllProps = StoreProps & DispatchProps;
 
 const UserProfileModal: React.FC<AllProps> = ({
   selectedUser,
-  showModal,
+  isModalVisible,
   isSubmitted,
   isLoaded,
   errors,
@@ -49,7 +55,7 @@ const UserProfileModal: React.FC<AllProps> = ({
   const renderModalContent = isLoaded ? renderForm : renderSpinner;
 
   return (
-    <Modal show={showModal} showClose={false} closeOnEsc={true} onClose={hideUserProfile}>
+    <Modal show={isModalVisible} showClose={false} closeOnEsc={true} onClose={hideUserProfile}>
       {renderModalContent}
     </Modal>
   );
@@ -58,9 +64,9 @@ const UserProfileModal: React.FC<AllProps> = ({
 const mapStateToProps = ({ userProfile }: RootState): StoreProps => {
   return {
     selectedUser: getSelectedUser(userProfile),
-    showModal: userProfile.showUserProfileModal,
+    isModalVisible: getShowUserProfileModal(userProfile),
     isSubmitted: getIsSubmitted(userProfile),
-    isLoaded: userProfile.isLoaded,
+    isLoaded: getIsLoaded(userProfile),
     errors: getUserProfileErrors(userProfile)
   };
 };

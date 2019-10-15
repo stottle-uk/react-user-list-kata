@@ -10,7 +10,7 @@ const userA: BaseUser = {
   username: 'A Man'
 };
 const userB: BaseUser = {
-  id: '1',
+  id: '2',
   username: 'B Man'
 };
 

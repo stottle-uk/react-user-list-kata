@@ -60,7 +60,7 @@ const updateUser = (
           user =>
             new UpdateUserSuccess({
               user
-            })
+            }) // todo: show toast when user updated
         ),
         catchError(errors => of(new UpdateUserFailure({ errors })))
       )

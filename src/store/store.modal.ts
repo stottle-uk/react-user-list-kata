@@ -1,5 +1,4 @@
-import { UserListState } from '../users/+store/userList/userList.reducer';
-import { UserProfileState } from '../users/+store/userProfile/userProfile.reducer';
+import { UserListState, UserProfileState } from '../users/+store/+shared/users.store.models';
 
 export interface RootState {
   userList: UserListState;
