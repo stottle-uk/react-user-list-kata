@@ -1,19 +1,14 @@
 import { createSelector } from 'reselect';
-import { UserListState } from '../+shared/users.store.models';
+import { NotificationsState } from './notifications.reducer';
 
-const getState = (state: UserListState) => state;
+const getState = (state: NotificationsState) => state;
 
-export const getUsers = createSelector(
+export const getMessage = createSelector(
   [getState],
-  state => state.users // todo: the sorting could be done here
+  state => state.message // todo: the sorting could be done here
 );
 
-export const getIsLoadingUsers = createSelector(
+export const getIsVisible = createSelector(
   [getState],
-  state => state.isLoading
-);
-
-export const getUserListErrors = createSelector(
-  [getState],
-  state => state.errors
+  state => state.isVisible
 );

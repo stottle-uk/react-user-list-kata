@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { getIsVisible, getMessage } from '../+store/notifications.selectors';
 import { RootState } from '../../store/store.modal';
 
 interface StoreProps {
@@ -21,8 +22,8 @@ const Notification: React.FC<StoreProps> = ({ isVisible, message }) => {
 };
 
 const mapStateToProps = ({ notifications }: RootState): StoreProps => ({
-  isVisible: notifications.isVisible,
-  message: notifications.message
+  message: getMessage(notifications),
+  isVisible: getIsVisible(notifications)
 });
 
 export default connect<StoreProps, {}, {}, RootState>(mapStateToProps)(Notification);
