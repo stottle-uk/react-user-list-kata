@@ -21,7 +21,7 @@ interface OwnProps {
   onCancel: () => void;
 }
 
-const UserProfileForm: React.FC<OwnProps> = ({ user, errors, onSubmit, onCancel }: OwnProps) => {
+const UserProfileForm: React.FC<OwnProps> = ({ user, errors, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState<User>(user);
 
   const onFormSubmit = () => onSubmit({ ...user, ...formData });

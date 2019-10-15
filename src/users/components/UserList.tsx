@@ -6,7 +6,7 @@ interface OwnProps {
   onUserSelected: (user: BaseUser) => void;
 }
 
-const UsersList: React.FC<OwnProps> = ({ users, onUserSelected }: OwnProps) => {
+const UsersList: React.FC<OwnProps> = ({ users, onUserSelected }) => {
   const [activeCard, setActiveCard] = useState<string>();
 
   const getCardClass = (id: string) => `card ${id === activeCard ? 'has-background-light' : 'has-background-white'}`;

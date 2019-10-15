@@ -23,7 +23,7 @@ interface DispatchProps {
 
 type AllProps = StoreProps & DispatchProps;
 
-const Users: React.FC<AllProps> = ({ users, isLoading, errors, showUserProfile, getUsers }: AllProps) => {
+const Users: React.FC<AllProps> = ({ users, isLoading, errors, showUserProfile, getUsers }) => {
   const usersDataEffect = () => {
     getUsers();
   };

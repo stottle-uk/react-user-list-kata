@@ -2,7 +2,7 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-Retrieves data from an API and displays the returned list on page, users can be selected and edited. I'm structured like a large application, so I’ve effectively boiled the ocean given the required functionality, but this is just an example of one feature.
+This code example retrieves data from an API and displays the returned list on page, items in the list can be selected and edited. I'm structured like a large application, so I’ve effectively boiled the ocean given the required functionality, but this is just an example of one feature.
 
 ## Install
 
@@ -26,7 +26,7 @@ There are a few todo's scattered around for functionality or features i would ad
 
 The `httpService` also has a retry strategy to handle 500 responses from the API - it will retry up to 4 times before it throws an error. The retry strategy is very basic at the moment but could be updated to have a linear or exponential back-off strategy.
 
-## State
+## Redux State
 
 The pattern I have created uses a lot of boilerplate, but everything is strongly typed for TypeScript and each part of the state has its own file - actions, reducer, epics and selectors.
 
@@ -34,7 +34,7 @@ Each feature has a store and is imported/configured in the `./store/configureSto
 
 ### Actions
 
-I've used a similar pattern to NGRX for Angular to create the `actions`. They are all classes and a ‘type’ is exported from the actions files and used in the reducer (all case statements are strongly typed) and `mapDispatchToProps` functions. There was an issue with this though and redux thought the classes were for an async action and threw an error but got around this with middleware to convert the class to a plain object.
+I've used a similar pattern to NGRX for Angular to create the `actions`. All `actions` are classes and a ‘type’ is exported from the actions files and used in the reducer (all case statements are strongly typed) and `mapDispatchToProps` functions. There was an issue with this though and redux thought the classes were for an async action and threw an error but got around this with middleware to convert the class to a plain object.
 
 ### Reducers
 
@@ -44,7 +44,7 @@ The reducer files contain the interface for the state and the reducer - nothing 
 
 Epics are like effects in NGRX and dependencies are injected for business logic and making API calls etc. The dependencies can also be mocked for unit testing.
 
-Epics make use of `rxjs` and API calls generally have a Start, Success, Failure action which looks good in the devTools. It also means other semi-related actions can be dispatched within the epics and all the logic can be kept in one place.
+Epics use `rxjs` to manage the streams of data and also handle the subscription to observables to not clutter the components with cleanup code. Each epic has a Start, Success, Failure action for async methods which looks good in the devTools and is a consistant pattern. It also means other semi-related actions can be dispatched within the epics and all the logic can be kept in one place.
 
 Along with `selectors`, this is where business logic is normally found.
 

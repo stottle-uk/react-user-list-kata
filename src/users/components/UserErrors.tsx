@@ -6,11 +6,7 @@ interface OwnProps {
   errors: any[];
 }
 
-interface StoreProps {}
-
-type AllProps = OwnProps & StoreProps;
-
-const UserErrors: React.FC<AllProps> = ({ errors, retry, retryText }: AllProps) =>
+const UserErrors: React.FC<OwnProps> = ({ errors, retry, retryText }) =>
   !!errors.length ? (
     <article className="message is-danger is-in-modal">
       <div className="message-body">
