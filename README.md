@@ -54,8 +54,8 @@ Selectors return memoized data from the redux store and can be used to efficient
 
 ### Styling
 
-I've used Bulma CSS for styling and a react library that wraps the bulmas components. I've added a few custom classes in `App.css`, but I’ve tried to keep it simple and give feedback to the user when something is happening/loading. It's not going to win any awards for UI/UX :), but works on all size devices.
+I've used Bulma CSS for styling and a react library that wraps the bulma components. I've added a few custom classes in `App.css`, but I’ve tried to keep it simple and give feedback to the user when something is happening/loading. It's not going to win any awards for UI/UX :), but works on all size devices.
 
 ## Testing
 
-I only added one unit-test for the `userList` epic as it contained some business logic for sorted the list - i could add more tests, but I’ve also created e2e tests using cypress in this [e2e tests repo](https://github.com/stottle-uk/react-user-list-kata-e2e)
+I only added one unit-test for the `userList` epic as it contained some business logic for sorting the list - I could/should add more tests, but I’ve also created e2e tests using cypress in this [e2e tests repo](https://github.com/stottle-uk/react-user-list-kata-e2e)
