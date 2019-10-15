@@ -1,0 +1,28 @@
+import React from 'react';
+import { connect } from 'react-redux';
+import { RootState } from '../../store/store.modal';
+
+interface StoreProps {
+  isVisible: boolean;
+  message: string;
+}
+
+const Notification: React.FC<StoreProps> = ({ isVisible, message }) => {
+  const containerClass = `toast-notification ${isVisible && 'visible'}`;
+  return (
+    <div className={containerClass}>
+      <article className="message is-success">
+        <div className="message-body">
+          <span>{message}</span>
+        </div>
+      </article>
+    </div>
+  );
+};
+
+const mapStateToProps = ({ notifications }: RootState): StoreProps => ({
+  isVisible: notifications.isVisible,
+  message: notifications.message
+});
+
+export default connect<StoreProps, {}, {}, RootState>(mapStateToProps)(Notification);

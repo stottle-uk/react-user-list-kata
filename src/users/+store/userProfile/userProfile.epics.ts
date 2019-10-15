@@ -2,6 +2,7 @@ import { ActionsObservable, ofType } from 'redux-observable';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { UsersEpicDependencies } from '../+shared/users.store.models';
+import { ShowNotification } from '../../../notifications/+store/notifications.actions';
 import {
   GetUserByIdFailure,
   GetUserByIdStart,
@@ -67,5 +68,12 @@ const updateUser = (
     )
   );
 
-export const userProfileEpics = { showUser, hideUser, getUserById, updateUser };
+const showUserUpdateNotification = (action$: ActionsObservable<UpdateUserSuccess>) =>
+  action$.pipe(
+    ofType(UserProfileActionTypes.UpdateUserSuccess),
+    map(user => `${user.payload.user.username} updated`),
+    map(message => new ShowNotification({ message }))
+  );
+
+export const userProfileEpics = { showUser, hideUser, getUserById, updateUser, showUserUpdateNotification };
 export const userProfileEpicsAsArray = Object.values(userProfileEpics);

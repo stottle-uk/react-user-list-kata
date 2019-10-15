@@ -16,3 +16,17 @@
   margin-top: 100px;
   text-align: center;
 }
+
+.toast-notification {
+  position: fixed;
+  top: 80px;
+  right: 0;
+  transform: translateX(100%);
+  opacity: 0;
+  transition: transform 1s, opacity 1s;
+}
+
+.toast-notification.visible {
+  transform: translateX(0);
+  opacity: 1;
+}
