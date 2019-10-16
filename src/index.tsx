@@ -1,3 +1,4 @@
+import { Base64 } from 'js-base64';
 import React from 'react';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 import ReactDOM from 'react-dom';
@@ -6,15 +7,34 @@ import App from './App';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import configureStore from './store/configureStore';
+import { GetAllUsersStart } from './users/+store/userList/userList.actions';
 
-// todo: add SSR
+const initialState =
+  (window as any).DATA !== null && (window as any).DATA !== '{{WINDOW_DATA}}'
+    ? Base64.decode((window as any).DATA)
+    : '{}';
 
-ReactDOM.render(
-  <Provider store={configureStore()}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-);
+const parsedInitialState = JSON.parse(initialState);
+const store = configureStore(parsedInitialState);
+
+if (initialState === '{}') {
+  // Non-server rendered.
+  store.dispatch<any>(new GetAllUsersStart());
+  ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.getElementById('root')
+  );
+} else {
+  // Server rendered hydration
+  ReactDOM.hydrate(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.getElementById('root')
+  );
+}
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

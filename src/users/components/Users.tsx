@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { GetAllUsersStart, UserListAction } from '../+store/userList/userList.actions';
-import { getIsLoadingUsers, getUserListErrors, getUsers } from '../+store/userList/userList.selectors';
+import { getIsLoadingUsers, getUserListErrors, getUsersSorted } from '../+store/userList/userList.selectors';
 import { ShowUserProfile, UserProfileAction } from '../+store/userProfile/userProfile.actions';
 import spinner from '../../shared/icons/spinner.svg';
 import { RootState } from '../../store/store.modal';
@@ -25,7 +25,7 @@ type AllProps = StoreProps & DispatchProps;
 
 const Users: React.FC<AllProps> = ({ users, isLoading, errors, showUserProfile, getUsers }) => {
   const usersDataEffect = () => {
-    getUsers();
+    // getUsers();
   };
 
   useEffect(usersDataEffect, []);
@@ -47,7 +47,7 @@ const Users: React.FC<AllProps> = ({ users, isLoading, errors, showUserProfile, 
 };
 
 const mapStateToProps = ({ userList }: RootState): StoreProps => ({
-  users: getUsers(userList),
+  users: getUsersSorted(userList),
   isLoading: getIsLoadingUsers(userList),
   errors: getUserListErrors(userList)
 });
