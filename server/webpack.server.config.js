@@ -2,6 +2,7 @@ const root = require('app-root-path').path;
 // const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
+  mode: 'development',
   entry: `${root}/server/index.ts`,
   target: 'node',
   node: {

@@ -28,7 +28,8 @@
   "scripts": {
     "start": "concurrently \"yarn build && yarn start:server\" \"PORT=3001 react-scripts start\"",
     "start:server": "cross-env NODE_ENV=development node build_server/compiled",
-    "build:server": "node scripts/start.js",
+    "start:server:dev": "node scripts/start-watch.js",
+    "build:server": "node scripts/build.js",
     "build:client": "react-scripts build",
     "build": "yarn run build:client && yarn run build:server",
     "test": "react-scripts test",
@@ -58,6 +59,7 @@
     "cross-env": "^6.0.3",
     "concurrently": "^5.0.0",
     "ignore-loader": "0.1.2",
+    "nodemon": "1.19.1",
     "redux-devtools-extension": "^2.13.8",
     "ts-loader": "6.0.4"
   }
