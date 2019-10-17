@@ -7,4 +7,4 @@ RUN yarn
 COPY . .
 RUN yarn build
 EXPOSE 3102
-CMD [ "node", "./build_server/compiled.js" ]
+CMD [ "node", "./build/server/compiled.js" ]

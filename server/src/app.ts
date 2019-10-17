@@ -29,15 +29,19 @@ app.use('/api', api);
 
 // Send a version of index.html that is stripped of placeholders. The service-worker requests this file directly.
 app.use('/index.html', (req: Request, res: Response) => {
-  fs.readFile(path.resolve(__dirname, '..', '..', 'build', 'index.html'), 'utf8', (err: any, htmlData: string) => {
-    res.send(htmlData.replace(/DATA\s*=\s*{{.*?}}/g, '').replace(/{{.*?}}/g, ''));
-  });
+  fs.readFile(
+    path.resolve(__dirname, '..', '..', 'build', 'client', 'index.html'),
+    'utf8',
+    (err: any, htmlData: string) => {
+      res.send(htmlData.replace(/DATA\s*=\s*{{.*?}}/g, '').replace(/{{.*?}}/g, ''));
+    }
+  );
 });
 
 // Server JS/CSS Bundle with Cache-Control
 app.use(
   '/static',
-  express.static(path.resolve(__dirname, '..', '..', 'build/static'), {
+  express.static(path.resolve(__dirname, '..', '..', 'build', 'client', 'static'), {
     maxAge: '30d'
   })
 );
@@ -50,7 +54,7 @@ app.use(
 // });
 
 // Serve static assets
-app.use(express.static(path.resolve(__dirname, '..', '..', 'build'), { index: false }));
+app.use(express.static(path.resolve(__dirname, '..', '..', 'build', 'client'), { index: false }));
 
 // Always return the main index.html, so react-router render the route in the client
 app.use('/', universalLoader);

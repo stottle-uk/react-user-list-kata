@@ -14,7 +14,7 @@ import { GetAllUsersSuccess } from '../../client/src/users/+store/userList/userL
 import { UsersService } from '../../client/src/users/services/UsersService';
 
 export default function universalLoader(req: Request, res: Response) {
-  const filePath = path.resolve(__dirname, '..', '..', 'build', 'index.html');
+  const filePath = path.resolve(__dirname, '..', '..', 'build', 'client', 'index.html');
 
   fs.readFile(filePath, 'utf8', (err: NodeJS.ErrnoException | null, htmlData: string) => {
     if (err) {

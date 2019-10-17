@@ -81,7 +81,7 @@
   "scripts": {
     "start": "concurrently \"yarn build && yarn start:server\" \"PORT=3001 node client/scripts/start.js\"",
     "start:client": "PORT=3001 node client/scripts/start.js",
-    "start:server": "cross-env NODE_ENV=development node build_server/compiled",
+    "start:server": "cross-env NODE_ENV=development node build/server/compiled",
     "start:server:dev": "node server/scripts/start-watch.js",
     "build:server": "node server/scripts/build.js",
     "build:client": "node client/scripts/build.js",
