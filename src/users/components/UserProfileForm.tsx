@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { UserProfileActionTypes } from '../+store/userProfile/userProfile.actions';
 import Form, { FormInputItem } from '../../shared/forms/Form';
 import { User } from '../models/User';
 import UserErrors from './UserErrors';
@@ -16,12 +17,11 @@ const formItems: FormInputItem[] = [
 
 interface OwnProps {
   user: User;
-  errors: any[];
   onSubmit: (user: User) => void;
   onCancel: () => void;
 }
 
-const UserProfileForm: React.FC<OwnProps> = ({ user, errors, onSubmit, onCancel }) => {
+const UserProfileForm: React.FC<OwnProps> = ({ user, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState<User>(user);
 
   const onFormSubmit = () => onSubmit({ ...user, ...formData });
@@ -33,7 +33,7 @@ const UserProfileForm: React.FC<OwnProps> = ({ user, errors, onSubmit, onCancel 
         <button className="delete" aria-label="close" onClick={onCancel}></button>
       </header>
       <section className="modal-card-body">
-        <UserErrors errors={errors} />
+        <UserErrors errorActionType={UserProfileActionTypes.UpdateUserFailure} />
         <Form initialFormData={user} formItems={formItems} onChange={setFormData} />
       </section>
       <footer className="modal-card-foot">

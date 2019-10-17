@@ -1,13 +1,17 @@
 import React, { Dispatch } from 'react';
 import { Modal } from 'react-bulma-components';
 import { connect } from 'react-redux';
-import { HideUserProfile, UpdateUserStart, UserProfileAction } from '../+store/userProfile/userProfile.actions';
+import {
+  HideUserProfile,
+  UpdateUserStart,
+  UserProfileAction,
+  UserProfileActionTypes
+} from '../+store/userProfile/userProfile.actions';
 import {
   getIsLoaded,
   getIsSubmitted,
   getSelectedUser,
-  getShowUserProfileModal,
-  getUserProfileErrors
+  getShowUserProfileModal
 } from '../+store/userProfile/userProfile.selectors';
 import spinner from '../../shared/icons/spinner.svg';
 import { RootState } from '../../store/store.modal';
@@ -20,7 +24,6 @@ interface StoreProps {
   isModalVisible: boolean;
   isSubmitted: boolean;
   isLoaded: boolean;
-  errors: any[];
 }
 
 interface DispatchProps {
@@ -35,7 +38,6 @@ const UserProfileModal: React.FC<AllProps> = ({
   isModalVisible,
   isSubmitted,
   isLoaded,
-  errors,
   updateUser,
   hideUserProfile
 }: AllProps) => {
@@ -47,9 +49,13 @@ const UserProfileModal: React.FC<AllProps> = ({
   );
 
   const renderForm = selectedUser ? (
-    <UserProfileForm user={selectedUser} errors={errors} onCancel={hideUserProfile} onSubmit={updateUser} />
+    <UserProfileForm user={selectedUser} onCancel={hideUserProfile} onSubmit={updateUser} />
   ) : (
-    <UserErrors errors={errors} retry={hideUserProfile} retryText="Click to close" />
+    <UserErrors
+      errorActionType={UserProfileActionTypes.GetUserByIdFailure}
+      retryAction={hideUserProfile}
+      retryText="Click to close"
+    />
   );
 
   const renderModalContent = isLoaded ? renderForm : renderSpinner;
@@ -61,15 +67,12 @@ const UserProfileModal: React.FC<AllProps> = ({
   );
 };
 
-const mapStateToProps = ({ userProfile }: RootState): StoreProps => {
-  return {
-    selectedUser: getSelectedUser(userProfile),
-    isModalVisible: getShowUserProfileModal(userProfile),
-    isSubmitted: getIsSubmitted(userProfile),
-    isLoaded: getIsLoaded(userProfile),
-    errors: getUserProfileErrors(userProfile)
-  };
-};
+const mapStateToProps = ({ userProfile }: RootState): StoreProps => ({
+  selectedUser: getSelectedUser(userProfile),
+  isModalVisible: getShowUserProfileModal(userProfile),
+  isSubmitted: getIsSubmitted(userProfile),
+  isLoaded: getIsLoaded(userProfile)
+});
 
 const mapDispatchToProps = (dispatch: Dispatch<UserProfileAction>): DispatchProps => ({
   updateUser: (user: User) => dispatch(new UpdateUserStart({ user })),
