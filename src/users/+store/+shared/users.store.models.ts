@@ -4,11 +4,16 @@ export interface UsersEpicDependencies {
   usersService: IGetUsers & IUpdateUsers;
 }
 
+export interface UsersError {
+  actionType: string;
+  errors: any[]; // todo: create typescript interface for errors
+}
+
 export interface UserListState {
   users: BaseUser[];
   isLoading: boolean;
   isLoaded: boolean;
-  errors: any[]; // todo: create typescript interface for errors
+  errors?: UsersError;
 }
 
 export interface UserProfileState {
@@ -17,5 +22,5 @@ export interface UserProfileState {
   isSubmitted: boolean;
   isLoading: boolean;
   isLoaded: boolean;
-  errors: any[]; // todo: create typescript interface for errors
+  errors?: UsersError;
 }

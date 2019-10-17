@@ -5,7 +5,7 @@ const initialState: UserListState = {
   users: [],
   isLoading: false,
   isLoaded: false,
-  errors: []
+  errors: undefined
 };
 
 export const userListReducer = (state = initialState, action: UserListAction): UserListState => {
@@ -15,7 +15,7 @@ export const userListReducer = (state = initialState, action: UserListAction): U
         ...state,
         isLoading: true,
         isLoaded: false,
-        errors: []
+        errors: undefined
       };
 
     case UserListActionTypes.GetAllUsersSuccess:
@@ -31,7 +31,10 @@ export const userListReducer = (state = initialState, action: UserListAction): U
         ...state,
         isLoading: false,
         isLoaded: true,
-        errors: action.payload.errors
+        errors: {
+          actionType: action.type,
+          errors: action.payload.errors
+        }
       };
 
     default:

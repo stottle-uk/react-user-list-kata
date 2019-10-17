@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { GetAllUsersStart, UserListAction } from '../+store/userList/userList.actions';
-import { getIsLoadingUsers, getUserListErrors, getUsers } from '../+store/userList/userList.selectors';
+import { GetAllUsersStart, UserListAction, UserListActionTypes } from '../+store/userList/userList.actions';
+import { getIsLoadingUsers, getUsers } from '../+store/userList/userList.selectors';
 import { ShowUserProfile, UserProfileAction } from '../+store/userProfile/userProfile.actions';
 import spinner from '../../shared/icons/spinner.svg';
 import { RootState } from '../../store/store.modal';
@@ -13,7 +13,6 @@ import UsersList from './UserList';
 interface StoreProps {
   users: BaseUser[];
   isLoading: boolean;
-  errors: any[];
 }
 
 interface DispatchProps {
@@ -23,7 +22,7 @@ interface DispatchProps {
 
 type AllProps = StoreProps & DispatchProps;
 
-const Users: React.FC<AllProps> = ({ users, isLoading, errors, showUserProfile, getUsers }) => {
+const Users: React.FC<AllProps> = ({ users, isLoading, showUserProfile, getUsers }) => {
   const usersDataEffect = () => {
     getUsers();
   };
@@ -38,7 +37,11 @@ const Users: React.FC<AllProps> = ({ users, isLoading, errors, showUserProfile, 
 
   const renderContent = (
     <>
-      <UserErrors errors={errors} retry={getUsers} retryText="Click to Retry" />
+      <UserErrors
+        errorActionType={UserListActionTypes.GetAllUsersFailure}
+        retryAction={getUsers}
+        retryText="Click to retry"
+      />
       <UsersList users={users} onUserSelected={showUserProfile} />
     </>
   );
@@ -48,8 +51,7 @@ const Users: React.FC<AllProps> = ({ users, isLoading, errors, showUserProfile, 
 
 const mapStateToProps = ({ userList }: RootState): StoreProps => ({
   users: getUsers(userList),
-  isLoading: getIsLoadingUsers(userList),
-  errors: getUserListErrors(userList)
+  isLoading: getIsLoadingUsers(userList)
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<UserListAction | UserProfileAction>): DispatchProps => ({

@@ -7,7 +7,7 @@ const initialState: UserProfileState = {
   isSubmitted: false,
   isLoading: false,
   isLoaded: false,
-  errors: []
+  errors: undefined
 };
 
 export const userProfileReducer = (state = initialState, action: UserProfileAction): UserProfileState => {
@@ -31,7 +31,7 @@ export const userProfileReducer = (state = initialState, action: UserProfileActi
         ...state,
         isLoading: true,
         isLoaded: false,
-        errors: []
+        errors: undefined
       };
 
     case UserProfileActionTypes.UpdateUserStart:
@@ -40,7 +40,7 @@ export const userProfileReducer = (state = initialState, action: UserProfileActi
         isSubmitted: true,
         isLoading: true,
         isLoaded: false,
-        errors: []
+        errors: undefined
       };
 
     case UserProfileActionTypes.UpdateUserSuccess:
@@ -58,7 +58,10 @@ export const userProfileReducer = (state = initialState, action: UserProfileActi
         ...state,
         isLoading: false,
         isLoaded: true,
-        errors: action.payload.errors
+        errors: {
+          actionType: action.type,
+          errors: action.payload.errors
+        }
       };
 
     default:
