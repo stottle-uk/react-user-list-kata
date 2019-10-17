@@ -5,7 +5,8 @@ import * as path from 'path';
 import * as React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
-import { tap } from 'rxjs/operators';
+import { empty } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 import App from '../src/App';
 import { HttpService } from '../src/shared/services/HttpService';
 import configureStore from '../src/store/configureStore';
@@ -50,6 +51,10 @@ export default function universalLoader(req: Request, res: Response) {
             .replace('{{WINDOW_DATA}}', Base64.encode(JSON.stringify(storeForClient)));
 
           res.status(200).send(RenderedApp);
+        }),
+        catchError(() => {
+          res.status(200).send(htmlData);
+          return empty();
         })
       )
       .subscribe();
