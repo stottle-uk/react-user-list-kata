@@ -35,7 +35,7 @@ export default function universalLoader(req: Request, res: Response) {
       .getAll()
       .pipe(
         tap(users => {
-          store.dispatch<any>(new GetAllUsersSuccess({ users }));
+          store.dispatch(new GetAllUsersSuccess({ users }));
 
           const markup = renderToString(
             <Provider store={store}>
