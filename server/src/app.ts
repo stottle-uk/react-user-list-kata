@@ -1,7 +1,7 @@
 // require('ignore-styles');
 import bodyParser from 'body-parser';
 import compression from 'compression';
-import express from 'express';
+import express, { Request, Response } from 'express';
 import fs from 'fs';
 import morgan from 'morgan';
 import path from 'path';
@@ -9,11 +9,6 @@ import path from 'path';
 import api from './api';
 import universalLoader from './universal';
 // const favicon = require('serve-favicon');
-
-// require('babel-register')({
-//   ignore: /\/(build|node_modules)\//,
-//   presets: ['env', 'react-app']
-// });
 
 const app = express();
 
@@ -33,8 +28,8 @@ app.use(morgan('combined'));
 app.use('/api', api);
 
 // Send a version of index.html that is stripped of placeholders. The service-worker requests this file directly.
-app.use('/index.html', (req: any, res: any) => {
-  fs.readFile(path.resolve(__dirname, '..', 'build', 'index.html'), 'utf8', (err: any, htmlData: any) => {
+app.use('/index.html', (req: Request, res: Response) => {
+  fs.readFile(path.resolve(__dirname, '..', '..', 'build', 'index.html'), 'utf8', (err: any, htmlData: string) => {
     res.send(htmlData.replace(/DATA\s*=\s*{{.*?}}/g, '').replace(/{{.*?}}/g, ''));
   });
 });
@@ -42,7 +37,7 @@ app.use('/index.html', (req: any, res: any) => {
 // Server JS/CSS Bundle with Cache-Control
 app.use(
   '/static',
-  express.static(path.resolve(__dirname, '..', 'build/static'), {
+  express.static(path.resolve(__dirname, '..', '..', 'build/static'), {
     maxAge: '30d'
   })
 );
@@ -55,7 +50,7 @@ app.use(
 // });
 
 // Serve static assets
-app.use(express.static(path.resolve(__dirname, '..', 'build'), { index: false }));
+app.use(express.static(path.resolve(__dirname, '..', '..', 'build'), { index: false }));
 
 // Always return the main index.html, so react-router render the route in the client
 app.use('/', universalLoader);

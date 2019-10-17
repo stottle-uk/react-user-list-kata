@@ -7,14 +7,14 @@ import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { empty } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import App from '../src/App';
-import { HttpService } from '../src/shared/services/HttpService';
-import configureStore from '../src/store/configureStore';
-import { GetAllUsersSuccess } from '../src/users/+store/userList/userList.actions';
-import { UsersService } from '../src/users/services/UsersService';
+import App from '../../client/src/App';
+import { HttpService } from '../../client/src/shared/services/HttpService';
+import configureStore from '../../client/src/store/configureStore';
+import { GetAllUsersSuccess } from '../../client/src/users/+store/userList/userList.actions';
+import { UsersService } from '../../client/src/users/services/UsersService';
 
 export default function universalLoader(req: Request, res: Response) {
-  const filePath = path.resolve(__dirname, '..', 'build', 'index.html');
+  const filePath = path.resolve(__dirname, '..', '..', 'build', 'index.html');
 
   fs.readFile(filePath, 'utf8', (err: NodeJS.ErrnoException | null, htmlData: string) => {
     if (err) {

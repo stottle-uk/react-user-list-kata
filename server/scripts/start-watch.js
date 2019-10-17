@@ -6,7 +6,7 @@ process.env.NODE_ENV = 'development';
 const path = require('path');
 const chalk = require('chalk');
 const webpack = require('webpack');
-const webpackConfig = require('../server/webpack.server.config');
+const webpackConfig = require('../config/webpack.server.config');
 const spawnNodemon = require('./utils/nodemon').default;
 const logger = require('./utils/logger').default;
 
@@ -15,8 +15,6 @@ const compiler = webpack(webpackConfig);
 const bundlePath = path.resolve(webpackConfig.output.path, webpackConfig.output.filename);
 
 let nodemon;
-
-console.log(logger);
 
 console.log(chalk.cyan('\nWebpack starts to build and watch your files...\n'));
 

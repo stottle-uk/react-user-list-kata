@@ -3,7 +3,7 @@ const root = require('app-root-path').path;
 
 module.exports = {
   mode: 'development',
-  entry: `${root}/server/index.ts`,
+  entry: `${root}/server/src/index.ts`,
   target: 'node',
   node: {
     __filename: true,
@@ -19,9 +19,9 @@ module.exports = {
     libraryTarget: 'commonjs'
   },
   resolve: {
-    modules: [`${root}/src`, `${root}/node_modules`],
+    modules: [`${root}/server/src`, `${root}/node_modules`],
     // Add in `.ts` and `.tsx` as a resolvable extension.
-    extensions: ['.config.js', '.web.js', '.ts', '.tsx', '.js']
+    extensions: ['.ts', '.tsx', '.js']
   },
   module: {
     rules: [
@@ -33,7 +33,7 @@ module.exports = {
           {
             loader: 'ts-loader',
             options: {
-              configFile: `${root}/server/tsconfig.server.json`
+              configFile: `${root}/server/config/tsconfig.server.json`
             }
           }
         ]
