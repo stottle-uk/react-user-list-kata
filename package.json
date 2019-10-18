@@ -114,8 +114,7 @@
     "cross-env": "^6.0.3",
     "ignore-loader": "0.1.2",
     "nodemon": "1.19.1",
-    "redux-devtools-extension": "^2.13.8",
-    "ts-loader": "6.0.4"
+    "redux-devtools-extension": "^2.13.8"
   },
   "jest": {
     "roots": [

@@ -39,9 +39,10 @@ module.exports = {
         exclude: [/node_modules/],
         use: [
           {
-            loader: 'ts-loader',
+            loader: require.resolve('babel-loader'),
             options: {
-              configFile: `${root}/server/config/tsconfig.server.json`
+              compact: true,
+              cacheDirectory: true
             }
           }
         ]
