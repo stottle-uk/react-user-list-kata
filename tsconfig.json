@@ -16,7 +16,7 @@
     "jsx": "react",
     "baseUrl": ".",
     "paths": {
-      "@notifications/*": ["libs/notifications/*"],
+      "@notifications": ["libs/notifications/index.ts"],
       "@shared/*": ["libs/shared/*"],
       "@store/*": ["libs/store/*"],
       "@users": ["libs/users/index.ts"]

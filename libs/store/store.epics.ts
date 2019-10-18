@@ -1,6 +1,6 @@
+import { notificationsEpics } from '@notifications';
 import { UsersEpicDependencies, usersEpics, UsersService } from '@users';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
-import { notificationsEpicsAsArray } from '../notifications/+store/notifications.epics';
 import { HttpService } from '../shared/services/HttpService';
 
 const usersService = new UsersService(
@@ -17,7 +17,7 @@ const dependencies: EpicDependencies = {
   usersService
 };
 
-export const rootEpic = combineEpics(...usersEpics, ...notificationsEpicsAsArray);
+export const rootEpic = combineEpics(...usersEpics, ...notificationsEpics);
 
 export const epicMiddleware = createEpicMiddleware({
   dependencies

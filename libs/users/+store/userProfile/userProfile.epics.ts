@@ -1,8 +1,8 @@
+import { ShowNotification } from '@notifications';
 import { ActionsObservable, ofType } from 'redux-observable';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
 import { UsersEpicDependencies } from '../+shared/users.store.models';
-import { ShowNotification } from '../../../notifications/+store/notifications.actions';
 import {
   GetUserByIdFailure,
   GetUserByIdStart,

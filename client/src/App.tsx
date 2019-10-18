@@ -1,4 +1,4 @@
-import Notification from '@notifications/components/Notification';
+import { Notification } from '@notifications';
 import Header from '@shared/layout/Header';
 import { UserProfileModal, Users } from '@users';
 import React from 'react';

@@ -1,5 +1,5 @@
+import { NotificationsState } from '@notifications';
 import { UserListState, UserProfileState } from '@users';
-import { NotificationsState } from '../notifications/+store/notifications.reducer';
 
 export interface RootState {
   userList: UserListState;
