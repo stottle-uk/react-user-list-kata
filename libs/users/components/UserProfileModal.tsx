@@ -1,3 +1,4 @@
+import { RootState } from 'libs/store/setup/store.modal';
 import React, { Dispatch } from 'react';
 import { Modal } from 'react-bulma-components';
 import { connect } from 'react-redux';
@@ -14,7 +15,6 @@ import {
   getShowUserProfileModal
 } from '../+store/userProfile/userProfile.selectors';
 import spinner from '../../shared/icons/spinner.svg';
-import { RootState } from '../../store/store.modal';
 import { User } from '../models/User';
 import UserErrors from './UserErrors';
 import UserProfileForm from './UserProfileForm';

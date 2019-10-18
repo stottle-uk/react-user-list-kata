@@ -1,3 +1,4 @@
+import { RootState } from 'libs/store/setup/store.modal';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
@@ -5,7 +6,6 @@ import { GetAllUsersStart, UserListAction, UserListActionTypes } from '../+store
 import { getIsLoadingUsers, getUsersSorted } from '../+store/userList/userList.selectors';
 import { ShowUserProfile, UserProfileAction } from '../+store/userProfile/userProfile.actions';
 import spinner from '../../shared/icons/spinner.svg';
-import { RootState } from '../../store/store.modal';
 import { BaseUser } from '../models/User';
 import UserErrors from './UserErrors';
 import UsersList from './UserList';

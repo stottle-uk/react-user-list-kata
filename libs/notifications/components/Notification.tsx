@@ -1,7 +1,7 @@
+import { RootState } from 'libs/store/setup/store.modal';
 import React from 'react';
 import { connect } from 'react-redux';
 import { getIsVisible, getMessage } from '../+store/notifications.selectors';
-import { RootState } from '../../store/store.modal';
 
 interface StoreProps {
   isVisible: boolean;

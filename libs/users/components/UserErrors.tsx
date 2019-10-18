@@ -1,9 +1,9 @@
+import { RootState } from 'libs/store/setup/store.modal';
 import React from 'react';
 import { connect } from 'react-redux';
 import { UsersError } from '../+store/+shared/users.store.models';
 import { getUserListErrors } from '../+store/userList/userList.selectors';
 import { getUserProfileErrors } from '../+store/userProfile/userProfile.selectors';
-import { RootState } from '../../store/store.modal';
 
 interface OwnProps {
   errorActionType: string;
