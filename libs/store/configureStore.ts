@@ -1,9 +1,9 @@
 import { applyMiddleware, createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { epicMiddleware, rootEpic } from './store.epics';
-import { actionConverter } from './store.middleware';
-import { RootState } from './store.modal';
-import { rootReducer } from './store.reducer';
+import { epicMiddleware, rootEpic } from './setup/store.epics';
+import { actionConverter } from './setup/store.middleware';
+import { RootState } from './setup/store.modal';
+import { rootReducer } from './setup/store.reducer';
 
 // todo: set dev tools to only run in dev mode
 

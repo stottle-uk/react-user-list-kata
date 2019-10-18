@@ -1,7 +1,7 @@
 import { notificationsEpics } from '@notifications';
 import { UsersEpicDependencies, usersEpics, UsersService } from '@users';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
-import { HttpService } from '../shared/services/HttpService';
+import { HttpService } from '../../shared/services/HttpService';
 
 const usersService = new UsersService(
   new HttpService({

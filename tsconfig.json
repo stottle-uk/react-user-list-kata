@@ -18,7 +18,7 @@
     "paths": {
       "@notifications": ["libs/notifications/index.ts"],
       "@shared/*": ["libs/shared/*"],
-      "@store/*": ["libs/store/*"],
+      "@store": ["libs/store/index.ts"],
       "@users": ["libs/users/index.ts"]
     }
   },
