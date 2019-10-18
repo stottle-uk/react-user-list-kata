@@ -26,7 +26,7 @@ export default function universalLoader(req: Request, res: Response) {
 
     const usersService = new UsersService(
       new HttpService({
-        baseUrl: 'http://localhost:3000', // todo: use ENV VARS for these values
+        baseUrl: process.env.API_BASE_URL || 'http://localhost:3000', // todo: use ENV VARS for these values
         defaultMaxRetryCount: 5,
         defaultRetryDelay: 200
       })
