@@ -1,6 +1,6 @@
+import { GetAllUsersStart } from '@users';
 import { Base64 } from 'js-base64';
 import configureStore from 'libs/store/configureStore';
-import { GetAllUsersStart } from 'libs/users/+store/userList/userList.actions';
 import React from 'react';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 import ReactDOM from 'react-dom';

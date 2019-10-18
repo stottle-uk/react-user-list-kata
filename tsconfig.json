@@ -19,7 +19,7 @@
       "@notifications/*": ["libs/notifications/*"],
       "@shared/*": ["libs/shared/*"],
       "@store/*": ["libs/store/*"],
-      "@users/*": ["libs/users/*"]
+      "@users": ["libs/users/index.ts"]
     }
   },
   "include": ["client/src", "server/src", "libs"],

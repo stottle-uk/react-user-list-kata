@@ -1,11 +1,10 @@
+import { GetAllUsersSuccess, UsersService } from '@users';
 import App from 'client/src/App';
 import { Request, Response } from 'express';
 import * as fs from 'fs';
 import { Base64 } from 'js-base64';
 import { HttpService } from 'libs/shared/services/HttpService';
 import configureStore from 'libs/store/configureStore';
-import { GetAllUsersSuccess } from 'libs/users/+store/userList/userList.actions';
-import { UsersService } from 'libs/users/services/UsersService';
 import * as path from 'path';
 import * as React from 'react';
 import { renderToString } from 'react-dom/server';
