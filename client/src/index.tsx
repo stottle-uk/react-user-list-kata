@@ -1,4 +1,6 @@
 import { Base64 } from 'js-base64';
+import configureStore from 'libs/store/configureStore';
+import { GetAllUsersStart } from 'libs/users/+store/userList/userList.actions';
 import React from 'react';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 import ReactDOM from 'react-dom';
@@ -6,8 +8,6 @@ import { Provider } from 'react-redux';
 import App from './App';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
-import configureStore from './store/configureStore';
-import { GetAllUsersStart } from './users/+store/userList/userList.actions';
 
 const initialState =
   (window as any).DATA !== null && (window as any).DATA !== '{{WINDOW_DATA}}'
@@ -19,7 +19,7 @@ const store = configureStore(parsedInitialState);
 
 if (initialState === '{}') {
   // Non-server rendered.
-  store.dispatch<any>(new GetAllUsersStart());
+  store.dispatch(new GetAllUsersStart());
   ReactDOM.render(
     <Provider store={store}>
       <App />

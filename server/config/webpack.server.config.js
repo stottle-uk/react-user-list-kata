@@ -21,6 +21,10 @@ module.exports = {
   resolve: {
     modules: [`${root}/server/src`, `${root}/node_modules`],
     // Add in `.ts` and `.tsx` as a resolvable extension.
+    alias: {
+      client: `${root}/client`,
+      libs: `${root}/libs`
+    },
     extensions: ['.ts', '.tsx', '.js']
   },
   module: {

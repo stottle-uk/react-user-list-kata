@@ -1,17 +1,17 @@
+import App from 'client/src/App';
 import { Request, Response } from 'express';
 import * as fs from 'fs';
 import { Base64 } from 'js-base64';
+import { HttpService } from 'libs/shared/services/HttpService';
+import configureStore from 'libs/store/configureStore';
+import { GetAllUsersSuccess } from 'libs/users/+store/userList/userList.actions';
+import { UsersService } from 'libs/users/services/UsersService';
 import * as path from 'path';
 import * as React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { empty } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
-import App from '../../client/src/App';
-import { HttpService } from '../../client/src/shared/services/HttpService';
-import configureStore from '../../client/src/store/configureStore';
-import { GetAllUsersSuccess } from '../../client/src/users/+store/userList/userList.actions';
-import { UsersService } from '../../client/src/users/services/UsersService';
 
 export default function universalLoader(req: Request, res: Response) {
   const filePath = path.resolve(__dirname, '..', '..', 'build', 'client', 'index.html');

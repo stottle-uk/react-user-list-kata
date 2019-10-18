@@ -85,6 +85,7 @@
     "start:server:dev": "node server/scripts/start-watch.js",
     "build:server": "node server/scripts/build.js",
     "build:client": "node client/scripts/build.js",
+    "build:docker": "sh server/scripts/docker/run.sh",
     "build": "yarn run build:client && yarn run build:server",
     "test": "node client/scripts/test.js"
   },

@@ -23,6 +23,12 @@ function logger(err, stats) {
     colors: true
   });
 
+  // console.log(
+  //   stats.toJson({
+  //     errorDetails: true
+  //   })
+  // );
+
   console.log(statsString);
 }
 
