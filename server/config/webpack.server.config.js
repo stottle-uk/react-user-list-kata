@@ -23,7 +23,11 @@ module.exports = {
     // Add in `.ts` and `.tsx` as a resolvable extension.
     alias: {
       client: `${root}/client`,
-      libs: `${root}/libs`
+      libs: `${root}/libs`,
+      '@notifications': `${root}/libs/notifications/`,
+      '@shared': `${root}/libs/shared/`,
+      '@users': `${root}/libs/users/`,
+      '@store': `${root}/libs/store/`
     },
     extensions: ['.ts', '.tsx', '.js']
   },

@@ -14,13 +14,13 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react",
-    "baseUrl": "."
-  },
-  "paths": {
-    "@notifications/*": ["libs/notifications/*"],
-    "@shared/*": ["libs/shared/*"],
-    "@store/*": ["libs/store/*"],
-    "@users/*": ["libs/users/*"]
+    "baseUrl": ".",
+    "paths": {
+      "@notifications/*": ["libs/notifications/*"],
+      "@shared/*": ["libs/shared/*"],
+      "@store/*": ["libs/store/*"],
+      "@users/*": ["libs/users/*"]
+    }
   },
   "include": ["client/src", "server/src", "libs"],
   "exclude": ["node_modules"]

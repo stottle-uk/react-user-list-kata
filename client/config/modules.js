@@ -73,7 +73,11 @@ function getWebpackAliases(options = {}) {
   if (path.relative(paths.appPath, baseUrlResolved) === '') {
     return {
       src: paths.appSrc,
-      libs: paths.libsSrc
+      libs: paths.libsSrc,
+      '@notifications': `${paths.libsSrc}/notifications/`,
+      '@shared': `${paths.libsSrc}/shared/`,
+      '@users': `${paths.libsSrc}/users/`,
+      '@store': `${paths.libsSrc}/store/`
     };
   }
 }
