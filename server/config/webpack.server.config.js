@@ -9,10 +9,7 @@ module.exports = {
     __dirname: true
   },
   externals: [
-    /^[a-z\-0-9]+$/, // Ignore node_modules folder,
-    '@users',
-    '@store',
-    '@notifications'
+    /^[a-z\-0-9]+$/ // Ignore node_modules folder,
   ],
   output: {
     filename: 'compiled.js', // output file
@@ -23,7 +20,10 @@ module.exports = {
     modules: [`${root}/server/src`, `${root}/node_modules`],
     alias: {
       client: `${root}/client`,
-      '@shared': `${root}/libs/shared/`
+      '@shared': `${root}/libs/shared/`,
+      '@store': `${root}/libs/store/`,
+      '@notifications': `${root}/libs/notifications/`,
+      '@users': `${root}/libs/users/`
     },
     extensions: ['.ts', '.tsx', '.js']
   },
