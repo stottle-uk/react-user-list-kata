@@ -10,7 +10,7 @@ import './index.css';
 import * as serviceWorker from './serviceWorker';
 
 const initialState =
-  (window as any).DATA !== null && (window as any).DATA !== '{{WINDOW_DATA}}'
+  (window as any).DATA !== '' && (window as any).DATA !== '{{WINDOW_DATA}}'
     ? Base64.decode((window as any).DATA)
     : '{}';
 

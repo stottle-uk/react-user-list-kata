@@ -9,8 +9,8 @@ import * as path from 'path';
 import * as React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
-import { empty } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 
 export default function universalLoader(req: Request, res: Response) {
   const filePath = path.resolve(__dirname, '..', '..', 'build', 'client', 'index.html');
@@ -34,27 +34,26 @@ export default function universalLoader(req: Request, res: Response) {
     usersService
       .getAll()
       .pipe(
-        tap(users => {
-          store.dispatch(new GetAllUsersSuccess({ users }));
-
-          const markup = renderToString(
+        tap(users => store.dispatch(new GetAllUsersSuccess({ users }))),
+        map(() =>
+          renderToString(
             <Provider store={store}>
               <App />
             </Provider>
-          );
-
-          let storeForClient = store.getState();
-
-          const RenderedApp = htmlData
-            .replace('{{ SSR }}', markup)
-            .replace('{{WINDOW_DATA}}', Base64.encode(JSON.stringify(storeForClient)));
-
-          res.status(200).send(RenderedApp);
-        }),
-        catchError(() => {
-          res.status(200).send(htmlData);
-          return empty();
-        })
+          )
+        ),
+        map(markup => ({
+          markup,
+          storeData: Base64.encode(JSON.stringify(store.getState()))
+        })),
+        catchError(() =>
+          of({
+            markup: '',
+            storeData: ''
+          })
+        ),
+        map(data => htmlData.replace('{{ SSR }}', data.markup).replace('{{WINDOW_DATA}}', data.storeData)),
+        tap(renderedApp => res.status(200).send(renderedApp))
       )
       .subscribe();
   });
