@@ -1,5 +1,4 @@
 const root = require('app-root-path').path;
-// const nodeExternals = require('webpack-node-externals');
 
 module.exports = {
   mode: 'development',
@@ -11,7 +10,6 @@ module.exports = {
   },
   externals: [
     /^[a-z\-0-9]+$/ // Ignore node_modules folder,
-    // nodeExternals
   ],
   output: {
     filename: 'compiled.js', // output file
@@ -20,7 +18,6 @@ module.exports = {
   },
   resolve: {
     modules: [`${root}/server/src`, `${root}/node_modules`],
-    // Add in `.ts` and `.tsx` as a resolvable extension.
     alias: {
       client: `${root}/client`,
       libs: `${root}/libs`,
@@ -34,7 +31,6 @@ module.exports = {
   module: {
     rules: [
       {
-        // all files with a `.ts` or `.tsx` extension will be handled by `ts-loader`
         test: /\.(ts|tsx)$/,
         exclude: [/node_modules/],
         use: [
