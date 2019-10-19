@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { UserProfileActionTypes } from '../+store/userProfile/userProfile.actions';
-import Form, { FormInputItem } from '../../shared/forms/Form';
+import Form, { FormInputItem, FormItemData } from '../../shared/forms/Form';
 import { User } from '../models/User';
 import UserErrors from './UserErrors';
 
@@ -24,7 +24,13 @@ interface OwnProps {
 const UserProfileForm: React.FC<OwnProps> = ({ user, onSubmit, onCancel }) => {
   const [formData, setFormData] = useState<User>(user);
 
-  const onFormSubmit = () => onSubmit({ ...user, ...formData });
+  const updateFormData = (data: FormItemData) =>
+    setFormData({
+      ...formData,
+      ...data
+    });
+
+  const onFormSubmit = () => onSubmit(formData);
 
   return (
     <div className="modal-card" data-e2e="user-profile-form">
@@ -34,7 +40,7 @@ const UserProfileForm: React.FC<OwnProps> = ({ user, onSubmit, onCancel }) => {
       </header>
       <section className="modal-card-body">
         <UserErrors errorActionType={UserProfileActionTypes.UpdateUserFailure} />
-        <Form initialFormData={user} formItems={formItems} onChange={setFormData} />
+        <Form initialFormData={user} formItems={formItems} onChange={updateFormData} />
       </section>
       <footer className="modal-card-foot">
         <button className="button is-success" onClick={onFormSubmit} data-e2e="user-profile-submit">

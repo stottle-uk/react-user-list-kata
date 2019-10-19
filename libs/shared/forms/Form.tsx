@@ -6,15 +6,19 @@ export interface FormInputItem {
   type?: string;
 }
 
+export interface FormItemData {
+  [key: string]: string;
+}
+
 interface OwnProps<T> {
   initialFormData: T;
   formItems: FormInputItem[];
-  onChange: (data: T) => void;
+  onChange: (data: FormItemData) => void;
 }
 
 const Form = <T extends {}>({ initialFormData, formItems, onChange }: OwnProps<T>) => {
   const onFieldChange = (e: React.ChangeEvent<HTMLInputElement>) =>
-    onChange({ ...initialFormData, [e.currentTarget.name]: e.currentTarget.value });
+    onChange({ [e.currentTarget.name]: e.currentTarget.value });
 
   const renderFormItem = (item: FormInputItem) => (
     <div key={item.name} className="field">

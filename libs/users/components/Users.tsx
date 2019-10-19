@@ -1,5 +1,5 @@
 import { RootState } from 'libs/store/setup/store.modal';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import { GetAllUsersStart, UserListAction, UserListActionTypes } from '../+store/userList/userList.actions';
@@ -23,12 +23,6 @@ interface DispatchProps {
 type AllProps = StoreProps & DispatchProps;
 
 const Users: React.FC<AllProps> = ({ users, isLoading, showUserProfile, getUsers }) => {
-  const usersDataEffect = () => {
-    // getUsers();
-  };
-
-  useEffect(usersDataEffect, []);
-
   const renderSpinner = (
     <div className="loading-users">
       <img src={spinner} className="spinner" alt="spinner" />
