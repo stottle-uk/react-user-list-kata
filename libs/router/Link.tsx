@@ -6,10 +6,10 @@ export interface LinkProps extends React.HTMLProps<HTMLAnchorElement> {
 }
 
 const Link = ({ routerContext, href, children, ...rest }: LinkProps) => {
-  const { history } = useContext(routerContext);
-  // if (!matchRoute(href)) {
-  //   console.warn('Path does not exist in router', href);
-  // }
+  const { history, matchRoute } = useContext(routerContext);
+  if (!matchRoute(href as string)) {
+    console.warn('Path does not exist in router', href);
+  }
   const handleClick = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ): void => {
