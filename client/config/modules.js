@@ -77,7 +77,8 @@ function getWebpackAliases(options = {}) {
       '@notifications': `${paths.libsSrc}/notifications/`,
       '@shared': `${paths.libsSrc}/shared/`,
       '@users': `${paths.libsSrc}/users/`,
-      '@store': `${paths.libsSrc}/store/`
+      '@store': `${paths.libsSrc}/store/`,
+      '@router': `${paths.libsSrc}/router/`
     };
   }
 }
