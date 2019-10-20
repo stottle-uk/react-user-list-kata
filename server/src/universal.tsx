@@ -13,48 +13,63 @@ import { of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 export default function universalLoader(req: Request, res: Response) {
-  const filePath = path.resolve(__dirname, '..', '..', 'build', 'client', 'index.html');
+  const filePath = path.resolve(
+    __dirname,
+    '..',
+    '..',
+    'build',
+    'client',
+    'index.html'
+  );
 
-  fs.readFile(filePath, 'utf8', (err: NodeJS.ErrnoException | null, htmlData: string) => {
-    if (err) {
-      // tslint:disable-next-line:no-console
-      console.error('read err', err);
-      return res.status(404).end();
+  fs.readFile(
+    filePath,
+    'utf8',
+    (err: NodeJS.ErrnoException | null, htmlData: string) => {
+      if (err) {
+        // tslint:disable-next-line:no-console
+        console.error('read err', err);
+        return res.status(404).end();
+      }
+      const store = configureStore();
+
+      const usersService = new UsersService(
+        new HttpService({
+          baseUrl: process.env.API_BASE_URL || 'http://localhost:3000', // todo: use ENV VARS for these values
+          defaultMaxRetryCount: 5,
+          defaultRetryDelay: 200
+        })
+      );
+
+      usersService
+        .getAll()
+        .pipe(
+          tap(users => store.dispatch(new GetAllUsersSuccess({ users }))),
+          map(() =>
+            renderToString(
+              <Provider store={store}>
+                <App />
+              </Provider>
+            )
+          ),
+          map(markup => ({
+            markup,
+            storeData: Base64.encode(JSON.stringify(store.getState()))
+          })),
+          catchError(() =>
+            of({
+              markup: '',
+              storeData: ''
+            })
+          ),
+          map(data =>
+            htmlData
+              .replace('{{ SSR }}', data.markup)
+              .replace('{{WINDOW_DATA}}', data.storeData)
+          ),
+          tap(renderedApp => res.status(200).send(renderedApp))
+        )
+        .subscribe();
     }
-    const store = configureStore();
-
-    const usersService = new UsersService(
-      new HttpService({
-        baseUrl: process.env.API_BASE_URL || 'http://localhost:3000', // todo: use ENV VARS for these values
-        defaultMaxRetryCount: 5,
-        defaultRetryDelay: 200
-      })
-    );
-
-    usersService
-      .getAll()
-      .pipe(
-        tap(users => store.dispatch(new GetAllUsersSuccess({ users }))),
-        map(() =>
-          renderToString(
-            <Provider store={store}>
-              <App />
-            </Provider>
-          )
-        ),
-        map(markup => ({
-          markup,
-          storeData: Base64.encode(JSON.stringify(store.getState()))
-        })),
-        catchError(() =>
-          of({
-            markup: '',
-            storeData: ''
-          })
-        ),
-        map(data => htmlData.replace('{{ SSR }}', data.markup).replace('{{WINDOW_DATA}}', data.storeData)),
-        tap(renderedApp => res.status(200).send(renderedApp))
-      )
-      .subscribe();
-  });
+  );
 }

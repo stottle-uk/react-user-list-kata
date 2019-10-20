@@ -20,6 +20,7 @@ module.exports = {
     modules: [`${root}/server/src`, `${root}/node_modules`],
     alias: {
       client: `${root}/client`,
+      libs: `${root}/libs`,
       '@shared': `${root}/libs/shared/`,
       '@store': `${root}/libs/store/`,
       '@notifications': `${root}/libs/notifications/`,

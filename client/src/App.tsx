@@ -1,9 +1,11 @@
 import { Notification } from '@notifications';
-import { UserProfileModal, Users } from '@users';
+import { UserProfileModal } from '@users';
+import Router from 'libs/router/Router';
 import React from 'react';
 import { Container, Section } from 'react-bulma-components';
 import './App.css';
 import Header from './layout/Header';
+import { routerContext } from './router/routerContext';
 
 const App: React.FC = () => {
   return (
@@ -11,7 +13,9 @@ const App: React.FC = () => {
       <Header />
       <Container className="has-background-white-ter">
         <Section>
-          <Users />
+          <Router routerContext={routerContext} routeData={{}}>
+            <span>Not Found</span>
+          </Router>
         </Section>
       </Container>
       <UserProfileModal />
