@@ -12,17 +12,12 @@ interface DispatchProps {
 
 type AllProps = DispatchProps & OwnProps;
 
-const Link = ({
-  href,
-  children,
-  navigateToPath: navigateUrl,
-  ...rest
-}: AllProps) => {
+const Link = ({ href, children, navigateToPath, ...rest }: AllProps) => {
   const handleClick = (
     event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ): void => {
     event.preventDefault();
-    navigateUrl(event.currentTarget.pathname);
+    navigateToPath(event.currentTarget.pathname);
   };
 
   return (
