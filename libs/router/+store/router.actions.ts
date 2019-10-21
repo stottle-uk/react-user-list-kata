@@ -16,7 +16,9 @@ export enum RouterActionTypes {
   GoStart = '[Router] Go Start',
   GoSucess = '[Router] Go Success',
   GoFailure = '[Router] Go Failure',
-  Back = '[Router] Back',
+  BackStart = '[Router] Back Start',
+  BackSuccess = '[Router] Back Success',
+  BackFailure = '[Router] Back Failure',
   Forward = '[Router] Forward',
   NavigateToPath = '[Router] Navigate To Path',
   NavigationCancelled = '[Router] Navigation Cancelled',
@@ -107,8 +109,20 @@ export class Forward implements Action {
   readonly type = RouterActionTypes.Forward;
 }
 
-export class Back implements Action {
-  readonly type = RouterActionTypes.Back;
+export class BackStart implements Action {
+  readonly type = RouterActionTypes.BackStart;
+}
+
+export class BackSuccess implements Action {
+  readonly type = RouterActionTypes.BackSuccess;
+
+  constructor(public payload: { route: RouterConfigRoute<any> }) {}
+}
+
+export class BackFailure implements Action {
+  readonly type = RouterActionTypes.BackFailure;
+
+  constructor(public payload: { error: any }) {}
 }
 
 export class NavigateToPath implements Action {
@@ -140,7 +154,9 @@ export type RouterAction =
   | GoStart
   | GoSucess
   | GoFailure
-  | Back
+  | BackStart
+  | BackSuccess
+  | BackFailure
   | Forward
   | NavigateToPath
   | NavigationCancelled

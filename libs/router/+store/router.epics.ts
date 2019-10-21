@@ -8,7 +8,9 @@ import {
   AddRoutesFailure,
   AddRoutesStart,
   AddRoutesSuccess,
-  Back,
+  BackFailure,
+  BackStart,
+  BackSuccess,
   GoFailure,
   GoStart,
   GoSucess,
@@ -141,19 +143,22 @@ const navigateToPath = (
   );
 
 const back = (
-  action$: ActionsObservable<Back>,
+  action$: ActionsObservable<BackStart>,
   state$: Observable<any>,
   { browserHistory, routeMatcher }: RouterEpicDependencies
 ) =>
   action$.pipe(
-    ofType(RouterActionTypes.Back),
+    ofType(RouterActionTypes.BackStart),
     tap(() => browserHistory.back()),
     map(() => browserHistory.getLocationPath()),
     switchMap(path =>
       state$.pipe(
         take(1),
         map(state => routeMatcher.matchRoute(path, state.router.routes)),
-        map(route => (route ? new GoSucess({ route }) : new RouteNotFound()))
+        map(route =>
+          route ? new BackSuccess({ route }) : new RouteNotFound()
+        ),
+        catchError(error => of(new BackFailure({ error })))
       )
     )
   );

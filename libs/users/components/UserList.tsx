@@ -1,3 +1,4 @@
+import { Back } from '@router';
 import React, { useState } from 'react';
 import { BaseUser } from '../models/User';
 
@@ -9,7 +10,10 @@ interface OwnProps {
 const UsersList: React.FC<OwnProps> = ({ users, onUserSelected }) => {
   const [activeCard, setActiveCard] = useState<string>();
 
-  const getCardClass = (id: string) => `card ${id === activeCard ? 'has-background-light' : 'has-background-white'}`;
+  const getCardClass = (id: string) =>
+    `card ${
+      id === activeCard ? 'has-background-light' : 'has-background-white'
+    }`;
 
   const renderUser = (user: BaseUser) => (
     <div
@@ -24,7 +28,10 @@ const UsersList: React.FC<OwnProps> = ({ users, onUserSelected }) => {
         <div className="media">
           <div className="media-left">
             <figure className="image is-96x96">
-              <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder" />
+              <img
+                src="https://bulma.io/images/placeholders/96x96.png"
+                alt="Placeholder"
+              />
             </figure>
           </div>
           <div className="media-content">
@@ -42,6 +49,7 @@ const UsersList: React.FC<OwnProps> = ({ users, onUserSelected }) => {
     <>
       <div className="content">
         <h1>User List</h1>
+        <Back>Back</Back>
       </div>
       {/* todo: add some user filtering */}
       {/* todo: add button to create user*/}

@@ -2,38 +2,38 @@ import { RootState } from 'libs/store/setup/store.modal';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { NavigateToPath, RouterAction } from '../+store/router.actions';
+import { BackStart, RouterAction } from '../+store/router.actions';
 
-interface OwnProps extends React.HTMLProps<HTMLAnchorElement> {}
+interface OwnProps extends React.HTMLProps<HTMLButtonElement> {}
 
 interface DispatchProps {
-  navigateToPath: (path: string) => void;
+  back: () => void;
 }
 
 type AllProps = DispatchProps & OwnProps;
 
-const Link = ({ href, children, navigateToPath, ...rest }: AllProps) => {
+const Back = ({ children, back, type, ...rest }: AllProps) => {
   const handleClick = (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ): void => {
     event.preventDefault();
-    navigateToPath(event.currentTarget.pathname);
+    back();
   };
 
   return (
-    <a {...rest} onClick={handleClick} href={href}>
+    <button type="button" onClick={handleClick} {...rest}>
       {children}
-    </a>
+    </button>
   );
 };
 
 const mapDispatchToProps = (
   dispatch: Dispatch<RouterAction>
 ): DispatchProps => ({
-  navigateToPath: (path: string) => dispatch(new NavigateToPath({ path }))
+  back: () => dispatch(new BackStart())
 });
 
 export default connect<{}, DispatchProps, OwnProps, RootState>(
   undefined,
   mapDispatchToProps
-)(Link);
+)(Back);
