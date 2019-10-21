@@ -26,6 +26,7 @@ const parsedInitialState = JSON.parse(initialState);
 const store = configureStore(parsedInitialState);
 
 if (initialState === '{}') {
+  // Non-server rendered.
   const http = new HttpService({
     baseUrl: 'http://localhost:3000', // todo: use ENV VARS for these values
     defaultMaxRetryCount: 4,
@@ -40,16 +41,17 @@ if (initialState === '{}') {
         store.dispatch(new AddRoutesStart({ routes: config.sitemap }));
         store.dispatch(new InitRouterOnClient());
         store.dispatch(new GetAllUsersStart());
+      }),
+      tap(() =>
         ReactDOM.render(
           <Provider store={store}>
             <App />
           </Provider>,
           document.getElementById('root')
-        );
-      })
+        )
+      )
     )
     .subscribe();
-  // Non-server rendered.
 } else {
   // Server rendered hydration
   store.dispatch(new StartPopStateListner());
