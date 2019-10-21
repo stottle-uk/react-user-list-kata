@@ -11,8 +11,8 @@ import * as path from 'path';
 import * as React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
-import { of } from 'rxjs';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { combineLatest, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 
 export default function universalLoader(req: Request, res: Response) {
   const filePath = path.resolve(
@@ -44,15 +44,13 @@ export default function universalLoader(req: Request, res: Response) {
       const usersService = new UsersService(httpService);
       const configService = new ConfigService(httpService);
 
-      configService
-        .get()
+      combineLatest(configService.get(), usersService.getAll())
         .pipe(
-          tap(config =>
-            store.dispatch(new AddRoutesStart({ routes: config.sitemap }))
-          ),
-          tap(() => store.dispatch(new InitFirstRouteStart({ path: req.url }))),
-          switchMap(() => usersService.getAll()),
-          tap(users => store.dispatch(new GetAllUsersSuccess({ users }))),
+          tap(([config, users]) => {
+            store.dispatch(new AddRoutesStart({ routes: config.sitemap }));
+            store.dispatch(new InitFirstRouteStart({ path: req.url }));
+            store.dispatch(new GetAllUsersSuccess({ users }));
+          }),
           map(() =>
             renderToString(
               <Provider store={store}>
