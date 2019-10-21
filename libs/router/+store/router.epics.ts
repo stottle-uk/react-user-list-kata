@@ -145,22 +145,13 @@ const navigateToPath = (
 const back = (
   action$: ActionsObservable<BackStart>,
   state$: Observable<any>,
-  { browserHistory, routeMatcher }: RouterEpicDependencies
+  { browserHistory }: RouterEpicDependencies
 ) =>
   action$.pipe(
     ofType(RouterActionTypes.BackStart),
     tap(() => browserHistory.back()),
-    map(() => browserHistory.getLocationPath()),
-    switchMap(path =>
-      state$.pipe(
-        take(1),
-        map(state => routeMatcher.matchRoute(path, state.router.routes)),
-        map(route =>
-          route ? new BackSuccess({ route }) : new RouteNotFound()
-        ),
-        catchError(error => of(new BackFailure({ error })))
-      )
-    )
+    map(() => new BackSuccess()),
+    catchError(error => of(new BackFailure({ error })))
   );
 
 export const routerEpics = {
@@ -169,7 +160,7 @@ export const routerEpics = {
   initFirstRoute,
   startPopStateListner,
   popState,
-  navigateToUrl: navigateToPath,
+  navigateToPath,
   go,
   back
 };

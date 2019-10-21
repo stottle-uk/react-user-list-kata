@@ -3,16 +3,18 @@ import {
   InitRouterOnClient,
   StartPopStateListner
 } from '@router';
+import { HttpService } from '@shared/services/HttpService';
 import { configureStore } from '@store';
 import { GetAllUsersStart } from '@users';
 import { Base64 } from 'js-base64';
+import { ConfigService } from 'libs/config/services/ConfigService';
 import React from 'react';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { tap } from 'rxjs/operators';
 import App from './App';
 import './index.css';
-import { routes } from './router/routes';
 import * as serviceWorker from './serviceWorker';
 
 const initialState =
@@ -24,16 +26,30 @@ const parsedInitialState = JSON.parse(initialState);
 const store = configureStore(parsedInitialState);
 
 if (initialState === '{}') {
+  const http = new HttpService({
+    baseUrl: 'http://localhost:3000', // todo: use ENV VARS for these values
+    defaultMaxRetryCount: 4,
+    defaultRetryDelay: 200
+  });
+  const configService = new ConfigService(http);
+
+  configService
+    .get()
+    .pipe(
+      tap(config => {
+        store.dispatch(new AddRoutesStart({ routes: config.sitemap }));
+        store.dispatch(new InitRouterOnClient());
+        store.dispatch(new GetAllUsersStart());
+        ReactDOM.render(
+          <Provider store={store}>
+            <App />
+          </Provider>,
+          document.getElementById('root')
+        );
+      })
+    )
+    .subscribe();
   // Non-server rendered.
-  store.dispatch(new AddRoutesStart({ routes }));
-  store.dispatch(new InitRouterOnClient());
-  store.dispatch(new GetAllUsersStart());
-  ReactDOM.render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
-    document.getElementById('root')
-  );
 } else {
   // Server rendered hydration
   store.dispatch(new StartPopStateListner());

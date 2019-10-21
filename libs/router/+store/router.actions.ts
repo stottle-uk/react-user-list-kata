@@ -115,8 +115,6 @@ export class BackStart implements Action {
 
 export class BackSuccess implements Action {
   readonly type = RouterActionTypes.BackSuccess;
-
-  constructor(public payload: { route: RouterConfigRoute<any> }) {}
 }
 
 export class BackFailure implements Action {
