@@ -1,4 +1,4 @@
-import { AddRoutesStart } from '@router';
+import { AddRoutesStart, InitFirstRouteStart } from '@router';
 import { HttpService } from '@shared/services/HttpService';
 import { configureStore } from '@store';
 import { GetAllUsersSuccess, UsersService } from '@users';
@@ -44,6 +44,7 @@ export default function universalLoader(req: Request, res: Response) {
       );
 
       store.dispatch(new AddRoutesStart({ routes }));
+      store.dispatch(new InitFirstRouteStart({ path: req.url }));
 
       usersService
         .getAll()

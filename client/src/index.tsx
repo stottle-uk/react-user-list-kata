@@ -1,4 +1,4 @@
-import { AddRoutesStart, InitRouter } from '@router';
+import { AddRoutesStart, InitRouter, StartPopStateListner } from '@router';
 import { configureStore } from '@store';
 import { GetAllUsersStart } from '@users';
 import { Base64 } from 'js-base64';
@@ -32,7 +32,7 @@ if (initialState === '{}') {
   );
 } else {
   // Server rendered hydration
-  store.dispatch(new InitRouter());
+  store.dispatch(new StartPopStateListner());
 
   ReactDOM.hydrate(
     <Provider store={store}>
