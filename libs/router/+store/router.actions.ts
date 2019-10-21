@@ -2,7 +2,7 @@ import { Action } from 'redux';
 import { RouterConfigRoute } from '../types/router';
 
 export enum RouterActionTypes {
-  InitRouter = '[Router] Init Router',
+  InitRouterOnClient = '[Router] Init Router',
   StartPopStateListner = '[Router] Start Pop State Listner',
   AddRoutesStart = '[Router] Add Routes Start',
   AddRoutesSuccess = '[Router] Add Routes Success',
@@ -23,8 +23,8 @@ export enum RouterActionTypes {
   RouteNotFound = '[Router] Path Not Found'
 }
 
-export class InitRouter implements Action {
-  readonly type = RouterActionTypes.InitRouter;
+export class InitRouterOnClient implements Action {
+  readonly type = RouterActionTypes.InitRouterOnClient;
 }
 
 export class StartPopStateListner implements Action {
@@ -126,7 +126,7 @@ export class RouteNotFound implements Action {
 }
 
 export type RouterAction =
-  | InitRouter
+  | InitRouterOnClient
   | StartPopStateListner
   | AddRoutesStart
   | AddRoutesSuccess

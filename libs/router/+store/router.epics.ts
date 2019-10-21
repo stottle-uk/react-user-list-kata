@@ -15,7 +15,7 @@ import {
   InitFirstRouteFailure,
   InitFirstRouteStart,
   InitFirstRouteSuccess,
-  InitRouter,
+  InitRouterOnClient,
   NavigateToPath,
   NavigationCancelled,
   PopStateFailure,
@@ -41,12 +41,12 @@ const addRoutes = (action$: ActionsObservable<AddRoutesStart>) =>
   );
 
 const initRouter = (
-  action$: ActionsObservable<InitRouter>,
+  action$: ActionsObservable<InitRouterOnClient>,
   state$: Observable<RootState>,
   { browserHistory }: RouterEpicDependencies
 ) =>
   action$.pipe(
-    ofType(RouterActionTypes.InitRouter),
+    ofType(RouterActionTypes.InitRouterOnClient),
     map(() => browserHistory.getLocationPath()),
     switchMap(path => [
       new InitFirstRouteStart({ path }),
