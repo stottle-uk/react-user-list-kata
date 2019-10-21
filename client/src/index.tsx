@@ -1,12 +1,14 @@
 import { configureStore } from '@store';
 import { GetAllUsersStart } from '@users';
 import { Base64 } from 'js-base64';
+import { AddRoutesStart } from 'libs/router/+store/router.actions';
 import React from 'react';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import App from './App';
 import './index.css';
+import { routes } from './router/routes';
 import * as serviceWorker from './serviceWorker';
 
 const initialState =
@@ -19,6 +21,7 @@ const store = configureStore(parsedInitialState);
 
 if (initialState === '{}') {
   // Non-server rendered.
+  store.dispatch(new AddRoutesStart({ routes }));
   store.dispatch(new GetAllUsersStart());
   ReactDOM.render(
     <Provider store={store}>
