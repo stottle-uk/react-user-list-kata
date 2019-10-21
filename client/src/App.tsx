@@ -5,6 +5,7 @@ import React from 'react';
 import { Container, Section } from 'react-bulma-components';
 import './App.css';
 import Header from './layout/Header';
+import { templateMap } from './router/routes';
 
 const App: React.FC = () => {
   return (
@@ -12,7 +13,7 @@ const App: React.FC = () => {
       <Header />
       <Container className="has-background-white-ter">
         <Section>
-          <Router routeData={{}}>
+          <Router routeData={{}} templateMap={templateMap}>
             <span>Not Found</span>
           </Router>
         </Section>

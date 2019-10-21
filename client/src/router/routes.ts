@@ -6,11 +6,16 @@ export const routes: RouterConfigRoute<any>[] = [
   {
     name: 'Home',
     path: '/',
-    template: Home
+    template: 'home'
   },
   {
-    name: 'Home',
+    name: 'Users',
     path: '/users',
-    template: Users
+    template: 'users'
   }
 ];
+
+export const templateMap: { [key: string]: React.ComponentType } = {
+  home: Home,
+  users: Users
+};

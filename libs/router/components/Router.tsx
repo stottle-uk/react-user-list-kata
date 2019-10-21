@@ -7,6 +7,7 @@ import { RouterConfigRoute } from '../types/router';
 
 interface RouterProps<T> {
   routeData: T;
+  templateMap: { [key: string]: React.ComponentType };
   children: React.ReactElement;
 }
 
@@ -23,10 +24,12 @@ type AllProps<T> = StoreProps<T> & DispatchProps & RouterProps<T>;
 export const Router = <T extends {}>({
   children,
   routeData,
+  templateMap,
   currentRoute
-}: AllProps<T>) =>
-  currentRoute ? <currentRoute.template {...routeData} /> : children;
-
+}: AllProps<T>) => {
+  const Template = currentRoute && templateMap[currentRoute.template];
+  return Template ? <Template {...routeData} /> : children;
+};
 const mapStateToProps = <T extends {}>({
   router
 }: RootState): StoreProps<T> => ({

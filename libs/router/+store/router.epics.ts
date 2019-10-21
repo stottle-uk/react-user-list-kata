@@ -15,6 +15,7 @@ import {
   InitFirstRouteFailure,
   InitFirstRouteStart,
   InitFirstRouteSuccess,
+  InitRouter,
   NavigateToPath,
   NavigationCancelled,
   PopStateFailure,
@@ -40,16 +41,16 @@ const addRoutes = (action$: ActionsObservable<AddRoutesStart>) =>
   );
 
 const initRouter = (
-  action$: ActionsObservable<AddRoutesSuccess>,
+  action$: ActionsObservable<InitRouter>,
   state$: Observable<RootState>,
   { browserHistory }: RouterEpicDependencies
 ) =>
   action$.pipe(
-    ofType(RouterActionTypes.AddRoutesSuccess),
+    ofType(RouterActionTypes.InitRouter),
     map(() => browserHistory.getLocationPath()),
     switchMap(path => [
-      new StartPopStateListner(),
-      new InitFirstRouteStart({ path })
+      new InitFirstRouteStart({ path }),
+      new StartPopStateListner()
     ])
   );
 
@@ -88,11 +89,11 @@ const startPopStateListner = (
 const popState = (
   action$: ActionsObservable<PopStateStart>,
   state$: Observable<RootState>,
-  { routeMatcher }: RouterEpicDependencies
+  { routeMatcher, browserHistory }: RouterEpicDependencies
 ) =>
   action$.pipe(
     ofType(RouterActionTypes.PopStateStart),
-    map(action => action.payload.path),
+    map(() => browserHistory.getLocationPath()),
     switchMap(path =>
       state$.pipe(
         take(1),
@@ -117,14 +118,8 @@ const go = (
       state$.pipe(
         take(1),
         map(state => routeMatcher.matchRoute(path, state.router.routes)),
-        map(route => {
-          if (!!route) {
-            browserHistory.go(route.path);
-            return new GoSucess({ route });
-          }
-          return new RouteNotFound();
-        }),
-
+        tap(route => route && browserHistory.go(route.path)),
+        map(route => (route ? new GoSucess({ route }) : new RouteNotFound())),
         catchError(error => of(new GoFailure({ error })))
       )
     )

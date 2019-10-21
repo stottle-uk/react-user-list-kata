@@ -1,4 +1,4 @@
-import { AddRoutesStart } from '@router';
+import { AddRoutesStart, InitRouter } from '@router';
 import { configureStore } from '@store';
 import { GetAllUsersStart } from '@users';
 import { Base64 } from 'js-base64';
@@ -22,6 +22,7 @@ const store = configureStore(parsedInitialState);
 if (initialState === '{}') {
   // Non-server rendered.
   store.dispatch(new AddRoutesStart({ routes }));
+  store.dispatch(new InitRouter());
   store.dispatch(new GetAllUsersStart());
   ReactDOM.render(
     <Provider store={store}>
@@ -31,6 +32,8 @@ if (initialState === '{}') {
   );
 } else {
   // Server rendered hydration
+  store.dispatch(new InitRouter());
+
   ReactDOM.hydrate(
     <Provider store={store}>
       <App />

@@ -1,7 +1,9 @@
+import { AddRoutesStart } from '@router';
 import { HttpService } from '@shared/services/HttpService';
 import { configureStore } from '@store';
 import { GetAllUsersSuccess, UsersService } from '@users';
 import App from 'client/src/App';
+import { routes } from 'client/src/router/routes';
 import { Request, Response } from 'express';
 import * as fs from 'fs';
 import { Base64 } from 'js-base64';
@@ -40,6 +42,8 @@ export default function universalLoader(req: Request, res: Response) {
           defaultRetryDelay: 200
         })
       );
+
+      store.dispatch(new AddRoutesStart({ routes }));
 
       usersService
         .getAll()
