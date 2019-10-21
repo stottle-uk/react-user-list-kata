@@ -108,6 +108,21 @@ const popState = (
     )
   );
 
+const navigateToPath = (
+  action$: ActionsObservable<NavigateToPath>,
+  state$: Observable<any>,
+  { browserHistory }: RouterEpicDependencies
+) =>
+  action$.pipe(
+    ofType(RouterActionTypes.NavigateToPath),
+    map(action => action.payload.path),
+    map(path =>
+      path !== browserHistory.getLocationPath()
+        ? new GoStart({ path })
+        : new NavigationCancelled()
+    )
+  );
+
 const go = (
   action$: ActionsObservable<GoStart>,
   state$: Observable<RootState>,
@@ -124,21 +139,6 @@ const go = (
         map(route => (route ? new GoSucess({ route }) : new RouteNotFound())),
         catchError(error => of(new GoFailure({ error })))
       )
-    )
-  );
-
-const navigateToPath = (
-  action$: ActionsObservable<NavigateToPath>,
-  state$: Observable<any>,
-  { browserHistory }: RouterEpicDependencies
-) =>
-  action$.pipe(
-    ofType(RouterActionTypes.NavigateToPath),
-    map(action => action.payload.path),
-    map(path =>
-      path !== browserHistory.getLocationPath()
-        ? new GoStart({ path })
-        : new NavigationCancelled()
     )
   );
 
