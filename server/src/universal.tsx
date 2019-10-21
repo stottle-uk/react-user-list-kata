@@ -3,16 +3,16 @@ import { HttpService } from '@shared/services/HttpService';
 import { configureStore } from '@store';
 import { GetAllUsersSuccess, UsersService } from '@users';
 import App from 'client/src/App';
-import { routes } from 'client/src/router/routes';
 import { Request, Response } from 'express';
 import * as fs from 'fs';
 import { Base64 } from 'js-base64';
+import { ConfigService } from 'libs/config/services/ConfigService';
 import * as path from 'path';
 import * as React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { of } from 'rxjs';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
 
 export default function universalLoader(req: Request, res: Response) {
   const filePath = path.resolve(
@@ -35,20 +35,23 @@ export default function universalLoader(req: Request, res: Response) {
       }
       const store = configureStore();
 
-      const usersService = new UsersService(
-        new HttpService({
-          baseUrl: process.env.API_BASE_URL || 'http://localhost:3000', // todo: use ENV VARS for these values
-          defaultMaxRetryCount: 5,
-          defaultRetryDelay: 200
-        })
-      );
+      const httpService = new HttpService({
+        baseUrl: process.env.API_BASE_URL || 'http://localhost:3000',
+        defaultMaxRetryCount: 4,
+        defaultRetryDelay: 200
+      });
 
-      store.dispatch(new AddRoutesStart({ routes }));
-      store.dispatch(new InitFirstRouteStart({ path: req.url }));
+      const usersService = new UsersService(httpService);
+      const configService = new ConfigService(httpService);
 
-      usersService
-        .getAll()
+      configService
+        .get()
         .pipe(
+          tap(config =>
+            store.dispatch(new AddRoutesStart({ routes: config.sitemap }))
+          ),
+          tap(() => store.dispatch(new InitFirstRouteStart({ path: req.url }))),
+          switchMap(() => usersService.getAll()),
           tap(users => store.dispatch(new GetAllUsersSuccess({ users }))),
           map(() =>
             renderToString(
