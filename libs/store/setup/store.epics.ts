@@ -1,11 +1,11 @@
 import { notificationsEpics } from '@notifications';
-import { UsersEpicDependencies, usersEpics, UsersService } from '@users';
 import {
+  BrowserHistory,
+  RouteMatcher,
   RouterEpicDependencies,
-  routerEpicsAsArray
-} from 'libs/router/+store/router.epics';
-import { BrowserHistory } from 'libs/router/services/BrowserHistory';
-import { RouteMatcher } from 'libs/router/services/RouteMatcher';
+  routerEpics
+} from '@router';
+import { UsersEpicDependencies, usersEpics, UsersService } from '@users';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
 import { HttpService } from '../../shared/services/HttpService';
 
@@ -29,7 +29,7 @@ const dependencies: EpicDependencies = {
 };
 
 export const rootEpic = combineEpics(
-  ...routerEpicsAsArray,
+  ...routerEpics,
   ...usersEpics,
   ...notificationsEpics
 );

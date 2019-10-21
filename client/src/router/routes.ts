@@ -1,7 +1,8 @@
+import { RouterConfigRoute } from '@router';
 import { Users } from '@users';
 import Home from '../layout/Home';
 
-export const routes = [
+export const routes: RouterConfigRoute<any>[] = [
   {
     name: 'Home',
     path: '/',

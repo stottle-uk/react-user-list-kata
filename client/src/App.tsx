@@ -1,6 +1,6 @@
 import { Notification } from '@notifications';
+import { Router } from '@router';
 import { UserProfileModal } from '@users';
-import Router from 'libs/router/components/Router';
 import React from 'react';
 import { Container, Section } from 'react-bulma-components';
 import './App.css';

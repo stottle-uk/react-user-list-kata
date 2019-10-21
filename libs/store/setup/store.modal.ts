@@ -1,6 +1,6 @@
 import { NotificationsState } from '@notifications';
+import { RouterState } from '@router';
 import { UserListState, UserProfileState } from '@users';
-import { RouterState } from 'libs/router/+store/router.reducer';
 
 export interface RootState {
   userList: UserListState;

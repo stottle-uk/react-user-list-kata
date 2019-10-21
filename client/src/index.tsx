@@ -1,7 +1,7 @@
+import { AddRoutesStart } from '@router';
 import { configureStore } from '@store';
 import { GetAllUsersStart } from '@users';
 import { Base64 } from 'js-base64';
-import { AddRoutesStart } from 'libs/router/+store/router.actions';
 import React from 'react';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 import ReactDOM from 'react-dom';

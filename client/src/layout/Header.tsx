@@ -1,4 +1,4 @@
-import Link from 'libs/router/components/Link';
+import { Link } from '@router';
 import React from 'react';
 import { Container, Navbar } from 'react-bulma-components';
 

@@ -1,6 +1,6 @@
 import { notificationsReducer } from '@notifications';
+import { routerReducer } from '@router';
 import { usersReducers } from '@users';
-import { routerReducer } from 'libs/router/+store/router.reducer';
 import { AnyAction, combineReducers } from 'redux';
 import { RootState } from './store.modal';
 
