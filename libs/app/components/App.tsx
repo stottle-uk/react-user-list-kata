@@ -3,9 +3,9 @@ import { Router } from '@router';
 import { UserProfileModal } from '@users';
 import React from 'react';
 import { Container, Section } from 'react-bulma-components';
+import { templateMap } from '../router/routes';
 import './App.css';
 import Header from './layout/Header';
-import { templateMap } from './router/routes';
 
 const App: React.FC = () => {
   return (

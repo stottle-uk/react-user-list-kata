@@ -3,17 +3,16 @@ import {
   InitRouterOnClient,
   StartPopStateListner
 } from '@router';
-import { HttpService } from '@shared/services/HttpService';
 import { configureStore } from '@store';
 import { GetAllUsersStart } from '@users';
 import { Base64 } from 'js-base64';
-import { ConfigService } from 'libs/config/services/ConfigService';
+import { configService } from 'libs/app';
+import App from 'libs/app/components/App';
 import React from 'react';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { tap } from 'rxjs/operators';
-import App from './App';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
@@ -27,13 +26,6 @@ const store = configureStore(parsedInitialState);
 
 if (initialState === '{}') {
   // Non-server rendered.
-  const http = new HttpService({
-    baseUrl: 'http://localhost:3000', // todo: use ENV VARS for these values
-    defaultMaxRetryCount: 4,
-    defaultRetryDelay: 200
-  });
-  const configService = new ConfigService(http);
-
   configService
     .get()
     .pipe(

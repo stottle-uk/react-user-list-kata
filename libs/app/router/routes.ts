@@ -1,6 +1,6 @@
 import { RouterConfigRoute } from '@router';
 import { Users } from '@users';
-import Home from '../layout/Home';
+import Home from '../components/layout/Home';
 
 export const routes: RouterConfigRoute<any>[] = [
   {

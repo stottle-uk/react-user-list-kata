@@ -1,12 +1,11 @@
 import { AddRoutesStart, InitFirstRouteStart } from '@router';
-import { HttpService } from '@shared/services/HttpService';
 import { configureStore } from '@store';
-import { GetAllUsersSuccess, UsersService } from '@users';
-import App from 'client/src/App';
+import { GetAllUsersSuccess } from '@users';
 import { Request, Response } from 'express';
 import * as fs from 'fs';
 import { Base64 } from 'js-base64';
-import { ConfigService } from 'libs/config/services/ConfigService';
+import { configService, usersService } from 'libs/app';
+import App from 'libs/app/components/App';
 import * as path from 'path';
 import * as React from 'react';
 import { renderToString } from 'react-dom/server';
@@ -34,15 +33,6 @@ export default function universalLoader(req: Request, res: Response) {
         return res.status(404).end();
       }
       const store = configureStore();
-
-      const httpService = new HttpService({
-        baseUrl: process.env.API_BASE_URL || 'http://localhost:3000',
-        defaultMaxRetryCount: 4,
-        defaultRetryDelay: 200
-      });
-
-      const usersService = new UsersService(httpService);
-      const configService = new ConfigService(httpService);
 
       combineLatest(configService.get(), usersService.getAll())
         .pipe(
