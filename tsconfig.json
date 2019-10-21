@@ -20,7 +20,8 @@
       "@shared/*": ["libs/shared/*"],
       "@store": ["libs/store/index.ts"],
       "@users": ["libs/users/index.ts"],
-      "@router": ["libs/router/index.ts"]
+      "@router": ["libs/router/index.ts"],
+      "@app": ["libs/app/index.ts"]
     }
   },
   "include": ["client/src", "server/src", "libs"],

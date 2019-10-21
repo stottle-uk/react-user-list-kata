@@ -25,7 +25,8 @@ module.exports = {
       '@store': `${root}/libs/store/`,
       '@notifications': `${root}/libs/notifications/`,
       '@users': `${root}/libs/users/`,
-      '@router': `${root}/libs/router/`
+      '@router': `${root}/libs/router/`,
+      '@app': `${root}/libs/app/`
     },
     extensions: ['.ts', '.tsx', '.js']
   },

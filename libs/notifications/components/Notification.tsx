@@ -26,4 +26,6 @@ const mapStateToProps = ({ notifications }: RootState): StoreProps => ({
   isVisible: getIsVisible(notifications)
 });
 
-export default connect<StoreProps, {}, {}, RootState>(mapStateToProps)(Notification);
+export default connect<StoreProps, {}, {}, RootState>(mapStateToProps)(
+  Notification
+);

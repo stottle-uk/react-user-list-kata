@@ -1,7 +1,7 @@
+import { browserHistory, routeMatcher, usersService } from '@app';
 import { notificationsEpics } from '@notifications';
 import { RouterEpicDependencies, routerEpics } from '@router';
 import { UsersEpicDependencies, usersEpics } from '@users';
-import { browserHistory, routeMatcher, usersService } from 'libs/app';
 import { combineEpics, createEpicMiddleware } from 'redux-observable';
 
 type EpicDependencies = UsersEpicDependencies & RouterEpicDependencies;

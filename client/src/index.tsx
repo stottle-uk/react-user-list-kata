@@ -1,3 +1,4 @@
+import { App, configService } from '@app';
 import {
   AddRoutesStart,
   InitRouterOnClient,
@@ -6,8 +7,6 @@ import {
 import { configureStore } from '@store';
 import { GetAllUsersStart } from '@users';
 import { Base64 } from 'js-base64';
-import { configService } from 'libs/app';
-import App from 'libs/app/components/App';
 import React from 'react';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 import ReactDOM from 'react-dom';

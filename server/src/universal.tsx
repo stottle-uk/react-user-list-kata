@@ -1,11 +1,10 @@
+import { App, configService, usersService } from '@app';
 import { AddRoutesStart, InitFirstRouteStart } from '@router';
 import { configureStore } from '@store';
 import { GetAllUsersSuccess } from '@users';
 import { Request, Response } from 'express';
 import * as fs from 'fs';
 import { Base64 } from 'js-base64';
-import { configService, usersService } from 'libs/app';
-import App from 'libs/app/components/App';
 import * as path from 'path';
 import * as React from 'react';
 import { renderToString } from 'react-dom/server';
