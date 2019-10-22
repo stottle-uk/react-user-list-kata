@@ -1,3 +1,4 @@
+import { ListsState } from '@lists';
 import { NotificationsState } from '@notifications';
 import { PagesState } from '@pages';
 import { RouterState } from '@router';
@@ -9,4 +10,5 @@ export interface RootState {
   notifications: NotificationsState;
   router: RouterState;
   pages: PagesState;
+  lists: ListsState;
 }

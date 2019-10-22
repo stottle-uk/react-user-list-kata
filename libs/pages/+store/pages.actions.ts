@@ -2,9 +2,9 @@ import { Action } from 'redux';
 
 export enum PagesActionTypes {
   thing = '',
-  GetPageStart = '[UserList] Get Page Start',
-  GetPageSuccess = '[UserList] Get Page Success',
-  GetPageFailure = '[UserList] Get Page Failure'
+  GetPageStart = '[Pages] Get Page Start',
+  GetPageSuccess = '[Pages] Get Page Success',
+  GetPageFailure = '[Pages] Get Page Failure'
 }
 
 export class thing implements Action {

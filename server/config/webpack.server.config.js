@@ -28,7 +28,8 @@ module.exports = {
       '@router': `${root}/libs/router/`,
       '@app': `${root}/libs/app/`,
       '@pages': `${root}/libs/pages/`,
-      '@pageEntries': `${root}/libs/pageEntries/`
+      '@pageEntries': `${root}/libs/pageEntries/`,
+      '@lists': `${root}/libs/lists/`
     },
     extensions: ['.ts', '.tsx', '.js']
   },
