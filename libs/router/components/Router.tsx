@@ -30,6 +30,7 @@ export const Router = <T extends {}>({
   const Template = currentRoute && templateMap[currentRoute.template];
   return Template ? <Template {...routeData} /> : children;
 };
+
 const mapStateToProps = <T extends {}>({
   router
 }: RootState): StoreProps<T> => ({

@@ -42,7 +42,7 @@ const addRoutes = (action$: ActionsObservable<AddRoutesStart>) =>
     catchError(error => of(new AddRoutesFailure({ error })))
   );
 
-const initRouter = (
+const initRouterOnClient = (
   action$: ActionsObservable<InitRouterOnClient>,
   state$: Observable<RootState>,
   { browserHistory }: RouterEpicDependencies
@@ -156,7 +156,7 @@ const back = (
 
 export const routerEpics = {
   addRoutes,
-  initRouter,
+  initRouterOnClient,
   initFirstRoute,
   startPopStateListner,
   popState,
