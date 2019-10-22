@@ -47,11 +47,12 @@ export const listsReducer = (
         }),
         {}
       );
-      const listIds = action.payload.lists.map(list => list.id);
+      const lists = { ...state.lists, ...listsAsDictionary };
+      const listIds = Object.keys(lists);
       return {
         ...state,
-        listIds: [...state.listIds, ...listIds],
-        lists: { ...state.lists, ...listsAsDictionary },
+        listIds,
+        lists,
         isLoading: false,
         isLoaded: true
       };

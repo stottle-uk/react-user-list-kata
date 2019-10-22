@@ -15,8 +15,8 @@ const Page: React.FC<StoreProps> = ({ pageData }) => (
   </Router>
 );
 
-const mapStateToProps = ({ pages }: RootState): StoreProps => ({
-  pageData: getPageData(pages)
+const mapStateToProps = ({ pages, router }: RootState): StoreProps => ({
+  pageData: getPageData({ ...pages, ...router })
 });
 
 export default connect<StoreProps, {}, {}, RootState>(mapStateToProps)(Page);

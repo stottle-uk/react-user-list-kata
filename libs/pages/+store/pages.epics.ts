@@ -1,9 +1,10 @@
 import { List, ManageList } from '@lists';
 import { PageEntry } from '@pageEntries';
 import { GoSucess, InitFirstRouteSuccess, RouterActionTypes } from '@router';
+import { RootState } from 'libs/store/setup/store.modal';
 import { ActionsObservable, ofType } from 'redux-observable';
 import { from, Observable, of } from 'rxjs';
-import { catchError, map, switchMap } from 'rxjs/operators';
+import { catchError, filter, map, switchMap, take } from 'rxjs/operators';
 import { PagesService } from '../services/PagesService';
 import {
   GetPageFailure,
@@ -33,13 +34,20 @@ const findListsInPage = (pageEntry: PageEntry): List[] => {
 };
 
 const watchNavigation = (
-  action$: ActionsObservable<GoSucess | InitFirstRouteSuccess>
+  action$: ActionsObservable<GoSucess | InitFirstRouteSuccess>,
+  state$: Observable<RootState>
 ) =>
   action$.pipe(
     ofType(RouterActionTypes.GoSucess, RouterActionTypes.InitFirstRouteSuccess),
     map(action => action.payload.route),
     map(route => route.path),
-    map(path => new GetPageStart({ path }))
+    switchMap(path =>
+      state$.pipe(
+        take(1),
+        filter(state => !state.pages.pageIds.includes(path)),
+        map(() => new GetPageStart({ path }))
+      )
+    )
   );
 
 const getPage = (

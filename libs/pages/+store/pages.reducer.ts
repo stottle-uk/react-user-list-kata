@@ -2,13 +2,16 @@ import { PageEntry } from '@pageEntries';
 import { PagesAction, PagesActionTypes } from './pages.actions';
 
 export interface PagesState {
-  pageData?: PageEntry;
+  pageIds: string[];
+  pages: { [key: string]: PageEntry };
   isLoading: boolean;
   isLoaded: boolean;
   error?: any;
 }
 
 const initialState: PagesState = {
+  pageIds: [],
+  pages: {},
   isLoading: false,
   isLoaded: false
 };
@@ -27,9 +30,16 @@ export const pagesReducer = (
       };
 
     case PagesActionTypes.GetPageSuccess:
+      const pages = {
+        ...state.pages,
+        [action.payload.pageData.path]: action.payload.pageData
+      };
+      const pageIds = Object.keys(pages);
+
       return {
         ...state,
-        pageData: action.payload.pageData,
+        pageIds,
+        pages,
         isLoading: false,
         isLoaded: true
       };

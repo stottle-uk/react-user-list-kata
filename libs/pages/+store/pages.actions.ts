@@ -1,3 +1,4 @@
+import { PageEntry } from '@pageEntries';
 import { Action } from 'redux';
 
 export enum PagesActionTypes {
@@ -20,7 +21,7 @@ export class GetPageStart implements Action {
 export class GetPageSuccess implements Action {
   readonly type = PagesActionTypes.GetPageSuccess;
 
-  constructor(public payload: { pageData: any }) {}
+  constructor(public payload: { pageData: PageEntry }) {}
 }
 
 export class GetPageFailure implements Action {

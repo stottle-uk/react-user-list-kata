@@ -12,3 +12,8 @@ export const getCurrentRoute = createSelector(
   [getState],
   state => state.currentRoute
 );
+
+export const getCurrentPath = createSelector(
+  [getCurrentRoute],
+  route => (route ? route.path : '/')
+);
