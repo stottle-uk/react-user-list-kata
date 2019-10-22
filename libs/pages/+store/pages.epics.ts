@@ -1,7 +1,7 @@
 import { GoSucess, InitFirstRouteSuccess, RouterActionTypes } from '@router';
 import { ActionsObservable, ofType } from 'redux-observable';
 import { Observable, of } from 'rxjs';
-import { catchError, map, switchMap, tap } from 'rxjs/operators';
+import { catchError, map, switchMap } from 'rxjs/operators';
 import { PagesService } from '../services/PagesService';
 import {
   GetPageFailure,
@@ -18,7 +18,6 @@ const watchNavigation = (
   action$: ActionsObservable<GoSucess | InitFirstRouteSuccess>
 ) =>
   action$.pipe(
-    tap(console.log),
     ofType(RouterActionTypes.GoSucess, RouterActionTypes.InitFirstRouteSuccess),
     map(action => action.payload.route),
     map(route => route.path),

@@ -5,7 +5,12 @@ const getState = (state: PagesState) => state;
 
 export const getPageData = createSelector(
   [getState],
-  state => state.pageData // todo: the sorting could be done here
+  state => ({
+    pageEntry: state.pageData,
+    loading: state.isLoading,
+    lists: {},
+    listsLoading: false
+  })
 );
 
 export const getIsLoading = createSelector(

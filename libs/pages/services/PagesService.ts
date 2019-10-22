@@ -1,6 +1,7 @@
+import { PageEntry } from '@pageEntries';
 import { Observable } from 'rxjs';
 import { HttpService } from '../../shared/services/HttpService';
-import { IGetPages, PageEntry } from '../models/Page';
+import { IGetPages } from '../models/Page';
 
 export class PagesService implements IGetPages {
   constructor(private httpService: HttpService) {}

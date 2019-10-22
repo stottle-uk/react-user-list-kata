@@ -15,4 +15,3 @@ export const pagesService = new PagesService(httpService);
 export const browserHistory = new BrowserHistory();
 export const routeMatcher = new RouteMatcher();
 export { default as App } from './components/App';
-export * from './router/routes';

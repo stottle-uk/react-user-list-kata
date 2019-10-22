@@ -1,11 +1,11 @@
-import { App, configService, usersService } from '@app';
+import { App, configService, pagesService } from '@app';
+import { GetPageSuccess } from '@pages';
 import {
   AddRoutesStart,
   InitFirstRouteStart,
   RouterConfigRoute
 } from '@router';
 import { configureStore } from '@store';
-import { GetAllUsersSuccess } from '@users';
 import { Request, Response } from 'express';
 import * as fs from 'fs';
 import { Base64 } from 'js-base64';
@@ -46,14 +46,15 @@ export default function universalLoader(req: Request, res: Response) {
       }
       const store = configureStore();
 
-      combineLatest(configService.get(), usersService.getAll())
+      combineLatest(configService.get(), pagesService.getPage(req.url))
         .pipe(
-          tap(([config, users]) => {
+          tap(([config, pageData]) => {
             store.dispatch(
               new AddRoutesStart({ routes: mapSitemapToRoute(config.sitemap) })
             );
             store.dispatch(new InitFirstRouteStart({ path: req.url }));
-            store.dispatch(new GetAllUsersSuccess({ users }));
+            // store.dispatch(new GetAllUsersSuccess({ users }));
+            store.dispatch(new GetPageSuccess({ pageData }));
           }),
           map(() =>
             renderToString(

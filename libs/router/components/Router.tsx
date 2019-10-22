@@ -7,7 +7,7 @@ import { RouterConfigRoute } from '../types/router';
 
 interface RouterProps<T> {
   routeData: T;
-  templateMap: { [key: string]: React.ComponentType };
+  templateMap: { [key: string]: React.ComponentType<any> };
   children: React.ReactElement;
 }
 
