@@ -15,7 +15,12 @@ export const routes: RouterConfigRoute<any>[] = [
   }
 ];
 
+const homeTemplate = 'Home';
+const itemDetailTemplate = 'Item Detail';
+const listDetailFeaturedTemplate = 'List Detail Featured';
+
 export const templateMap: { [key: string]: React.ComponentType } = {
-  home: Home,
-  users: Users
+  [homeTemplate]: Home,
+  [itemDetailTemplate]: Users,
+  [listDetailFeaturedTemplate]: Users
 };

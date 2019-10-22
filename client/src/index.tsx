@@ -2,16 +2,17 @@ import { App, configService } from '@app';
 import {
   AddRoutesStart,
   InitRouterOnClient,
+  RouterConfigRoute,
   StartPopStateListner
 } from '@router';
 import { configureStore } from '@store';
-import { GetAllUsersStart } from '@users';
 import { Base64 } from 'js-base64';
+import { Sitemap } from 'libs/config/models/Config';
 import React from 'react';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
@@ -23,15 +24,25 @@ const initialState =
 const parsedInitialState = JSON.parse(initialState);
 const store = configureStore(parsedInitialState);
 
+function mapSitemapToRoute(sitemap: Sitemap[]): RouterConfigRoute<any>[] {
+  return sitemap.map(s => ({
+    name: s.title,
+    path: s.path,
+    template: s.template
+  }));
+}
+
 if (initialState === '{}') {
   // Non-server rendered.
   configService
     .get()
     .pipe(
-      tap(config => {
-        store.dispatch(new AddRoutesStart({ routes: config.sitemap }));
+      map(config => config.sitemap),
+      map(sitemap => mapSitemapToRoute(sitemap)),
+      tap(routes => {
+        store.dispatch(new AddRoutesStart({ routes }));
         store.dispatch(new InitRouterOnClient());
-        store.dispatch(new GetAllUsersStart());
+        // store.dispatch(new GetAllUsersStart());
       }),
       tap(() =>
         ReactDOM.render(

@@ -21,7 +21,8 @@
       "@store": ["libs/store/index.ts"],
       "@users": ["libs/users/index.ts"],
       "@router": ["libs/router/index.ts"],
-      "@app": ["libs/app/index.ts"]
+      "@app": ["libs/app/index.ts"],
+      "@pages": ["libs/pages/index.ts"]
     }
   },
   "include": ["client/src", "server/src", "libs"],

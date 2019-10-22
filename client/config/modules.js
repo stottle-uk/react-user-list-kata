@@ -79,7 +79,8 @@ function getWebpackAliases(options = {}) {
       '@users': `${paths.libsSrc}/users/`,
       '@store': `${paths.libsSrc}/store/`,
       '@router': `${paths.libsSrc}/router/`,
-      '@app': `${paths.libsSrc}/app/`
+      '@app': `${paths.libsSrc}/app/`,
+      '@pages': `${paths.libsSrc}/pages/`
     };
   }
 }
