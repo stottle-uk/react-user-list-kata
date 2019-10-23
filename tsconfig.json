@@ -24,7 +24,8 @@
       "@app": ["libs/app/index.ts"],
       "@pages": ["libs/pages/index.ts"],
       "@pageEntries": ["libs/pageEntries/index.ts"],
-      "@lists": ["libs/lists/index.ts"]
+      "@lists": ["libs/lists/index.ts"],
+      "@config": ["libs/config/index.ts"]
     }
   },
   "include": ["client/src", "server/src", "libs"],

@@ -1,7 +1,7 @@
+import { Sitemap } from '@config';
 import { Home, ListDetailFeatured, PageTemplateData } from '@pageEntries';
 import { RouterConfigRoute } from '@router';
 import { Users } from '@users';
-import { Sitemap } from 'libs/config/models/Config';
 
 const homeTemplate = 'Home';
 const itemDetailTemplate = 'Item Detail';

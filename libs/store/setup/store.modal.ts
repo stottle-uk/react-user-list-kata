@@ -1,3 +1,4 @@
+import { ConfigState } from '@config';
 import { ListsState } from '@lists';
 import { NotificationsState } from '@notifications';
 import { PagesState } from '@pages';
@@ -11,4 +12,5 @@ export interface RootState {
   router: RouterState;
   pages: PagesState;
   lists: ListsState;
+  config: ConfigState;
 }

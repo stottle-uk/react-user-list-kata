@@ -29,7 +29,8 @@ module.exports = {
       '@app': `${root}/libs/app/`,
       '@pages': `${root}/libs/pages/`,
       '@pageEntries': `${root}/libs/pageEntries/`,
-      '@lists': `${root}/libs/lists/`
+      '@lists': `${root}/libs/lists/`,
+      '@config': `${root}/libs/config/`
     },
     extensions: ['.ts', '.tsx', '.js']
   },

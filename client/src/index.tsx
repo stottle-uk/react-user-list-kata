@@ -1,4 +1,5 @@
 import { App, configService } from '@app';
+import { AddNavigation } from '@config';
 import { mapSitemapToRoute } from '@pageEntries';
 import {
   AddRoutesStart,
@@ -11,7 +12,7 @@ import React from 'react';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
@@ -28,10 +29,12 @@ if (initialState === '{}') {
   configService
     .get()
     .pipe(
-      map(config => config.sitemap),
-      map(sitemap => mapSitemapToRoute(sitemap)),
-      tap(routes => {
-        store.dispatch(new AddRoutesStart({ routes }));
+      tap(config => {
+        store.dispatch(
+          new AddRoutesStart({ routes: mapSitemapToRoute(config.sitemap) })
+        );
+        store.dispatch(new AddNavigation({ navigation: config.navigation }));
+
         store.dispatch(new InitRouterOnClient());
         // store.dispatch(new GetAllUsersStart());
       }),

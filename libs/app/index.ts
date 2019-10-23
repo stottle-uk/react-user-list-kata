@@ -1,9 +1,9 @@
+import { ConfigService } from '@config';
 import { ListsService } from '@lists';
 import { PagesService } from '@pages';
 import { BrowserHistory, RouteMatcher } from '@router';
 import { HttpService } from '@shared/services/HttpService';
 import { UsersService } from '@users';
-import { ConfigService } from 'libs/config/services/ConfigService';
 
 const httpService = new HttpService({
   baseUrl: process.env.API_BASE_URL || 'https://cdn.telecineplay.com.br/api/',

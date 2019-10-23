@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { HttpService } from '../../shared/services/HttpService';
-import { Config, IGetConfig } from '../models/Config';
+import { Config, IGetConfig } from '../models/config.d';
 
 export class ConfigService implements IGetConfig {
   constructor(private httpService: HttpService) {}
