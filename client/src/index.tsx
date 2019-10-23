@@ -1,13 +1,12 @@
 import { App, configService } from '@app';
+import { mapSitemapToRoute } from '@pageEntries';
 import {
   AddRoutesStart,
   InitRouterOnClient,
-  RouterConfigRoute,
   StartPopStateListner
 } from '@router';
 import { configureStore } from '@store';
 import { Base64 } from 'js-base64';
-import { Sitemap } from 'libs/config/models/Config';
 import React from 'react';
 import 'react-bulma-components/dist/react-bulma-components.min.css';
 import ReactDOM from 'react-dom';
@@ -23,14 +22,6 @@ const initialState =
 
 const parsedInitialState = JSON.parse(initialState);
 const store = configureStore(parsedInitialState);
-
-function mapSitemapToRoute(sitemap: Sitemap[]): RouterConfigRoute<any>[] {
-  return sitemap.map(s => ({
-    name: s.title,
-    path: s.path,
-    template: s.template
-  }));
-}
 
 if (initialState === '{}') {
   // Non-server rendered.

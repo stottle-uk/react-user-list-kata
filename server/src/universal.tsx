@@ -1,29 +1,17 @@
 import { App, configService, pagesService } from '@app';
+import { mapSitemapToRoute } from '@pageEntries';
 import { GetPageSuccess } from '@pages';
-import {
-  AddRoutesStart,
-  InitFirstRouteStart,
-  RouterConfigRoute
-} from '@router';
+import { AddRoutesStart, InitFirstRouteStart } from '@router';
 import { configureStore } from '@store';
 import { Request, Response } from 'express';
 import * as fs from 'fs';
 import { Base64 } from 'js-base64';
-import { Sitemap } from 'libs/config/models/Config';
 import * as path from 'path';
 import * as React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import { combineLatest, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-
-function mapSitemapToRoute(sitemap: Sitemap[]): RouterConfigRoute<any>[] {
-  return sitemap.map(s => ({
-    name: s.title,
-    path: s.path,
-    template: s.template
-  }));
-}
 
 export default function universalLoader(req: Request, res: Response) {
   const filePath = path.resolve(
