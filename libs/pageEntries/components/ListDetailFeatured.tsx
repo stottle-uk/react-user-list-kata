@@ -38,8 +38,7 @@ const ListDetailFeatured: React.FC<PageTemplateData> = ({
     <>
       {isLoading && <div>isLoading</div>}
       {pageEntry && pageEntry.entries && renderEntries(pageEntry, lists)}
-
-      <pre>{JSON.stringify(pageEntry, undefined, 2)} </pre>
+      {/* <pre>{JSON.stringify(pageEntry, undefined, 2)} </pre> */}
     </>
   );
 };
