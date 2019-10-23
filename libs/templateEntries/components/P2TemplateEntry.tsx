@@ -6,19 +6,17 @@ import './P2TemplateEntry.css';
 class P2PageEntry extends React.PureComponent<List> {
   render() {
     return (
-      <div className="panel">
-        <div className="panel-heading">
-          <h2>
-            <Link href={this.props.path}>
-              {this.props.title} <small>{this.props.id}</small>
-            </Link>
-          </h2>
-        </div>
+      <article className="panel is-primary">
+        <p className="panel-heading">
+          <Link href={this.props.path}>
+            {this.props.title} <small>{this.props.id}</small>
+          </Link>
+        </p>
         <div className="columns is-gapless">
           {this.renderList(this.props.items)}
         </div>
         {/* <pre>{JSON.stringify(this.props, null, 2)}</pre> */}
-      </div>
+      </article>
     );
   }
 

@@ -13,14 +13,12 @@ function renderEntries(
       const list = lists[entry.list.id];
 
       return (
-        <div key={entry.id} className="row no-gutters">
-          <div className="col">
-            {Template ? (
-              <Template {...list} />
-            ) : (
-              <div> {entry.template} not found</div>
-            )}
-          </div>
+        <div key={entry.id}>
+          {Template ? (
+            <Template {...list} />
+          ) : (
+            <div> {entry.template} not found</div>
+          )}
         </div>
       );
     }

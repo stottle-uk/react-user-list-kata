@@ -44,9 +44,7 @@ export default function universalLoader(req: Request, res: Response) {
             store.dispatch(
               new AddNavigation({ navigation: config.navigation })
             );
-
             store.dispatch(new InitFirstRouteStart({ path: req.url }));
-            // store.dispatch(new GetAllUsersSuccess({ users }));
             store.dispatch(new GetPageSuccess({ pageData }));
           }),
           map(() =>

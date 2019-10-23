@@ -10,7 +10,6 @@ import {
 import { configureStore } from '@store';
 import { Base64 } from 'js-base64';
 import React from 'react';
-import 'react-bulma-components/dist/react-bulma-components.min.css';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { tap } from 'rxjs/operators';
