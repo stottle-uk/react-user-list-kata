@@ -2,12 +2,12 @@ import { Action } from 'redux';
 import { Navigation } from '../models/config';
 
 export enum ConfigActionTypes {
-  thing = '',
-  AddNavigation = '[Pages] Add Navgiations'
+  SetClientSide = '[Config] Set Client Side',
+  AddNavigation = '[Config] Add Navgiations'
 }
 
-export class thing implements Action {
-  readonly type = ConfigActionTypes.thing;
+export class SetClientSide implements Action {
+  readonly type = ConfigActionTypes.SetClientSide;
 }
 
 export class AddNavigation implements Action {
@@ -16,4 +16,4 @@ export class AddNavigation implements Action {
   constructor(public payload: { navigation: Navigation }) {}
 }
 
-export type ConfigAction = thing | AddNavigation;
+export type ConfigAction = SetClientSide | AddNavigation;

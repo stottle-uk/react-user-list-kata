@@ -1,5 +1,5 @@
 import { App, configService } from '@app';
-import { AddNavigation } from '@config';
+import { AddNavigation, SetClientSide } from '@config';
 import { mapSitemapToRoute } from '@pageEntries';
 import { CheckAndGetPageLists } from '@pages';
 import {
@@ -25,8 +25,11 @@ const initialState =
 const parsedInitialState = JSON.parse(initialState);
 const store = configureStore(parsedInitialState);
 
+store.dispatch(new SetClientSide());
+
 if (initialState === '{}') {
   // Non-server rendered.
+
   configService
     .get()
     .pipe(

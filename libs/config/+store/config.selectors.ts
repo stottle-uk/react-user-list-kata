@@ -8,6 +8,11 @@ export const getNavigation = createSelector(
   state => state.navigation
 );
 
+export const getIsClientSide = createSelector(
+  [getState],
+  state => state.clientSide
+);
+
 export const getHeader = createSelector(
   [getNavigation],
   navigation => (navigation ? navigation.header : [])

@@ -8,6 +8,11 @@ export const getLists = createSelector(
   state => state.lists
 );
 
+export const getListIds = createSelector(
+  [getState],
+  state => state.listIds
+);
+
 export const getIsLoading = createSelector(
   [getState],
   state => state.isLoading

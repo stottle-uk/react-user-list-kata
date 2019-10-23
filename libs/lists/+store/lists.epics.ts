@@ -1,6 +1,7 @@
+import { getIsClientSide } from '@config';
 import { RootState } from 'libs/store/setup/store.modal';
 import { ActionsObservable, ofType } from 'redux-observable';
-import { Observable, of } from 'rxjs';
+import { iif, Observable, of } from 'rxjs';
 import {
   bufferTime,
   catchError,
@@ -20,6 +21,7 @@ import {
   ManageList,
   QueueList
 } from './lists.actions';
+import { getListIds } from './lists.selectors';
 
 export interface ListsEpicDependencies {
   listsService: ListsService;
@@ -35,14 +37,20 @@ const manageList = (
     switchMap(list =>
       state$.pipe(
         take(1),
-        filter(state => !state.lists.listIds.includes(list.id)),
-        map(() => list)
+        map(state => getListIds(state.lists).includes(list.id)),
+        filter(inCache => !inCache),
+        switchMap(() =>
+          iif(
+            () => !!list.items.length,
+            of(new AddCompleteList({ list })),
+            state$.pipe(
+              take(1),
+              filter(state => getIsClientSide(state.config)),
+              map(() => new QueueList({ list }))
+            )
+          )
+        )
       )
-    ),
-    map(list =>
-      list.items.length
-        ? new AddCompleteList({ list })
-        : new QueueList({ list })
     )
   );
 
