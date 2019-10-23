@@ -58,12 +58,13 @@ export default function universalLoader(req: Request, res: Response) {
             markup,
             storeData: Base64.encode(JSON.stringify(store.getState()))
           })),
-          catchError(() =>
-            of({
-              markup: '',
+          catchError(error => {
+            console.error(error);
+            return of({
+              markup: JSON.stringify(error, undefined, 2),
               storeData: ''
-            })
-          ),
+            });
+          }),
           map(data =>
             htmlData
               .replace('{{ SSR }}', data.markup)
