@@ -69,7 +69,14 @@ const initFirstRoute = (
         take(1),
         map(state => routeMatcher.matchRoute(path, state.router.routes)),
         map(route =>
-          route ? new InitFirstRouteSuccess({ route }) : new RouteNotFound()
+          route
+            ? new InitFirstRouteSuccess({
+                route: {
+                  ...route,
+                  path
+                }
+              })
+            : new RouteNotFound()
         ),
         catchError(error => of(new InitFirstRouteFailure({ error })))
       )
@@ -101,7 +108,14 @@ const popState = (
         take(1),
         map(state => routeMatcher.matchRoute(path, state.router.routes)),
         map(route =>
-          route ? new PopStateSuccess({ route }) : new RouteNotFound()
+          route
+            ? new PopStateSuccess({
+                route: {
+                  ...route,
+                  path
+                }
+              })
+            : new RouteNotFound()
         ),
         catchError(error => of(new PopStateFailure({ error })))
       )
@@ -135,8 +149,17 @@ const go = (
       state$.pipe(
         take(1),
         map(state => routeMatcher.matchRoute(path, state.router.routes)),
-        tap(route => route && browserHistory.go(route.path)),
-        map(route => (route ? new GoSucess({ route }) : new RouteNotFound())),
+        tap(route => route && browserHistory.go(path)),
+        map(route =>
+          route
+            ? new GoSucess({
+                route: {
+                  ...route,
+                  path
+                }
+              })
+            : new RouteNotFound()
+        ),
         catchError(error => of(new GoFailure({ error })))
       )
     )
