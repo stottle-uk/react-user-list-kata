@@ -9,6 +9,12 @@ export class RouteMatcher<T> {
   }
 
   private findRoute(path: string, route: RouterConfigRoute<T>): boolean {
+    if (path.startsWith('/filme/') && route.path === '/filme/{id}') {
+      return true;
+    }
+    if (path.startsWith('/playlist/') && route.path === '/playlist/{id}') {
+      return true;
+    }
     return route.path === decodeURIComponent(path);
   }
 }

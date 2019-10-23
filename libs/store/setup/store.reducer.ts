@@ -1,4 +1,7 @@
+import { configReducer } from '@config';
+import { listsReducer } from '@lists';
 import { notificationsReducer } from '@notifications';
+import { pagesReducer } from '@pages';
 import { routerReducer } from '@router';
 import { usersReducers } from '@users';
 import { AnyAction, combineReducers } from 'redux';
@@ -8,5 +11,8 @@ export const rootReducer = combineReducers<RootState, AnyAction>({
   userList: usersReducers.userListReducer,
   userProfile: usersReducers.userProfileReducer,
   notifications: notificationsReducer,
-  router: routerReducer
+  router: routerReducer,
+  pages: pagesReducer,
+  lists: listsReducer,
+  config: configReducer
 });

@@ -1,0 +1,27 @@
+.list-row {
+  display: flex;
+  /* flex-direction: row; */
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* img {
+  max-height: 100px;
+} */
+
+.test {
+  margin: 20px;
+  padding: 12px;
+  height: 30px;
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+.panel {
+  margin-bottom: 1.2em;
+}
+
+.columns {
+  overflow: hidden;
+  min-height: 139px;
+}

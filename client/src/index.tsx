@@ -1,14 +1,15 @@
 import { App, configService } from '@app';
+import { AddNavigation, SetClientSide } from '@config';
+import { mapSitemapToRoute } from '@pageEntries';
+import { CheckAndGetPageLists } from '@pages';
 import {
   AddRoutesStart,
   InitRouterOnClient,
   StartPopStateListner
 } from '@router';
 import { configureStore } from '@store';
-import { GetAllUsersStart } from '@users';
 import { Base64 } from 'js-base64';
 import React from 'react';
-import 'react-bulma-components/dist/react-bulma-components.min.css';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { tap } from 'rxjs/operators';
@@ -23,15 +24,22 @@ const initialState =
 const parsedInitialState = JSON.parse(initialState);
 const store = configureStore(parsedInitialState);
 
+store.dispatch(new SetClientSide());
+
 if (initialState === '{}') {
   // Non-server rendered.
+
   configService
     .get()
     .pipe(
       tap(config => {
-        store.dispatch(new AddRoutesStart({ routes: config.sitemap }));
+        store.dispatch(
+          new AddRoutesStart({ routes: mapSitemapToRoute(config.sitemap) })
+        );
+        store.dispatch(new AddNavigation({ navigation: config.navigation }));
+
         store.dispatch(new InitRouterOnClient());
-        store.dispatch(new GetAllUsersStart());
+        // store.dispatch(new GetAllUsersStart());
       }),
       tap(() =>
         ReactDOM.render(
@@ -46,6 +54,7 @@ if (initialState === '{}') {
 } else {
   // Server rendered hydration
   store.dispatch(new StartPopStateListner());
+  store.dispatch(new CheckAndGetPageLists());
 
   ReactDOM.hydrate(
     <Provider store={store}>

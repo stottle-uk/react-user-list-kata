@@ -26,7 +26,12 @@ module.exports = {
       '@notifications': `${root}/libs/notifications/`,
       '@users': `${root}/libs/users/`,
       '@router': `${root}/libs/router/`,
-      '@app': `${root}/libs/app/`
+      '@app': `${root}/libs/app/`,
+      '@pages': `${root}/libs/pages/`,
+      '@pageEntries': `${root}/libs/pageEntries/`,
+      '@lists': `${root}/libs/lists/`,
+      '@config': `${root}/libs/config/`,
+      '@templateEntries': `${root}/libs/templateEntries/`
     },
     extensions: ['.ts', '.tsx', '.js']
   },
