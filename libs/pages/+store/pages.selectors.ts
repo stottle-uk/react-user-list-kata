@@ -1,3 +1,4 @@
+import { getLists } from '@lists';
 import { getCurrentPath } from 'libs/router/+store/router.selectors';
 import { createSelector } from 'reselect';
 import { PagesState } from './pages.reducer';
@@ -15,11 +16,11 @@ export const getIsLoading = createSelector(
 );
 
 export const getPageData = createSelector(
-  [getCurrentPath, getPages, getIsLoading],
-  (path, pages, isLoading) => ({
+  [getCurrentPath, getPages, getIsLoading, getLists],
+  (path, pages, isLoading, lists) => ({
     pageEntry: pages[path],
-    loading: isLoading,
-    lists: {},
+    isLoading,
+    lists,
     listsLoading: false
   })
 );

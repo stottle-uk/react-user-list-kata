@@ -5,7 +5,7 @@ export interface Dictionary<T> {
 }
 
 export interface PageTemplateData {
-  loading: boolean;
+  isLoading: boolean;
   listsLoading: boolean;
   pageEntry?: PageEntry;
   lists: Dictionary<List>;

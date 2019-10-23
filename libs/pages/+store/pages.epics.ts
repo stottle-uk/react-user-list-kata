@@ -93,7 +93,9 @@ const getPageLists = (
     switchMap(() =>
       state$.pipe(
         take(1),
-        map(state => getPageData({ ...state.pages, ...state.router })),
+        map(state =>
+          getPageData({ ...state.pages, ...state.router, ...state.lists })
+        ),
         filter(pageData => pageData && !!pageData.pageEntry),
         map(pageData => pageData && pageData.pageEntry),
         map(pageData => new GetPageLists({ pageData }))

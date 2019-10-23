@@ -30,7 +30,8 @@ module.exports = {
       '@pages': `${root}/libs/pages/`,
       '@pageEntries': `${root}/libs/pageEntries/`,
       '@lists': `${root}/libs/lists/`,
-      '@config': `${root}/libs/config/`
+      '@config': `${root}/libs/config/`,
+      '@templateEntries': `${root}/libs/templateEntries/`
     },
     extensions: ['.ts', '.tsx', '.js']
   },

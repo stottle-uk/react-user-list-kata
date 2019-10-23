@@ -83,7 +83,8 @@ function getWebpackAliases(options = {}) {
       '@pages': `${paths.libsSrc}/pages/`,
       '@pageEntries': `${paths.libsSrc}/pageEntries/`,
       '@lists': `${paths.libsSrc}/lists/`,
-      '@config': `${paths.libsSrc}/config/`
+      '@config': `${paths.libsSrc}/config/`,
+      '@templateEntries': `${paths.libsSrc}/templateEntries/`
     };
   }
 }
