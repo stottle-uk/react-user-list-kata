@@ -20,9 +20,9 @@ const Header: React.FC<StoreProps> = ({ navContent }) => (
           {navContent.map((f, t) => {
             return !!f.children ? (
               <div key={t} className="navbar-item has-dropdown is-hoverable">
-                <a className="navbar-link" href={f.path}>
+                <Link className="navbar-link" href={f.path}>
                   {f.label}
-                </a>
+                </Link>
 
                 <div className="navbar-dropdown">
                   {f.children.map((c, j) => {
