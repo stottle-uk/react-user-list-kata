@@ -1,4 +1,5 @@
 import { App, configService, pagesService } from '@app';
+import { AddNavigation } from '@config';
 import { mapSitemapToRoute } from '@pageEntries';
 import { GetPageSuccess } from '@pages';
 import { AddRoutesStart, InitFirstRouteStart } from '@router';
@@ -40,6 +41,10 @@ export default function universalLoader(req: Request, res: Response) {
             store.dispatch(
               new AddRoutesStart({ routes: mapSitemapToRoute(config.sitemap) })
             );
+            store.dispatch(
+              new AddNavigation({ navigation: config.navigation })
+            );
+
             store.dispatch(new InitFirstRouteStart({ path: req.url }));
             // store.dispatch(new GetAllUsersSuccess({ users }));
             store.dispatch(new GetPageSuccess({ pageData }));

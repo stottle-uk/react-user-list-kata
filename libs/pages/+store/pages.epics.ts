@@ -7,17 +7,20 @@ import { from, Observable, of } from 'rxjs';
 import { catchError, filter, map, switchMap, take } from 'rxjs/operators';
 import { PagesService } from '../services/PagesService';
 import {
+  CheckAndGetPageLists,
   GetPageFailure,
+  GetPageLists,
   GetPageStart,
   GetPageSuccess,
   PagesActionTypes
 } from './pages.actions';
+import { getPageData } from './pages.selectors';
 
 export interface PagesEpicDependencies {
   pagesService: PagesService;
 }
 
-const findListsInPage = (pageEntry: PageEntry): List[] => {
+const findListsInPage = (pageEntry: PageEntry): Observable<List> => {
   const entryLists = pageEntry.entries
     ? pageEntry.entries
         .filter(e => e.list)
@@ -30,7 +33,7 @@ const findListsInPage = (pageEntry: PageEntry): List[] => {
       ? [pageEntry.list, ...entryLists]
       : entryLists;
 
-  return lists;
+  return from(lists);
 };
 
 const watchNavigation = (
@@ -71,13 +74,37 @@ const getPage = (
     )
   );
 
-const queuePageLists = (action$: ActionsObservable<GetPageSuccess>) =>
+const queuePageLists = (
+  action$: ActionsObservable<GetPageSuccess | GetPageLists>
+) =>
   action$.pipe(
-    ofType(PagesActionTypes.GetPageSuccess),
+    ofType(PagesActionTypes.GetPageSuccess, PagesActionTypes.GetPageLists),
     map(action => action.payload.pageData),
-    switchMap(pageData => from(findListsInPage(pageData))),
+    switchMap(pageData => findListsInPage(pageData)),
     map(list => new ManageList({ list }))
   );
 
-export const pagesEpics = { watchNavigation, getPage, queuePageLists };
+const getPageLists = (
+  action$: ActionsObservable<CheckAndGetPageLists>,
+  state$: Observable<RootState>
+) =>
+  action$.pipe(
+    ofType(PagesActionTypes.CheckAndGetPageLists),
+    switchMap(() =>
+      state$.pipe(
+        take(1),
+        map(state => getPageData({ ...state.pages, ...state.router })),
+        filter(pageData => pageData && !!pageData.pageEntry),
+        map(pageData => pageData && pageData.pageEntry),
+        map(pageData => new GetPageLists({ pageData }))
+      )
+    )
+  );
+
+export const pagesEpics = {
+  watchNavigation,
+  getPage,
+  queuePageLists,
+  getPageLists
+};
 export const pagesEpicsAsArray = Object.values(pagesEpics);

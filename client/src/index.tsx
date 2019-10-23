@@ -1,6 +1,7 @@
 import { App, configService } from '@app';
 import { AddNavigation } from '@config';
 import { mapSitemapToRoute } from '@pageEntries';
+import { CheckAndGetPageLists } from '@pages';
 import {
   AddRoutesStart,
   InitRouterOnClient,
@@ -51,6 +52,7 @@ if (initialState === '{}') {
 } else {
   // Server rendered hydration
   store.dispatch(new StartPopStateListner());
+  store.dispatch(new CheckAndGetPageLists());
 
   ReactDOM.hydrate(
     <Provider store={store}>

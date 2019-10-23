@@ -25,23 +25,12 @@ export interface ListsEpicDependencies {
   listsService: ListsService;
 }
 
-const manageList = (action$: ActionsObservable<ManageList>) =>
-  action$.pipe(
-    ofType(ListsActionTypes.ManageList),
-    map(action => action.payload.list),
-    map(list =>
-      list.items.length
-        ? new AddCompleteList({ list })
-        : new QueueList({ list })
-    )
-  );
-
-const queueList = (
-  action$: ActionsObservable<QueueList>,
+const manageList = (
+  action$: ActionsObservable<ManageList>,
   state$: Observable<RootState>
 ) =>
   action$.pipe(
-    ofType(ListsActionTypes.QueueList),
+    ofType(ListsActionTypes.ManageList),
     map(action => action.payload.list),
     switchMap(list =>
       state$.pipe(
@@ -50,6 +39,17 @@ const queueList = (
         map(() => list)
       )
     ),
+    map(list =>
+      list.items.length
+        ? new AddCompleteList({ list })
+        : new QueueList({ list })
+    )
+  );
+
+const queueList = (action$: ActionsObservable<QueueList>) =>
+  action$.pipe(
+    ofType(ListsActionTypes.QueueList),
+    map(action => action.payload.list),
     bufferTime(200, null, 5),
     filter(lists => !!lists.length),
     map(lists => lists.map(l => l.id)),
