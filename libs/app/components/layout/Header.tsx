@@ -1,23 +1,59 @@
+import { getHeader, NavEntry } from '@config';
 import { Link } from '@router';
+import { RootState } from '@store';
 import React from 'react';
 import { Container, Navbar } from 'react-bulma-components';
+import { connect } from 'react-redux';
 
-const Header = () => (
+interface StoreProps {
+  navContent: NavEntry[];
+}
+
+const Header: React.FC<StoreProps> = ({ navContent }) => (
   <Navbar className="is-fixed-top has-shadow">
     <Container>
       <div className="navbar-start">
         <div className="navbar-brand">
-          <span className="navbar-item">User List Kata</span>
           <Link className="navbar-item" href="/">
             Home
           </Link>
-          <Link className="navbar-item" href="/new_releases">
-            New Releases
-          </Link>
+          {navContent.map((f, t) => {
+            return !!f.children ? (
+              <div key={t} className="navbar-item has-dropdown is-hoverable">
+                <a className="navbar-link" href={f.path}>
+                  {f.label}
+                </a>
+
+                <div className="navbar-dropdown">
+                  {f.children.map((c, j) => {
+                    return !!c.children ? (
+                      c.children.map((cc, i) => {
+                        return (
+                          <Link key={i} className="navbar-item" href={cc.path}>
+                            {cc.label}
+                          </Link>
+                        );
+                      })
+                    ) : (
+                      <span key={j} />
+                    );
+                  })}
+                </div>
+              </div>
+            ) : (
+              <Link key={t} className="navbar-item" href={f.path}>
+                {f.label}
+              </Link>
+            );
+          })}
         </div>
       </div>
     </Container>
   </Navbar>
 );
 
-export default Header;
+const mapStateToProps = ({ config }: RootState): StoreProps => ({
+  navContent: getHeader(config)
+});
+
+export default connect<StoreProps, {}, {}, RootState>(mapStateToProps)(Header);

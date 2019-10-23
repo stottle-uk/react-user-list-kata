@@ -11,7 +11,10 @@ interface StoreProps {
 
 const Page: React.FC<StoreProps> = ({ pageData }) => (
   <Router routeData={pageData} templateMap={templateMap}>
-    <span>Not Found</span>
+    <>
+      <h1>Not Found</h1>
+      {pageData.pageEntry && pageData.pageEntry.template}
+    </>
   </Router>
 );
 
