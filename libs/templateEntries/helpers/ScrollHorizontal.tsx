@@ -19,13 +19,7 @@ interface DispatchProps {
 
 type AllProps = OwnProps & StoreProps & DispatchProps;
 
-const ScrollHorizontal = ({
-  listt,
-  isLoading,
-  getMore,
-  children,
-  ...rest
-}: AllProps) => {
+const ScrollHorizontal = ({ listt, isLoading, getMore, ...rest }: AllProps) => {
   const containerEl = useRef<HTMLDivElement>(null);
   const [scrollInfo, setScrollInfo] = useState({
     startOfList: true,
@@ -74,9 +68,7 @@ const ScrollHorizontal = ({
           Left
         </div>
       )}
-      <div {...rest} ref={containerEl} style={scrollInfo.styles}>
-        {children}
-      </div>
+      <div {...rest} ref={containerEl} style={scrollInfo.styles} />
       {!scrollInfo.endOfList && (
         <div className="right-arrow" onClick={onRightClick}>
           Right
