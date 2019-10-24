@@ -32,6 +32,7 @@ export const listsReducer = (
         }
       };
 
+    case ListsActionTypes.GetListNextPageStart:
     case ListsActionTypes.GetListsStart:
       return {
         ...state,
@@ -56,6 +57,7 @@ export const listsReducer = (
         isLoaded: true
       };
 
+    case ListsActionTypes.GetListNextPageFailure:
     case ListsActionTypes.GetListsFailure:
       return {
         ...state,

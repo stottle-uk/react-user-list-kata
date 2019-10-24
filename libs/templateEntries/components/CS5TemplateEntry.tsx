@@ -1,22 +1,21 @@
 import { Item, List } from '@lists';
 import { Link } from '@router';
 import React from 'react';
-import GetMore from '../helpers/GetMore';
+import ScrollLoader from '../helpers/ScrollLoader';
 import './P2TemplateEntry.css';
 
 class CS5TemplateEntry extends React.PureComponent<List> {
   render() {
-    return (
-      <div className="col">
-        <h1>{this.props.title}</h1>
-        <h2>{this.props.tagline}</h2>
+    const { title, tagline, paging, items } = this.props;
 
-        <div className="columns is-multiline is-gapless">
-          {this.renderList(this.props.items)}
-          <GetMore className="test" page={this.props.paging}>
-            More
-          </GetMore>
-        </div>
+    return (
+      <div>
+        <h1>{title}</h1>
+        <h2>{tagline}</h2>
+
+        <ScrollLoader className="columns is-multiline is-gapless" page={paging}>
+          {this.renderList(items)}
+        </ScrollLoader>
       </div>
     );
   }
