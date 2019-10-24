@@ -1,6 +1,11 @@
 import { List, ManageList } from '@lists';
 import { PageEntry } from '@pageEntries';
-import { GoSucess, InitFirstRouteSuccess, RouterActionTypes } from '@router';
+import {
+  GoSucess,
+  InitFirstRouteSuccess,
+  PopStateSuccess,
+  RouterActionTypes
+} from '@router';
 import { RootState } from 'libs/store/setup/store.modal';
 import { ActionsObservable, ofType } from 'redux-observable';
 import { from, Observable, of } from 'rxjs';
@@ -37,11 +42,17 @@ const findListsInPage = (pageEntry: PageEntry): Observable<List> => {
 };
 
 const watchNavigation = (
-  action$: ActionsObservable<GoSucess | InitFirstRouteSuccess>,
+  action$: ActionsObservable<
+    GoSucess | InitFirstRouteSuccess | PopStateSuccess
+  >,
   state$: Observable<RootState>
 ) =>
   action$.pipe(
-    ofType(RouterActionTypes.GoSucess, RouterActionTypes.InitFirstRouteSuccess),
+    ofType(
+      RouterActionTypes.GoSucess,
+      RouterActionTypes.InitFirstRouteSuccess,
+      RouterActionTypes.PopStateSuccess
+    ),
     map(action => action.payload.route),
     map(route => route.path),
     switchMap(path =>

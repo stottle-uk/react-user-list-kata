@@ -34,7 +34,7 @@ class P2PageEntry extends React.PureComponent<List> {
               backgroundSize: 'cover',
               backgroundRepeat: 'no-repeat'
             }}
-          ></Link>
+          />
         </div>
       ))
     );
