@@ -1,4 +1,5 @@
-import { List } from '../models/lists';
+import { Dictionary } from '@pageEntries';
+import { Item, List } from '../models/lists';
 import { ListsAction, ListsActionTypes } from './lists.actions';
 
 export interface ListsState {
@@ -40,19 +41,17 @@ export const listsReducer = (
       };
 
     case ListsActionTypes.GetListsSuccess:
-      const listsAsDictionary = action.payload.lists.reduce(
-        (prev, curr) => ({
-          ...prev,
-          [curr.id]: curr
-        }),
-        {}
-      );
-      const lists = { ...state.lists, ...listsAsDictionary };
-      const listIds = Object.keys(lists);
       return {
         ...state,
-        listIds,
-        lists,
+        ...updateLists(state.lists, ...action.payload.lists),
+        isLoading: false,
+        isLoaded: true
+      };
+
+    case ListsActionTypes.GetListNextPageSuccess:
+      return {
+        ...state,
+        ...updateLists(state.lists, action.payload.list),
         isLoading: false,
         isLoaded: true
       };
@@ -69,3 +68,29 @@ export const listsReducer = (
       return state;
   }
 };
+
+function updateLists(cachedLists: Dictionary<List>, ...lists: List[]) {
+  const updatedLists = lists.reduce(
+    (cache, currentList) => ({
+      ...cache,
+      [currentList.id]: {
+        ...cache[currentList.id],
+        ...currentList,
+        items: concatAndRemoveDuplicates(cache, currentList)
+      }
+    }),
+    cachedLists
+  );
+  const updatedListIds = Object.keys(lists);
+  return { listIds: updatedListIds, lists: updatedLists };
+}
+
+function concatAndRemoveDuplicates(
+  cachedLists: Dictionary<List>,
+  list: List
+): Item[] {
+  const cachedItems = cachedLists[list.id] ? cachedLists[list.id].items : [];
+  return [...cachedItems, ...list.items].filter(
+    (item, i, arr) => arr.findIndex(a => item.id === a.id) === i
+  );
+}

@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { List } from '../models/lists';
+import { List, Paging } from '../models/lists';
 
 export enum ListsActionTypes {
   thing = '',
@@ -8,7 +8,10 @@ export enum ListsActionTypes {
   QueueList = '[Lists] Queue List',
   GetListsStart = '[Lists] Get Lists Start',
   GetListsSuccess = '[Lists] Get Lists Success',
-  GetListsFailure = '[Lists] Get Lists Failure'
+  GetListsFailure = '[Lists] Get Lists Failure',
+  GetListNextPageStart = '[Lists] Get List Next Page Start',
+  GetListNextPageSuccess = '[Lists] Get List Next Page Success',
+  GetListNextPageFailure = '[Lists] Get List Next Page Failure'
 }
 
 export class thing implements Action {
@@ -51,6 +54,24 @@ export class GetListsFailure implements Action {
   constructor(public payload: { error: any }) {}
 }
 
+export class GetListNextPageStart implements Action {
+  readonly type = ListsActionTypes.GetListNextPageStart;
+
+  constructor(public payload: { paging: Paging }) {}
+}
+
+export class GetListNextPageSuccess implements Action {
+  readonly type = ListsActionTypes.GetListNextPageSuccess;
+
+  constructor(public payload: { list: List }) {}
+}
+
+export class GetListNextPageFailure implements Action {
+  readonly type = ListsActionTypes.GetListNextPageFailure;
+
+  constructor(public payload: { error: any }) {}
+}
+
 export type ListsAction =
   | thing
   | ManageList
@@ -58,4 +79,7 @@ export type ListsAction =
   | QueueList
   | GetListsStart
   | GetListsSuccess
-  | GetListsFailure;
+  | GetListsFailure
+  | GetListNextPageStart
+  | GetListNextPageSuccess
+  | GetListNextPageFailure;

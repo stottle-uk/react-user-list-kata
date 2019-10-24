@@ -29,7 +29,16 @@ export const Router: React.FC<AllProps> = ({
   currentRoute
 }) => {
   const Template = currentRoute && templateMap[currentRoute.template];
-  return Template ? <Template {...routeData} /> : children;
+  return Template ? (
+    <>
+      <div>
+        Template Name: {!!routeData.pageEntry && routeData.pageEntry.template}
+      </div>
+      <Template {...routeData} />
+    </>
+  ) : (
+    children
+  );
 };
 
 const mapStateToProps = ({ router }: RootState): StoreProps => ({

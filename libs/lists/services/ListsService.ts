@@ -9,6 +9,10 @@ export class ListsService implements IGetLists {
     return this.httpService.get(this.buildListUri(listIds));
   }
 
+  getNextPage(nextPageUrl: string): Observable<List> {
+    return this.httpService.get(nextPageUrl);
+  }
+
   private buildListUri(listIds: string[]): string {
     const encodedListIds = encodeURIComponent(
       listIds.map(listId => `${listId}|page_size=24`).join(',')

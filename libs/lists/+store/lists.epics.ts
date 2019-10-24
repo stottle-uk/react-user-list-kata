@@ -5,6 +5,7 @@ import { iif, Observable, of } from 'rxjs';
 import {
   bufferTime,
   catchError,
+  distinctUntilChanged,
   filter,
   map,
   mergeMap,
@@ -14,6 +15,9 @@ import {
 import { ListsService } from '../services/ListsService';
 import {
   AddCompleteList,
+  GetListNextPageFailure,
+  GetListNextPageStart,
+  GetListNextPageSuccess,
   GetListsFailure,
   GetListsStart,
   GetListsSuccess,
@@ -85,5 +89,28 @@ const getLists = (
     )
   );
 
-export const listsEpics = { manageList, queueList, getLists };
+const getMoreListItems = (
+  action$: ActionsObservable<GetListNextPageStart>,
+  state$: Observable<any>,
+  { listsService }: ListsEpicDependencies
+) =>
+  action$.pipe(
+    ofType(ListsActionTypes.GetListNextPageStart),
+    map(action => action.payload.paging.next),
+    distinctUntilChanged(),
+    map(next => `${next}`),
+    mergeMap(next =>
+      listsService.getNextPage(next).pipe(
+        map(
+          list =>
+            new GetListNextPageSuccess({
+              list
+            })
+        ),
+        catchError(error => of(new GetListNextPageFailure({ error })))
+      )
+    )
+  );
+
+export const listsEpics = { getMoreListItems, manageList, queueList, getLists };
 export const listsEpicsAsArray = Object.values(listsEpics);
