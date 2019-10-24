@@ -25,13 +25,16 @@ class P2PageEntry extends React.PureComponent<List> {
       items &&
       items.map(item => (
         <div className="column is-1" key={item.id}>
-          <Link href={item.path}>
-            <img
-              className="image"
-              src={item.images ? item.images.poster : ''}
-              alt=""
-            />
-          </Link>
+          <Link
+            href={item.path}
+            className="image is-2by3"
+            style={{
+              backgroundImage: `url("${item.images.poster}")`,
+              backgroundPosition: 'center',
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat'
+            }}
+          ></Link>
         </div>
       ))
     );
