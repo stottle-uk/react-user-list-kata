@@ -49,7 +49,7 @@ const ScrollLoader = ({ page, isLoading, getMore, ...rest }: AllProps) => {
   };
   useEffect(watchBottomEffect, [page, isLoading]);
 
-  return <div {...rest} ref={getMoreEl} onClick={() => getMore(page)} />;
+  return <div {...rest} ref={getMoreEl} />;
 };
 
 const mapStateToProps = ({ lists }: RootState): StoreProps => ({
