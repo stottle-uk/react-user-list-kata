@@ -28,14 +28,14 @@ class CS5TemplateEntry extends React.PureComponent<List> {
       items &&
       items.map(item => (
         <div
-          className="column is-6-mobile is-4-tablet is-3-desktop"
+          className="column is-6-mobile is-4-tablet is-3-desktop is-2-widescreen"
           key={item.id}
         >
           <Link
             href={item.path}
             className="image is-2by3"
             style={{
-              backgroundImage: `url("${item.images.poster}")`,
+              backgroundImage: `url("${item.images && item.images.poster}")`,
               backgroundPosition: 'center',
               backgroundSize: 'cover',
               backgroundRepeat: 'no-repeat'

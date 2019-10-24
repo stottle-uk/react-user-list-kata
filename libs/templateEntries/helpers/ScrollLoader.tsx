@@ -11,7 +11,7 @@ import { Dispatch } from 'redux';
 import { fromEvent } from 'rxjs';
 import { filter, tap, throttleTime } from 'rxjs/operators';
 
-export interface OwnProps extends React.HTMLProps<HTMLSpanElement> {
+export interface OwnProps extends React.HTMLProps<HTMLDivElement> {
   page: Paging;
 }
 
@@ -34,7 +34,7 @@ const ScrollLoader = ({ page, isLoading, getMore, ...rest }: AllProps) => {
     window &&
     !!getMoreEl.current &&
     getMoreEl.current.getBoundingClientRect().bottom <=
-      window.innerHeight / 0.6;
+      window.innerHeight / 0.5;
 
   const watchBottomEffect = () => {
     const subscription = fromEvent(document, 'scroll')
