@@ -13,7 +13,10 @@ class CS5TemplateEntry extends React.PureComponent<List> {
         <h1>{title}</h1>
         <h2>{tagline}</h2>
 
-        <ScrollLoader className="columns is-multiline is-gapless" page={paging}>
+        <ScrollLoader
+          className="columns is-mobile is-multiline is-gapless"
+          page={paging}
+        >
           {this.renderList(items)}
         </ScrollLoader>
       </div>
