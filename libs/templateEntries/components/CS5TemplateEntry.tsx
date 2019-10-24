@@ -11,7 +11,7 @@ class CS5TemplateEntry extends React.PureComponent<List> {
         <h1>{this.props.title}</h1>
         <h2>{this.props.tagline}</h2>
 
-        <div className="list-row">
+        <div className="columns is-multiline is-gapless">
           {this.renderList(this.props.items)}
           <GetMore className="test" page={this.props.paging}>
             More
@@ -25,10 +25,20 @@ class CS5TemplateEntry extends React.PureComponent<List> {
     return (
       items &&
       items.map(item => (
-        <div key={item.id}>
-          <Link href={item.path}>
-            <img src={item.images ? item.images.poster : ''} alt="" />
-          </Link>
+        <div
+          className="column is-6-mobile is-4-tablet is-3-desktop"
+          key={item.id}
+        >
+          <Link
+            href={item.path}
+            className="image is-2by3"
+            style={{
+              backgroundImage: `url("${item.images.poster}")`,
+              backgroundPosition: 'center',
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat'
+            }}
+          />
         </div>
       ))
     );
