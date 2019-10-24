@@ -1,8 +1,10 @@
 import { GetListNextPageStart, ListsAction, Paging } from '@lists';
 import { RootState } from '@store';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
+import { fromEvent } from 'rxjs';
+import { debounceTime, filter, tap } from 'rxjs/operators';
 
 export interface OwnProps extends React.HTMLProps<HTMLSpanElement> {
   page: Paging;
@@ -15,8 +17,29 @@ interface DispatchProps {
 type AllProps = OwnProps & DispatchProps;
 
 const GetMore = ({ page, getMore, ...rest }: AllProps) => {
+  const getMoreEl = useRef<HTMLSpanElement>(null);
+
+  const isNearBottom = () =>
+    window &&
+    !!getMoreEl.current &&
+    getMoreEl.current.getBoundingClientRect().bottom <=
+      window.innerHeight / 0.6;
+
+  const watchBottomEffect = () => {
+    const subscription = fromEvent(document, 'scroll')
+      .pipe(
+        debounceTime(200),
+        filter(() => isNearBottom()),
+        tap(() => getMore(page))
+      )
+      .subscribe();
+
+    return () => subscription.unsubscribe();
+  };
+  useEffect(watchBottomEffect, [page]);
+
   return page && page.next ? (
-    <span {...rest} onClick={() => getMore(page)} />
+    <span {...rest} ref={getMoreEl} onClick={() => getMore(page)} />
   ) : (
     <></>
   );

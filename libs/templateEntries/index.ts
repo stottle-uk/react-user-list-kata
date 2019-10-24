@@ -10,7 +10,7 @@ export const pageTemplateEntries: Dictionary<React.ComponentType<List>> = {
   // '3:1 Hero (Standard)': HeroStandard3x1,
   '2:3 Poster (Block Hero)': P2PageEntry,
   D6: P2PageEntry,
-  CS5: CS5TemplateEntry
-  // CS1: CS1TemplateEntry,
+  CS5: CS5TemplateEntry,
+  CS1: CS5TemplateEntry
   // LH1: LH1TemplateEntry
 };
