@@ -26,14 +26,14 @@ interface DispatchProps {
 type AllProps = OwnProps & StoreProps & DispatchProps;
 
 const ScrollLoader = ({ page, isLoading, getMore, ...rest }: AllProps) => {
-  const getMoreEl = useRef<HTMLDivElement>(null);
+  const containerEl = useRef<HTMLDivElement>(null);
 
   const isNearBottom = () =>
     !isLoading &&
     !!page.next &&
     window &&
-    !!getMoreEl.current &&
-    getMoreEl.current.getBoundingClientRect().bottom <=
+    !!containerEl.current &&
+    containerEl.current.getBoundingClientRect().bottom <=
       window.innerHeight / 0.5;
 
   const watchBottomEffect = () => {
@@ -49,7 +49,7 @@ const ScrollLoader = ({ page, isLoading, getMore, ...rest }: AllProps) => {
   };
   useEffect(watchBottomEffect, [page, isLoading]);
 
-  return <div {...rest} ref={getMoreEl} />;
+  return <div {...rest} ref={containerEl} />;
 };
 
 const mapStateToProps = ({ lists }: RootState): StoreProps => ({
