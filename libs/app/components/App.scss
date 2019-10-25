@@ -1,0 +1,100 @@
+// $body-background-color: red;
+
+$navbar-background-color: rgb(0, 0, 0);
+$navbar-item-color: rgb(255, 255, 255);
+$navbar-item-hover-color: rgb(214, 214, 214);
+$navbar-item-hover-background-color: rgb(0, 0, 0);
+$navbar-dropdown-background-color: rgb(0, 0, 0);
+$navbar-dropdown-arrow: rgb(214, 214, 214);
+
+@import '~bulma/bulma.sass';
+
+.spinner {
+  height: 100px;
+  width: 100px;
+  padding-bottom: 10px;
+}
+
+.no-margin {
+  margin: 0 !important;
+}
+
+.no-padding {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.is-in-modal {
+  z-index: 99;
+}
+
+.loading-users {
+  margin-top: 100px;
+  text-align: center;
+}
+
+.toast-notification {
+  position: fixed;
+  top: 80px;
+  right: 0;
+  transform: translateX(100%);
+  opacity: 0;
+  transition: transform 1s, opacity 1s;
+}
+
+.toast-notification.visible {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.column-header {
+  padding-top: 2em;
+  padding-left: 1em;
+}
+
+.horizontal-scroller {
+  position: relative;
+
+  .right-arrow {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 60px;
+  }
+
+  .left-arrow {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 60px;
+  }
+}
+
+.carousel {
+  overflow: hidden;
+  width: 100%;
+
+  &__item {
+    width: 100%;
+    display: inline-block !important;
+    box-sizing: border-box;
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: relative;
+  }
+
+  &__title {
+    position: absolute;
+    top: 70%;
+    left: 20px;
+    color: #fff;
+    max-width: 30%;
+  }
+}

@@ -13,7 +13,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { tap } from 'rxjs/operators';
-import './index.css';
+import './index.scss';
 import * as serviceWorker from './serviceWorker';
 
 const initialState =

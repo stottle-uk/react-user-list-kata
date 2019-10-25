@@ -58,7 +58,11 @@ module.exports = {
           name: '/static/media/[name].[hash:8].[ext]'
         }
       },
-      { test: /\.css$/, loader: 'ignore-loader' }
+      {
+        test: /\.scss$/,
+        exclude: [/node_modules/],
+        loader: [require.resolve('css-loader'), require.resolve('sass-loader')]
+      }
     ]
   }
 };

@@ -2,7 +2,6 @@ import { Item, List } from '@lists';
 import { Link } from '@router';
 import React from 'react';
 import ScrollLoader from '../helpers/ScrollLoader';
-import './P2TemplateEntry.css';
 
 class CS5TemplateEntry extends React.PureComponent<List> {
   render() {
