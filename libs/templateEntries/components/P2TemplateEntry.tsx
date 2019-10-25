@@ -7,10 +7,13 @@ import './P2TemplateEntry.css';
 class P2PageEntry extends React.PureComponent<List> {
   render() {
     return (
-      <article className="panel is-primary">
-        <p className="panel-heading">
-          <Link href={this.props.path}>
-            {this.props.title} <small>{this.props.id}</small>
+      <article className="content">
+        <p className="column-header">
+          <Link
+            className="has-text-white is-capitalized"
+            href={this.props.path}
+          >
+            {this.props.title}
           </Link>
         </p>
         <ScrollHorizontal listt={this.props} className="columns is-gapless">

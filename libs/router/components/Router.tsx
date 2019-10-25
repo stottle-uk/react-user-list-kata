@@ -31,9 +31,9 @@ export const Router: React.FC<AllProps> = ({
   const Template = currentRoute && templateMap[currentRoute.template];
   return Template ? (
     <>
-      <div>
+      {/* <div>
         Template Name: {!!routeData.pageEntry && routeData.pageEntry.template}
-      </div>
+      </div> */}
       <Template {...routeData} />
     </>
   ) : (

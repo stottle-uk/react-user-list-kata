@@ -29,7 +29,6 @@ function renderEntries(
 const Home: React.FC<PageTemplateData> = ({ pageEntry, isLoading, lists }) => {
   return !!pageEntry ? (
     <>
-      <h1>{pageEntry.title}</h1>
       {pageEntry.entries && renderEntries(pageEntry.entries, lists)}
       {/* <pre>{JSON.stringify(this.props, null, 2)}</pre> */}
     </>

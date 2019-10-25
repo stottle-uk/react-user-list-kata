@@ -40,6 +40,11 @@
   opacity: 1;
 }
 
+.column-header {
+  padding-top: 2em;
+  padding-left: 1em;
+}
+
 .horizontal-scroller {
   position: relative;
 }
