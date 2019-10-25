@@ -6,20 +6,15 @@ import './P2TemplateEntry.css';
 
 class CS5TemplateEntry extends React.PureComponent<List> {
   render() {
-    const { title, tagline, paging, items } = this.props;
+    const { paging, items } = this.props;
 
     return (
-      <div>
-        <h1>{title}</h1>
-        <h2>{tagline}</h2>
-
-        <ScrollLoader
-          className="columns is-mobile is-multiline is-gapless"
-          page={paging}
-        >
-          {this.renderList(items)}
-        </ScrollLoader>
-      </div>
+      <ScrollLoader
+        className="columns is-mobile is-multiline is-gapless"
+        page={paging}
+      >
+        {this.renderList(items)}
+      </ScrollLoader>
     );
   }
 

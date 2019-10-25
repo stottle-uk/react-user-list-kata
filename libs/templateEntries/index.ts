@@ -2,6 +2,7 @@ import { List } from '@lists';
 import { Dictionary } from '@pageEntries'; // todo - this shouldn't be here as pageEntries also depends on this module!
 import CS5TemplateEntry from './components/CS5TemplateEntry';
 import HeroStandard3x1 from './components/HeroStandard3x1';
+import LH1TemplateEntry from './components/LH1TemplateEntry';
 import P2PageEntry from './components/P2TemplateEntry';
 
 export const pageTemplateEntries: Dictionary<React.ComponentType<List>> = {
@@ -13,6 +14,7 @@ export const pageTemplateEntries: Dictionary<React.ComponentType<List>> = {
   '2:3 Poster (Block Hero)': P2PageEntry,
   D6: P2PageEntry,
   CS5: CS5TemplateEntry,
-  CS1: CS5TemplateEntry
-  // LH1: LH1TemplateEntry
+  CS1: CS5TemplateEntry,
+  LH1: LH1TemplateEntry,
+  'Sub Genres (Custom)': LH1TemplateEntry
 };
