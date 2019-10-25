@@ -1,20 +1,8 @@
-import { getIsLoading, GetListNextPageStart, List, ListsAction } from '@lists';
 import { Link } from '@router';
-import { RootState } from '@store';
 import React, { CSSProperties, useRef, useState } from 'react';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
 
 export interface OwnProps extends React.HTMLProps<HTMLDivElement> {
-  listt: List;
-}
-
-interface StoreProps {
-  isLoading: boolean;
-}
-
-interface DispatchProps {
-  getMore: (paging: List) => void;
+  path: string;
 }
 
 interface OwnState {
@@ -24,9 +12,7 @@ interface OwnState {
   styles: CSSProperties;
 }
 
-type AllProps = OwnProps & StoreProps & DispatchProps;
-
-const ScrollHorizontal = ({ listt, isLoading, getMore, ...rest }: AllProps) => {
+const ScrollHorizontal: React.FC<OwnProps> = ({ path, ...rest }) => {
   const containerEl = useRef<HTMLDivElement>(null);
   const [state, setState] = useState<OwnState>({
     startOfList: true,
@@ -83,24 +69,11 @@ const ScrollHorizontal = ({ listt, isLoading, getMore, ...rest }: AllProps) => {
       )}
       {state.endOfList && (
         <div className="right-arrow" onClick={onRightClick}>
-          <Link href={listt.path}>More!!!</Link>
+          <Link href={path}>More!!!</Link>
         </div>
       )}
     </div>
   );
 };
 
-const mapStateToProps = ({ lists }: RootState): StoreProps => ({
-  isLoading: getIsLoading(lists)
-});
-
-const mapDispatchToProps = (
-  dispatch: Dispatch<ListsAction>
-): DispatchProps => ({
-  getMore: (paging: any) => dispatch(new GetListNextPageStart({ paging }))
-});
-
-export default connect<StoreProps, DispatchProps, {}, RootState>(
-  mapStateToProps,
-  mapDispatchToProps
-)(ScrollHorizontal);
+export default ScrollHorizontal;

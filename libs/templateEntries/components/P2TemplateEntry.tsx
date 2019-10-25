@@ -15,7 +15,7 @@ class P2PageEntry extends React.PureComponent<List> {
             {this.props.title}
           </Link>
         </p>
-        <ScrollHorizontal listt={this.props} className="columns is-gapless">
+        <ScrollHorizontal path={this.props.path} className="columns is-gapless">
           {this.renderList(this.props.items)}
         </ScrollHorizontal>
         {/* <pre>{JSON.stringify(this.props, null, 2)}</pre> */}
