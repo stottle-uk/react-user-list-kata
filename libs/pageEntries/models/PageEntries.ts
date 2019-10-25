@@ -1,4 +1,4 @@
-import { List } from '@lists';
+import { Item, List } from '@lists';
 
 export interface Dictionary<T> {
   [key: string]: T;
@@ -22,6 +22,7 @@ export interface PageEntry {
   title: string;
   entries: Entry[];
   list?: List;
+  item?: Item;
 }
 
 export interface Metadata {
@@ -44,7 +45,16 @@ export interface CustomFields2 {
 }
 
 export interface Entry {
-  type: string;
+  type:
+    | 'ItemEntry'
+    | 'ItemDetailEntry'
+    | 'ListEntry'
+    | 'ListDetailEntry'
+    | 'UserEntry'
+    | 'TextEntry'
+    | 'ImageEntry'
+    | 'CustomEntry'
+    | 'PeopleEntry';
   id: string;
   template: string;
   title: string;

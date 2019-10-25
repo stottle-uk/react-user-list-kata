@@ -32,6 +32,7 @@ export interface Item {
   type?: string;
   mouseOverDescription?: string;
   shortDescription?: string;
+  description?: string;
   contextualTitle?: string;
   title?: string;
   classification?: Classification;
