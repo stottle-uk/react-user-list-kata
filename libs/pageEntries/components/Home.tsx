@@ -1,7 +1,7 @@
 import { List } from '@lists';
 import { pageTemplateEntries } from '@templateEntries';
 import React from 'react';
-import { Dictionary, Entry, PageTemplateData } from '../models/PageEntries';
+import { Dictionary, Entry, PageTemplateData } from '../models/pageEntries';
 
 function renderEntries(
   entries: Entry[],
