@@ -63,3 +63,26 @@
   z-index: 1;
   width: 60px;
 }
+
+.carousel {
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel__item {
+  width: 100%;
+  display: inline-block !important;
+  box-sizing: border-box;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.carousel__title {
+  position: absolute;
+  top: 70%;
+  left: 20px;
+  color: #fff;
+  max-width: 30%;
+}
