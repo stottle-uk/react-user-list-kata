@@ -13,6 +13,6 @@ export class PagesService implements IGetPages {
   private buildPageUrl(path: string): string {
     const encodePath = encodeURIComponent(path);
 
-    return `/page?device=web_browser&ff=idp%2Cldp&list_page_size=24&max_list_prefetch=3&path=${encodePath}&segments=globo%2Ctrial&sub=Subscriber&text_entry_format=html`;
+    return `page?device=web_browser&ff=idp%2Cldp&list_page_size=24&max_list_prefetch=3&path=${encodePath}&text_entry_format=html`;
   }
 }
