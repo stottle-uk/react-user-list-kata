@@ -14,14 +14,16 @@ import {
 
 export * from './models/pageEntryTemplates.d';
 
+type ListEntryType = React.ComponentType<ListEntry>;
+type ItemEntryType = React.ComponentType<ItemEntry>;
+type ImageEntryType = React.ComponentType<ImageEntry>;
+type TextEntryType = React.ComponentType<TextEntry>;
+
 export type AllEntryTypes = Dictionary<
-  | React.ComponentType<ItemEntry>
-  | React.ComponentType<ListEntry>
-  | React.ComponentType<ImageEntry>
-  | React.ComponentType<TextEntry>
+  ListEntryType | ItemEntryType | ImageEntryType | TextEntryType
 >;
 
-export const pageTemplateEntries: AllEntryTypes = {
+const listEntryTemplates: Dictionary<ListEntryType> = {
   P2: P2PageEntry,
   H7: P2PageEntry,
   '2:3 Poster (Standard)': P2PageEntry,
@@ -32,8 +34,24 @@ export const pageTemplateEntries: AllEntryTypes = {
   CS5: CS5TemplateEntry,
   CS1: CS5TemplateEntry,
   LH1: LH1TemplateEntry,
-  'Sub Genres (Custom)': LH1TemplateEntry,
-  DH1: DH1TemplateEntry,
-  'Editorial Image': EditorialImage,
+  'Sub Genres (Custom)': LH1TemplateEntry
+};
+
+const itemEntryTemplates: Dictionary<ItemEntryType> = {
+  DH1: DH1TemplateEntry
+};
+
+const imageEntryTemplates: Dictionary<ImageEntryType> = {
+  'Editorial Image': EditorialImage
+};
+
+const textEntryTemplates: Dictionary<TextEntryType> = {
   'Text Heading': TextHeading
+};
+
+export const pageTemplateEntries: AllEntryTypes = {
+  ...listEntryTemplates,
+  ...itemEntryTemplates,
+  ...imageEntryTemplates,
+  ...textEntryTemplates
 };

@@ -14,8 +14,8 @@ const movieDetail = 'Movie Detail';
 export const templateMap: Dictionary<React.ComponentType<PageTemplate>> = {
   [homeTemplate]: Home,
   [listDetailTemplate]: ListDetailFeatured,
-  [listDetailFeaturedTemplate]: MovieDetail,
-  [category]: MovieDetail,
+  [listDetailFeaturedTemplate]: ListDetailFeatured,
+  [category]: Home,
   [movieDetail]: MovieDetail
 };
 
