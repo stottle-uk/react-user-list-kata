@@ -1,8 +1,8 @@
 import { Item } from '@lists';
 import { Link } from '@router';
 import React from 'react';
-import ScrollLoader from '../helpers/ScrollLoader';
-import { ListEntry } from '../models/pageEntryTemplates';
+import ScrollLoader from '../../helpers/ScrollLoader';
+import { ListEntry } from '../../models/pageEntryTemplates';
 
 class CS5TemplateEntry extends React.PureComponent<ListEntry> {
   render() {

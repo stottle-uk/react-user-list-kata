@@ -1,9 +1,9 @@
-import CS5TemplateEntry from './components/CS5TemplateEntry';
-import DH1TemplateEntry from './components/DH1TemplateEntry';
-import HeroStandard3x1 from './components/HeroStandard3x1';
 import EditorialImage from './components/imageEntry/EditorialImage';
-import LH1TemplateEntry from './components/LH1TemplateEntry';
-import P2PageEntry from './components/P2TemplateEntry';
+import DH1TemplateEntry from './components/itemEntry/DH1TemplateEntry';
+import CS5TemplateEntry from './components/listEntry/CS5TemplateEntry';
+import HeroStandard3x1 from './components/listEntry/HeroStandard3x1';
+import LH1TemplateEntry from './components/listEntry/LH1TemplateEntry';
+import P2PageEntry from './components/listEntry/P2TemplateEntry';
 import TextHeading from './components/textEntry/TextHeading';
 import {
   ImageEntry,
