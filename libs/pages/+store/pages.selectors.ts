@@ -1,4 +1,4 @@
-import { getIsLoading as getIsListsLoading, getLists, List } from '@lists';
+import { getLists, List } from '@lists';
 import { Entry, NomralisedEntry } from '@pageTemplateEntries';
 import { Page, PageTemplate } from '@pageTemplates';
 import { getCurrentPath } from '@router';
@@ -17,22 +17,17 @@ export const getIsLoading = createSelector(
   state => state.isLoading
 );
 
-export const getPageData = createSelector(
-  [getCurrentPath, getPages, getIsLoading, getLists, getIsListsLoading],
-  (path, pages, isLoading, lists, listsLoading) => ({
-    pageEntry: pages[path],
-    isLoading,
-    lists,
-    listsLoading
-  })
+export const getCurrentPage = createSelector(
+  [getCurrentPath, getPages],
+  (path, pages) => pages[path]
 );
 
-export const getPageData2 = createSelector(
-  [getCurrentPath, getPages, getIsLoading, getLists],
-  (path, pages, isLoading, lists): PageTemplate => ({
-    pageEntries: normaliseEntries(pages[path], lists),
+export const getPageEntries = createSelector(
+  [getCurrentPage, getIsLoading, getLists],
+  (page, isLoading, lists): PageTemplate => ({
+    pageEntries: normaliseEntries(page, lists),
     isLoading,
-    template: pages[path] && pages[path].template
+    template: page && page.template
   })
 );
 
