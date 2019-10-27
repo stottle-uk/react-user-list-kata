@@ -1,4 +1,4 @@
-import { pageTemplateEntries } from '@templateEntries';
+import { pageTemplateEntries } from '@pageTemplateEntries';
 import React from 'react';
 import { PageTemplate } from '../models/pageEntries';
 import configPage from '../utils/templateRenderer';

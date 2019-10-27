@@ -31,7 +31,7 @@ module.exports = {
       '@pageTemplates': `${root}/libs/pageTemplates/`,
       '@lists': `${root}/libs/lists/`,
       '@config': `${root}/libs/config/`,
-      '@templateEntries': `${root}/libs/templateEntries/`
+      '@pageTemplateEntries': `${root}/libs/pageTemplateEntries/`
     },
     extensions: ['.ts', '.tsx', '.js']
   },

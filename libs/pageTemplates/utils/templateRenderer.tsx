@@ -1,5 +1,5 @@
+import { Dictionary, NomralisedEntry } from '@pageTemplateEntries';
 import { PageTemplate } from '@pageTemplates';
-import { Dictionary, NomralisedEntry } from '@templateEntries';
 import React from 'react';
 
 export default function configPage(

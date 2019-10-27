@@ -1,4 +1,4 @@
-import { NomralisedEntry } from '@templateEntries';
+import { NomralisedEntry } from '@pageTemplateEntries';
 import React from 'react';
 
 const DH1TemplateEntry: React.FC<NomralisedEntry> = ({ list }) => (

@@ -26,7 +26,7 @@
       "@pageTemplates": ["libs/pageTemplates/index.ts"],
       "@lists": ["libs/lists/index.ts"],
       "@config": ["libs/config/index.ts"],
-      "@templateEntries": ["libs/templateEntries/index.ts"]
+      "@pageTemplateEntries": ["libs/pageTemplateEntries/index.ts"]
     }
   },
   "include": ["client/src", "server/src", "libs"],
