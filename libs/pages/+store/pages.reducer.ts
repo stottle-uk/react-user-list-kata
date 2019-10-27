@@ -3,7 +3,7 @@ import { PagesAction, PagesActionTypes } from './pages.actions';
 
 export interface PagesState {
   pageIds: string[];
-  pages: { [key: string]: Page };
+  pages: Dictionary<Page>;
   isLoading: boolean;
   isLoaded: boolean;
   error?: any;

@@ -6,9 +6,7 @@ export interface FormInputItem {
   type?: string;
 }
 
-export interface FormItemData {
-  [key: string]: string;
-}
+export interface FormItemData extends Dictionary<string> {}
 
 interface OwnProps<T> {
   initialFormData: T;
@@ -16,7 +14,11 @@ interface OwnProps<T> {
   onChange: (data: FormItemData) => void;
 }
 
-const Form = <T extends {}>({ initialFormData, formItems, onChange }: OwnProps<T>) => {
+const Form = <T extends {}>({
+  initialFormData,
+  formItems,
+  onChange
+}: OwnProps<T>) => {
   const onFieldChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     onChange({ [e.currentTarget.name]: e.currentTarget.value });
 

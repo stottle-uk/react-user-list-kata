@@ -3,7 +3,7 @@ import { ListsAction, ListsActionTypes } from './lists.actions';
 
 export interface ListsState {
   listIds: string[];
-  lists: { [key: string]: List };
+  lists: Dictionary<List>;
   isLoading: boolean;
   isLoaded: boolean;
   error?: any;

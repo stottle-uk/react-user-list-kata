@@ -32,7 +32,7 @@ export interface Navigation {
   footer?: NavEntry;
   account?: NavEntry;
   copyright?: string;
-  customFields?: { [key: string]: any };
+  customFields?: Dictionary<string>;
 }
 
 export interface NavEntry {
@@ -42,7 +42,7 @@ export interface NavEntry {
   content?: NavContent;
   children?: NavEntry[];
   featured?: boolean;
-  customFields?: { [key: string]: any };
+  customFields?: Dictionary<string>;
 }
 
 export interface NavContent {
