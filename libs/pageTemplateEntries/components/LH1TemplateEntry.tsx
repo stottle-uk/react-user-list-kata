@@ -1,7 +1,7 @@
 import React from 'react';
-import { NomralisedEntry } from '../models/pageEntryTemplates';
+import { ListEntry } from '../models/pageEntryTemplates';
 
-const LH1TemplateEntry: React.FC<NomralisedEntry> = ({ list }) => (
+const LH1TemplateEntry: React.FC<ListEntry> = ({ list }) => (
   <div className="card">
     <div className="card-content">
       <h1 className="is-size-3">{list.title}</h1>

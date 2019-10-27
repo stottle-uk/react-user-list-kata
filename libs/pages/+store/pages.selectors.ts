@@ -1,5 +1,5 @@
 import { getLists, List } from '@lists';
-import { Entry, NomralisedEntry } from '@pageTemplateEntries';
+import { Entry, ItemEntry, ListEntry } from '@pageTemplateEntries';
 import { Page, PageTemplate } from '@pageTemplates';
 import { getCurrentPath } from '@router';
 import { createSelector } from 'reselect';
@@ -32,49 +32,38 @@ export const getPageEntries = createSelector(
 );
 
 function normaliseEntries(page: Page, lists: Dictionary<List>) {
-  const buildEntry = (page: Page, entry: Entry): NomralisedEntry => {
-    const defaultList = {
-      items: [page.item],
-      id: 'dummyId',
-      tagline: 'dummyTagline',
-      path: 'dummyTagPath',
-      paging: {
-        page: -1
-      }
-    };
+  const buildEntry = (page: Page, entry: Entry) => {
     if (entry.type === 'ItemDetailEntry' && page.item) {
       return {
         ...entry,
-        list: {
-          ...defaultList,
-          items: [page.item]
-        }
-      };
+        item: page.item
+      } as ItemEntry;
     }
-    if (entry.type === 'ListDetailEntry') {
+    if (entry.type === 'ListDetailEntry' && page.list) {
       return {
         ...entry,
-        list: {
-          ...defaultList,
-          ...page.list,
-          items: page.list ? page.list.items : []
-        }
-      };
+        list: page.list
+      } as ListEntry;
     }
 
-    return entry as NomralisedEntry;
+    return entry;
   };
 
-  const getEntry = (page: Page, entry: Entry): NomralisedEntry => {
+  const getEntry = (page: Page, entry: Entry): Entry => {
     const newEntry = buildEntry(page, entry);
     const foundList =
       newEntry.list && lists[newEntry.list.id]
         ? lists[newEntry.list.id]
-        : newEntry.list;
-    return {
-      ...entry,
-      list: foundList
-    };
+        : (newEntry.list as List);
+
+    if (foundList) {
+      return {
+        ...newEntry,
+        list: foundList
+      };
+    } else {
+      return newEntry;
+    }
   };
 
   return !!page && !!page.entries

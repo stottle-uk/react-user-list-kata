@@ -19,8 +19,12 @@ export interface Entry {
   images?: Images;
 }
 
-export interface NomralisedEntry extends Entry {
+export interface ListEntry extends Entry {
   list: List;
+}
+
+export interface ItemEntry extends Entry {
+  item: Item;
 }
 
 const t = [

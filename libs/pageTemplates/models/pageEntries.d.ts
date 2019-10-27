@@ -1,9 +1,9 @@
 import { Item, List } from '@lists';
-import { Entry, NomralisedEntry } from '@pageTemplateEntries';
+import { Entry, ItemEntry } from '@pageTemplateEntries';
 
 export interface PageTemplate {
   isLoading: boolean;
-  pageEntries: NomralisedEntry[];
+  pageEntries: (ListEntry | ItemEntry)[];
   template: string;
 }
 

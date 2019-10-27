@@ -2,9 +2,9 @@ import { Item } from '@lists';
 import { Link } from '@router';
 import React from 'react';
 import ScrollHorizontal from '../helpers/ScrollHorizontal';
-import { NomralisedEntry } from '../models/pageEntryTemplates';
+import { ListEntry } from '../models/pageEntryTemplates';
 
-class P2PageEntry extends React.PureComponent<NomralisedEntry> {
+class P2PageEntry extends React.PureComponent<ListEntry> {
   render() {
     const { list } = this.props;
 

@@ -1,38 +1,32 @@
-import { NomralisedEntry } from '@pageTemplateEntries';
+import { AllEntryTypes, Entry } from '@pageTemplateEntries';
 import { PageTemplate } from '@pageTemplates';
 import React from 'react';
 
-export default function configPage(
+export default function configPage<T extends Entry>(
   Page: React.FC<PageTemplate>,
-  pageEntryTemplates: Dictionary<React.ComponentType<NomralisedEntry>>
+  pageEntryTemplates: AllEntryTypes
 ): React.FC<PageTemplate> {
-  function renderEntries(entries: NomralisedEntry[]) {
-    return entries.map(entry => {
-      const template = pageEntryTemplates[entry.template];
-      return renderTemplate(entry, template);
-    });
-  }
+  const getTemplate = (template: string) =>
+    pageEntryTemplates[template] as React.ComponentType<T>;
 
-  const renderTemplate = (
-    entry: NomralisedEntry,
-    Template: React.ComponentType<NomralisedEntry>
-  ) => {
-    return (
-      <div key={entry.id}>
-        {Template ? (
-          <Template {...entry} />
-        ) : (
-          <div>{entry.template} not found</div>
-        )}
-      </div>
-    );
-  };
+  const renderTemplate = (entry: T, Template: React.ComponentType<T>) => (
+    <div key={entry.id}>
+      {Template ? (
+        <Template {...entry} />
+      ) : (
+        <div>{entry.template} not found</div>
+      )}
+    </div>
+  );
 
-  return props => {
-    return props.isLoading ? (
-      <div>LOADING!!!!</div>
-    ) : (
-      <Page {...props}>{renderEntries(props.pageEntries)}</Page>
-    );
-  };
+  const renderEntries = (entries: T[]) =>
+    entries.map(entry => renderTemplate(entry, getTemplate(entry.template)));
+
+  return props => <Page {...props}>{renderEntries(props.pageEntries)}</Page>;
 }
+
+// return props.isLoading ? (
+//   <div>LOADING!!!!</div>
+// ) : (
+//   <Page {...props}>{renderEntries(props.pageEntries)}</Page>
+// );

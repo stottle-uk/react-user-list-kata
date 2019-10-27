@@ -3,11 +3,15 @@ import DH1TemplateEntry from './components/DH1TemplateEntry';
 import HeroStandard3x1 from './components/HeroStandard3x1';
 import LH1TemplateEntry from './components/LH1TemplateEntry';
 import P2PageEntry from './components/P2TemplateEntry';
-import { NomralisedEntry } from './models/pageEntryTemplates.d';
+import { ItemEntry, ListEntry } from './models/pageEntryTemplates.d';
 
-export const pageTemplateEntries: Dictionary<
-  React.ComponentType<NomralisedEntry>
-> = {
+export * from './models/pageEntryTemplates.d';
+
+export type AllEntryTypes = Dictionary<
+  React.ComponentType<ItemEntry> | React.ComponentType<ListEntry>
+>;
+
+export const pageTemplateEntries: AllEntryTypes = {
   P2: P2PageEntry,
   H7: P2PageEntry,
   '2:3 Poster (Standard)': P2PageEntry,
@@ -21,5 +25,3 @@ export const pageTemplateEntries: Dictionary<
   'Sub Genres (Custom)': LH1TemplateEntry,
   DH1: DH1TemplateEntry
 };
-
-export * from './models/pageEntryTemplates.d';

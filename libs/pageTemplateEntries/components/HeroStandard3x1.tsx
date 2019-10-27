@@ -3,9 +3,9 @@ import { Link } from '@router';
 import React from 'react';
 import Carousel from '../helpers/Carousel';
 import CarouselItem from '../helpers/CarouselItem';
-import { NomralisedEntry } from '../models/pageEntryTemplates';
+import { ListEntry } from '../models/pageEntryTemplates';
 
-class HeroStandard3x1 extends React.PureComponent<NomralisedEntry> {
+class HeroStandard3x1 extends React.PureComponent<ListEntry> {
   render() {
     return (
       <Carousel className="carousel" intervalTime={2000}>
