@@ -1,4 +1,4 @@
-import { RootState } from 'libs/store/setup/store.modal';
+import { RootState } from '@store';
 import { ActionsObservable, ofType } from 'redux-observable';
 import { Observable, of } from 'rxjs';
 import { catchError, map, switchMap, take, tap } from 'rxjs/operators';

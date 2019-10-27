@@ -1,5 +1,5 @@
 import { getIsClientSide } from '@config';
-import { RootState } from 'libs/store/setup/store.modal';
+import { RootState } from '@store';
 import { ActionsObservable, ofType } from 'redux-observable';
 import { iif, Observable, of } from 'rxjs';
 import {

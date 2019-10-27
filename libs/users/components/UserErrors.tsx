@@ -1,4 +1,4 @@
-import { RootState } from 'libs/store/setup/store.modal';
+import { RootState } from '@store';
 import React from 'react';
 import { connect } from 'react-redux';
 import { UsersError } from '../+store/+shared/users.store.models';
@@ -17,7 +17,12 @@ interface StoreProps {
 
 type AllProps = OwnProps & StoreProps;
 
-const UserErrors: React.FC<AllProps> = ({ usersError, errorActionType, retryText, retryAction }) =>
+const UserErrors: React.FC<AllProps> = ({
+  usersError,
+  errorActionType,
+  retryText,
+  retryAction
+}) =>
   usersError.actionType === errorActionType ? (
     <article className="message is-danger is-in-modal">
       <div className="message-body">
@@ -41,4 +46,6 @@ const mapStateToProps = ({ userProfile, userList }: RootState): StoreProps => ({
   }
 });
 
-export default connect<StoreProps, {}, {}, RootState>(mapStateToProps)(UserErrors);
+export default connect<StoreProps, {}, {}, RootState>(mapStateToProps)(
+  UserErrors
+);

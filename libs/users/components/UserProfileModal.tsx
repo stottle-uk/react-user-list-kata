@@ -1,4 +1,4 @@
-import { RootState } from 'libs/store/setup/store.modal';
+import { RootState } from '@store';
 import React, { Dispatch } from 'react';
 import { Modal } from 'react-bulma-components';
 import { connect } from 'react-redux';
@@ -44,12 +44,18 @@ const UserProfileModal: React.FC<AllProps> = ({
   const renderSpinner = (
     <>
       <img src={spinner} className="spinner is-in-modal" alt="spinner" />
-      {isSubmitted && <p className="is-size-3 has-text-white is-in-modal">Saving</p>}
+      {isSubmitted && (
+        <p className="is-size-3 has-text-white is-in-modal">Saving</p>
+      )}
     </>
   );
 
   const renderForm = selectedUser ? (
-    <UserProfileForm user={selectedUser} onCancel={hideUserProfile} onSubmit={updateUser} />
+    <UserProfileForm
+      user={selectedUser}
+      onCancel={hideUserProfile}
+      onSubmit={updateUser}
+    />
   ) : (
     <UserErrors
       errorActionType={UserProfileActionTypes.GetUserByIdFailure}
@@ -61,7 +67,12 @@ const UserProfileModal: React.FC<AllProps> = ({
   const renderModalContent = isLoaded ? renderForm : renderSpinner;
 
   return (
-    <Modal show={isModalVisible} showClose={false} closeOnEsc={true} onClose={hideUserProfile}>
+    <Modal
+      show={isModalVisible}
+      showClose={false}
+      closeOnEsc={true}
+      onClose={hideUserProfile}
+    >
       {renderModalContent}
     </Modal>
   );
@@ -74,7 +85,9 @@ const mapStateToProps = ({ userProfile }: RootState): StoreProps => ({
   isLoaded: getIsLoaded(userProfile)
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<UserProfileAction>): DispatchProps => ({
+const mapDispatchToProps = (
+  dispatch: Dispatch<UserProfileAction>
+): DispatchProps => ({
   updateUser: (user: User) => dispatch(new UpdateUserStart({ user })),
   hideUserProfile: () => dispatch(new HideUserProfile())
 });

@@ -6,7 +6,7 @@ import {
   PopStateSuccess,
   RouterActionTypes
 } from '@router';
-import { RootState } from 'libs/store/setup/store.modal';
+import { RootState } from '@store';
 import { ActionsObservable, ofType } from 'redux-observable';
 import { from, Observable, of } from 'rxjs';
 import { catchError, filter, map, switchMap, take } from 'rxjs/operators';

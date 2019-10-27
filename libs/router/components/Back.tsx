@@ -1,4 +1,4 @@
-import { RootState } from 'libs/store/setup/store.modal';
+import { RootState } from '@store';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';

@@ -1,10 +1,20 @@
-import { RootState } from 'libs/store/setup/store.modal';
+import { RootState } from '@store';
 import React from 'react';
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { GetAllUsersStart, UserListAction, UserListActionTypes } from '../+store/userList/userList.actions';
-import { getIsLoadingUsers, getUsersSorted } from '../+store/userList/userList.selectors';
-import { ShowUserProfile, UserProfileAction } from '../+store/userProfile/userProfile.actions';
+import {
+  GetAllUsersStart,
+  UserListAction,
+  UserListActionTypes
+} from '../+store/userList/userList.actions';
+import {
+  getIsLoadingUsers,
+  getUsersSorted
+} from '../+store/userList/userList.selectors';
+import {
+  ShowUserProfile,
+  UserProfileAction
+} from '../+store/userProfile/userProfile.actions';
 import spinner from '../../shared/icons/spinner.svg';
 import { BaseUser } from '../models/User';
 import UserErrors from './UserErrors';
@@ -22,7 +32,12 @@ interface DispatchProps {
 
 type AllProps = StoreProps & DispatchProps;
 
-const Users: React.FC<AllProps> = ({ users, isLoading, showUserProfile, getUsers }) => {
+const Users: React.FC<AllProps> = ({
+  users,
+  isLoading,
+  showUserProfile,
+  getUsers
+}) => {
   const renderSpinner = (
     <div className="loading-users">
       <img src={spinner} className="spinner" alt="spinner" />
@@ -48,7 +63,9 @@ const mapStateToProps = ({ userList }: RootState): StoreProps => ({
   isLoading: getIsLoadingUsers(userList)
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<UserListAction | UserProfileAction>): DispatchProps => ({
+const mapDispatchToProps = (
+  dispatch: Dispatch<UserListAction | UserProfileAction>
+): DispatchProps => ({
   getUsers: () => dispatch(new GetAllUsersStart()),
   showUserProfile: (user: BaseUser) => dispatch(new ShowUserProfile({ user }))
 });
