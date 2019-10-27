@@ -1,4 +1,4 @@
-import { RouterConfigRoute } from '../types/router';
+import { RouterConfigRoute } from '../models/router';
 import { RouterAction, RouterActionTypes } from './router.actions';
 
 export interface RouterState {

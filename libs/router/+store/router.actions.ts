@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { RouterConfigRoute } from '../types/router';
+import { RouterConfigRoute } from '../models/router';
 
 export enum RouterActionTypes {
   InitRouterOnClient = '[Router] Init Router',

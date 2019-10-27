@@ -4,7 +4,7 @@ import React, { Dispatch } from 'react';
 import { connect } from 'react-redux';
 import { NavigateToPath, RouterAction } from '../+store/router.actions';
 import { getCurrentRoute } from '../+store/router.selectors';
-import { RouterConfigRoute } from '../types/router';
+import { RouterConfigRoute } from '../models/router';
 
 interface RouterProps {
   routeData: PageTemplate;

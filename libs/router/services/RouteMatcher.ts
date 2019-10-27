@@ -1,4 +1,4 @@
-import { RouterConfigRoute } from '../types/router';
+import { RouterConfigRoute } from '../models/router';
 
 export class RouteMatcher<T> {
   matchRoute(

@@ -2,7 +2,7 @@ import { Page } from '@pageEntries';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { HttpService } from '../../shared/services/HttpService';
-import { IGetPages } from '../models/Page';
+import { IGetPages } from '../models/page.t';
 
 export class PagesService implements IGetPages {
   constructor(private httpService: HttpService) {}
