@@ -4,10 +4,12 @@ import HeroStandard3x1 from './components/HeroStandard3x1';
 import EditorialImage from './components/imageEntry/EditorialImage';
 import LH1TemplateEntry from './components/LH1TemplateEntry';
 import P2PageEntry from './components/P2TemplateEntry';
+import TextHeading from './components/textEntry/TextHeading';
 import {
   ImageEntry,
   ItemEntry,
-  ListEntry
+  ListEntry,
+  TextEntry
 } from './models/pageEntryTemplates.d';
 
 export * from './models/pageEntryTemplates.d';
@@ -16,6 +18,7 @@ export type AllEntryTypes = Dictionary<
   | React.ComponentType<ItemEntry>
   | React.ComponentType<ListEntry>
   | React.ComponentType<ImageEntry>
+  | React.ComponentType<TextEntry>
 >;
 
 export const pageTemplateEntries: AllEntryTypes = {
@@ -31,5 +34,6 @@ export const pageTemplateEntries: AllEntryTypes = {
   LH1: LH1TemplateEntry,
   'Sub Genres (Custom)': LH1TemplateEntry,
   DH1: DH1TemplateEntry,
-  'Editorial Image': EditorialImage
+  'Editorial Image': EditorialImage,
+  'Text Heading': TextHeading
 };

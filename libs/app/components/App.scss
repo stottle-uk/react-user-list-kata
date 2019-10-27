@@ -112,3 +112,11 @@ $navbar-dropdown-arrow: rgb(214, 214, 214);
     max-width: 30%;
   }
 }
+
+.text-heading {
+  position: relative;
+  height: 150px;
+  display: flex;
+  align-items: flex-end;
+  padding-left: 1em;
+}
