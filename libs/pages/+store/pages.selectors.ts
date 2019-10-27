@@ -1,5 +1,5 @@
 import { getIsLoading as getIsListsLoading, getLists, List } from '@lists';
-import { Dictionary, Page, PageTemplate } from '@pageEntries';
+import { Dictionary, Page, PageTemplate } from '@pageTemplates';
 import { getCurrentPath } from '@router';
 import { Entry, NomralisedEntry } from '@templateEntries';
 import { createSelector } from 'reselect';

@@ -1,5 +1,5 @@
 import { List, ManageList } from '@lists';
-import { Page } from '@pageEntries';
+import { Page } from '@pageTemplates';
 import {
   GoSucess,
   InitFirstRouteSuccess,

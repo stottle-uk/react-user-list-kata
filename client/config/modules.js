@@ -81,7 +81,7 @@ function getWebpackAliases(options = {}) {
       '@router': `${paths.libsSrc}/router/`,
       '@app': `${paths.libsSrc}/app/`,
       '@pages': `${paths.libsSrc}/pages/`,
-      '@pageEntries': `${paths.libsSrc}/pageEntries/`,
+      '@pageTemplates': `${paths.libsSrc}/pageTemplates/`,
       '@lists': `${paths.libsSrc}/lists/`,
       '@config': `${paths.libsSrc}/config/`,
       '@templateEntries': `${paths.libsSrc}/templateEntries/`

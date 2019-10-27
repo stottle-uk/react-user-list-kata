@@ -1,4 +1,4 @@
-import { PageTemplate } from '@pageEntries';
+import { PageTemplate } from '@pageTemplates';
 import { Dictionary, NomralisedEntry } from '@templateEntries';
 import React from 'react';
 

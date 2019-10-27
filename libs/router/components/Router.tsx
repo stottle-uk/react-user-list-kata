@@ -1,5 +1,5 @@
-import { PageTemplate } from '@pageEntries';
-import { RootState } from 'libs/store/setup/store.modal';
+import { PageTemplate } from '@pageTemplates';
+import { RootState } from '@store';
 import React, { Dispatch } from 'react';
 import { connect } from 'react-redux';
 import { NavigateToPath, RouterAction } from '../+store/router.actions';

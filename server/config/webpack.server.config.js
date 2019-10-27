@@ -28,7 +28,7 @@ module.exports = {
       '@router': `${root}/libs/router/`,
       '@app': `${root}/libs/app/`,
       '@pages': `${root}/libs/pages/`,
-      '@pageEntries': `${root}/libs/pageEntries/`,
+      '@pageTemplates': `${root}/libs/pageTemplates/`,
       '@lists': `${root}/libs/lists/`,
       '@config': `${root}/libs/config/`,
       '@templateEntries': `${root}/libs/templateEntries/`

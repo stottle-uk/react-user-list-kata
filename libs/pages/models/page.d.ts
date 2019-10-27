@@ -1,4 +1,4 @@
-import { Page } from '@pageEntries';
+import { Page } from '@pageTemplates';
 import { Observable } from 'rxjs';
 
 export interface IGetPages {

@@ -1,6 +1,6 @@
-import { PageTemplate, templateMap } from '@pageEntries';
+import { PageTemplate, templateMap } from '@pageTemplates';
 import { Router } from '@router';
-import { RootState } from 'libs/store/setup/store.modal';
+import { RootState } from '@store';
 import React from 'react';
 import { connect } from 'react-redux';
 import { getPageData2 } from '../+store/pages.selectors';

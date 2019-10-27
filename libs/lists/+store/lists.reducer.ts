@@ -1,4 +1,4 @@
-import { Dictionary } from '@pageEntries';
+import { Dictionary } from '@pageTemplates';
 import { Item, List } from '../models/lists';
 import { ListsAction, ListsActionTypes } from './lists.actions';
 
