@@ -1,5 +1,6 @@
 import EditorialImage from './components/imageEntry/EditorialImage';
 import DH1TemplateEntry from './components/itemEntry/DH1TemplateEntry';
+import B1 from './components/listEntry/B1';
 import CS5TemplateEntry from './components/listEntry/CS5TemplateEntry';
 import HeroStandard3x1 from './components/listEntry/HeroStandard3x1';
 import LH1TemplateEntry from './components/listEntry/LH1TemplateEntry';
@@ -34,7 +35,8 @@ const listEntryTemplates: Dictionary<ListEntryType> = {
   CS5: CS5TemplateEntry,
   CS1: CS5TemplateEntry,
   LH1: LH1TemplateEntry,
-  'Sub Genres (Custom)': LH1TemplateEntry
+  'Sub Genres (Custom)': LH1TemplateEntry,
+  '4:3 Block (Reduced)': B1
 };
 
 const itemEntryTemplates: Dictionary<ItemEntryType> = {
