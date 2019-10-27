@@ -1,6 +1,6 @@
 import { getIsLoading as getIsListsLoading, getLists, List } from '@lists';
 import { Entry, NomralisedEntry } from '@pageTemplateEntries';
-import { Dictionary, Page, PageTemplate } from '@pageTemplates';
+import { Page, PageTemplate } from '@pageTemplates';
 import { getCurrentPath } from '@router';
 import { createSelector } from 'reselect';
 import { PagesState } from './pages.reducer';

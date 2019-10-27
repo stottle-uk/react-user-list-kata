@@ -1,9 +1,5 @@
 import { Images, List } from '@lists';
 
-export interface Dictionary<T> {
-  [key: string]: T;
-}
-
 export interface Entry {
   type:
     | 'ItemEntry'

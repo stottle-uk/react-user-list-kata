@@ -3,7 +3,7 @@ import { RouterConfigRoute } from '@router';
 import Home from '../components/Home';
 import MovieDetail from '../components/ItemDetail';
 import ListDetailFeatured from '../components/ListDetailFeatured';
-import { Dictionary, PageTemplate } from '../models/pageEntries';
+import { PageTemplate } from '../models/pageEntries';
 
 const homeTemplate = 'Home';
 const listDetailTemplate = 'List Detail';

@@ -29,6 +29,6 @@
       "@pageTemplateEntries": ["libs/pageTemplateEntries/index.ts"]
     }
   },
-  "include": ["client/src", "server/src", "libs"],
+  "include": ["client/src", "server/src", "libs", "typings"],
   "exclude": ["node_modules"]
 }

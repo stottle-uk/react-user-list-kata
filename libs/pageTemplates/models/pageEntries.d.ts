@@ -1,10 +1,6 @@
 import { Item, List } from '@lists';
 import { Entry, NomralisedEntry } from '@pageTemplateEntries';
 
-export interface Dictionary<T> {
-  [key: string]: T;
-}
-
 export interface PageTemplate {
   isLoading: boolean;
   pageEntries: NomralisedEntry[];

@@ -3,7 +3,7 @@ import DH1TemplateEntry from './components/DH1TemplateEntry';
 import HeroStandard3x1 from './components/HeroStandard3x1';
 import LH1TemplateEntry from './components/LH1TemplateEntry';
 import P2PageEntry from './components/P2TemplateEntry';
-import { Dictionary, NomralisedEntry } from './models/pageEntryTemplates.d';
+import { NomralisedEntry } from './models/pageEntryTemplates.d';
 
 export const pageTemplateEntries: Dictionary<
   React.ComponentType<NomralisedEntry>
