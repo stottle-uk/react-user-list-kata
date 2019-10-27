@@ -6,7 +6,7 @@ export * from './+store/router.selectors';
 export { default as Back } from './components/Back';
 export { default as Link } from './components/Link';
 export { default as Router } from './components/Router';
-export * from './models/router';
+export * from './models/router.d';
 export * from './services/BrowserHistory';
 export * from './services/RouteMatcher';
 
