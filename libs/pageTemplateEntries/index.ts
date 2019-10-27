@@ -1,14 +1,21 @@
 import CS5TemplateEntry from './components/CS5TemplateEntry';
 import DH1TemplateEntry from './components/DH1TemplateEntry';
 import HeroStandard3x1 from './components/HeroStandard3x1';
+import EditorialImage from './components/imageEntry/EditorialImage';
 import LH1TemplateEntry from './components/LH1TemplateEntry';
 import P2PageEntry from './components/P2TemplateEntry';
-import { ItemEntry, ListEntry } from './models/pageEntryTemplates.d';
+import {
+  ImageEntry,
+  ItemEntry,
+  ListEntry
+} from './models/pageEntryTemplates.d';
 
 export * from './models/pageEntryTemplates.d';
 
 export type AllEntryTypes = Dictionary<
-  React.ComponentType<ItemEntry> | React.ComponentType<ListEntry>
+  | React.ComponentType<ItemEntry>
+  | React.ComponentType<ListEntry>
+  | React.ComponentType<ImageEntry>
 >;
 
 export const pageTemplateEntries: AllEntryTypes = {
@@ -23,5 +30,6 @@ export const pageTemplateEntries: AllEntryTypes = {
   CS1: CS5TemplateEntry,
   LH1: LH1TemplateEntry,
   'Sub Genres (Custom)': LH1TemplateEntry,
-  DH1: DH1TemplateEntry
+  DH1: DH1TemplateEntry,
+  'Editorial Image': EditorialImage
 };

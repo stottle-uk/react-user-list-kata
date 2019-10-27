@@ -16,24 +16,22 @@ class HeroStandard3x1 extends React.PureComponent<ListEntry> {
 
   private renderItems = () => {
     const { list } = this.props;
-    return (
-      list &&
-      list.items &&
-      list.items.map(item => (
-        <CarouselItem
-          key={item.id}
-          className="carousel__item image is-3by1"
-          item={item}
-        >
-          {this.renderItemChildren(item)}
-        </CarouselItem>
-      ))
-    );
+    return list.items.map(item => (
+      <CarouselItem
+        key={item.id}
+        className="carousel__item image is-3by1"
+        item={item}
+      >
+        {this.renderItemChildren(item)}
+      </CarouselItem>
+    ));
   };
 
   private renderItemChildren = (item: Item) => (
-    <div className="carousel__title">
-      <Link href={item.path}>{item.title}</Link>
+    <div className="is-size-3 carousel__title">
+      <Link className="has-text-white" href={item.path}>
+        {item.title}
+      </Link>
       <p>{item.tagline}</p>
     </div>
   );

@@ -45,7 +45,6 @@ function normaliseEntries(page: Page, lists: Dictionary<List>) {
         list: page.list
       } as ListEntry;
     }
-
     return entry;
   };
 

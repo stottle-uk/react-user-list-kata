@@ -59,6 +59,7 @@ export interface Images {
   wallpaper?: string;
   logo?: string;
   tile?: string;
+  custom?: string;
 }
 
 export interface Offer {

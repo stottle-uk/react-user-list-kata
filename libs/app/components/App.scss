@@ -93,8 +93,22 @@ $navbar-dropdown-arrow: rgb(214, 214, 214);
   &__title {
     position: absolute;
     top: 70%;
-    left: 20px;
-    color: #fff;
+    left: 1em;
+    max-width: 30%;
+  }
+}
+
+.editorial-image {
+  position: relative;
+
+  &.is-4by1 {
+    padding-top: 25%;
+  }
+
+  .caption {
+    position: absolute;
+    top: 80%;
+    left: 1em;
     max-width: 30%;
   }
 }

@@ -27,6 +27,10 @@ export interface ItemEntry extends Entry {
   item: Item;
 }
 
+export interface ImageEntry extends Entry {
+  images: Images;
+}
+
 const t = [
   {
     title: 'Cinelists',

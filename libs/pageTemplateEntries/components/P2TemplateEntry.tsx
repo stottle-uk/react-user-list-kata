@@ -11,7 +11,7 @@ class P2PageEntry extends React.PureComponent<ListEntry> {
     return (
       <article className="content">
         <p className="column-header">
-          <Link className="has-text-white is-capitalized" href={list.path}>
+          <Link className="has-text-white is-uppercase" href={list.path}>
             {list.title}
           </Link>
         </p>
@@ -24,26 +24,23 @@ class P2PageEntry extends React.PureComponent<ListEntry> {
   }
 
   private renderList(items: Item[]): React.ReactNodeArray {
-    return (
-      items &&
-      items.map(item => (
-        <div
-          className="column is-6-mobile is-4-tablet is-3-desktop is-2-widescreen"
-          key={item.id}
-        >
-          <Link
-            href={item.path}
-            className="image is-2by3"
-            style={{
-              backgroundImage: `url("${item.images && item.images.poster}")`,
-              backgroundPosition: 'center',
-              backgroundSize: 'cover',
-              backgroundRepeat: 'no-repeat'
-            }}
-          />
-        </div>
-      ))
-    );
+    return items.map(item => (
+      <div
+        className="column is-6-mobile is-4-tablet is-3-desktop is-2-widescreen"
+        key={item.id}
+      >
+        <Link
+          href={item.path}
+          className="image is-2by3"
+          style={{
+            backgroundImage: `url("${item.images && item.images.poster}")`,
+            backgroundPosition: 'center',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat'
+          }}
+        />
+      </div>
+    ));
   }
 }
 
