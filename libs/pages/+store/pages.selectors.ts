@@ -22,12 +22,19 @@ export const getCurrentPage = createSelector(
   (path, pages) => pages[path]
 );
 
-export const getPageEntries = createSelector(
-  [getCurrentPage, getIsLoading, getLists],
-  (page, isLoading, lists): PageTemplate => ({
+export const getNormalisedEntries = createSelector(
+  [getCurrentPage, getLists],
+  (page, lists) => ({
     pageEntries: normaliseEntries(page, lists),
-    isLoading,
-    template: page && page.template
+    templateName: page && page.template
+  })
+);
+
+export const getPageEntries = createSelector(
+  [getNormalisedEntries, getIsLoading],
+  (pageEntries, isLoading): PageTemplate => ({
+    ...pageEntries,
+    isLoading
   })
 );
 

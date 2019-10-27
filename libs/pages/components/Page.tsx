@@ -13,7 +13,7 @@ const Page: React.FC<StoreProps> = ({ pageEntries }) => (
   <Router routeData={pageEntries} templateMap={templateMap}>
     <>
       <h1>Not Found</h1>
-      Template: {pageEntries.template}
+      Template: {pageEntries.templateName}
     </>
   </Router>
 );

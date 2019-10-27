@@ -4,7 +4,7 @@ import { Entry, ItemEntry } from '@pageTemplateEntries';
 export interface PageTemplate {
   isLoading: boolean;
   pageEntries: (ListEntry | ItemEntry)[];
-  template: string;
+  templateName: string;
 }
 
 export interface Page {
