@@ -1,18 +1,19 @@
-import { Item, List } from '@lists';
+import { Item } from '@lists';
 import { Link } from '@router';
 import React from 'react';
 import ScrollLoader from '../helpers/ScrollLoader';
+import { NomralisedEntry } from '../models/pageEntryTemplates';
 
-class CS5TemplateEntry extends React.PureComponent<List> {
+class CS5TemplateEntry extends React.PureComponent<NomralisedEntry> {
   render() {
-    const { paging, items } = this.props;
+    const { list } = this.props;
 
     return (
       <ScrollLoader
         className="columns is-mobile is-multiline is-gapless"
-        page={paging}
+        page={list.paging}
       >
-        {this.renderList(items)}
+        {this.renderList(list.items)}
       </ScrollLoader>
     );
   }

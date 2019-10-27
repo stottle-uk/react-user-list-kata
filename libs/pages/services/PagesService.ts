@@ -1,13 +1,28 @@
-import { PageEntry } from '@pageEntries';
+import { Page } from '@pageEntries';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 import { HttpService } from '../../shared/services/HttpService';
 import { IGetPages } from '../models/Page';
 
 export class PagesService implements IGetPages {
   constructor(private httpService: HttpService) {}
 
-  getPage(path: string): Observable<PageEntry> {
-    return this.httpService.get(this.buildPageUrl(path));
+  getPage(path: string): Observable<Page> {
+    return this.httpService.get<Page>(this.buildPageUrl(path)).pipe(
+      tap(page => {
+        const t = page.entries.map(e => {
+          return {
+            title: page.title,
+            page: page.template,
+            template: e.template,
+            type: e.type,
+            hasList: !!e.list
+          };
+        });
+
+        console.log('page', t);
+      })
+    );
   }
 
   private buildPageUrl(path: string): string {

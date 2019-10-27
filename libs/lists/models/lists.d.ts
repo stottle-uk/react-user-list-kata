@@ -15,7 +15,7 @@ export interface List {
   items: Item[];
   size?: number;
   paging: Paging;
-  images?: Images2;
+  images?: Images;
 }
 
 export interface Item {
@@ -53,8 +53,12 @@ export interface Paging {
   authorization?: Authorization;
 }
 
-export interface Images2 {
-  wallpaper: string;
+export interface Images {
+  hero3x1?: string;
+  poster?: string;
+  wallpaper?: string;
+  logo?: string;
+  tile?: string;
 }
 
 export interface Offer {

@@ -79,7 +79,7 @@
   },
   "scripts": {
     "start": "concurrently \"yarn build && yarn start:server\" \"PORT=3001 node client/scripts/start.js\"",
-    "start:client": "PORT=3001 node client/scripts/start.js",
+    "start:client": "open -a Google\\ Chrome --args --disable-web-security --user-data-dir && PORT=3001 node client/scripts/start.js",
     "start:server": "cross-env NODE_ENV=development node build/server/compiled",
     "start:server:dev": "node server/scripts/start-watch.js",
     "build:client": "node client/scripts/build.js",

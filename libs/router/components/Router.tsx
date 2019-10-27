@@ -1,4 +1,4 @@
-import { PageTemplateData } from '@pageEntries';
+import { PageTemplate } from '@pageEntries';
 import { RootState } from 'libs/store/setup/store.modal';
 import React, { Dispatch } from 'react';
 import { connect } from 'react-redux';
@@ -7,13 +7,13 @@ import { getCurrentRoute } from '../+store/router.selectors';
 import { RouterConfigRoute } from '../types/router';
 
 interface RouterProps {
-  routeData: PageTemplateData;
-  templateMap: { [key: string]: React.ComponentType<PageTemplateData> };
+  routeData: PageTemplate;
+  templateMap: { [key: string]: React.ComponentType<PageTemplate> };
   children: React.ReactElement;
 }
 
 interface StoreProps {
-  currentRoute?: RouterConfigRoute<PageTemplateData>;
+  currentRoute?: RouterConfigRoute<PageTemplate>;
 }
 
 interface DispatchProps {

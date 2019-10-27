@@ -1,10 +1,11 @@
-import { Item, List } from '@lists';
+import { Item } from '@lists';
 import { Link } from '@router';
 import React from 'react';
 import Carousel from '../helpers/Carousel';
 import CarouselItem from '../helpers/CarouselItem';
+import { NomralisedEntry } from '../models/pageEntryTemplates';
 
-class HeroStandard3x1 extends React.PureComponent<List> {
+class HeroStandard3x1 extends React.PureComponent<NomralisedEntry> {
   render() {
     return (
       <Carousel className="carousel" intervalTime={2000}>
@@ -14,11 +15,16 @@ class HeroStandard3x1 extends React.PureComponent<List> {
   }
 
   private renderItems = () => {
-    const { items } = this.props;
+    const { list } = this.props;
     return (
-      items &&
-      items.map(item => (
-        <CarouselItem className="carousel__item image is-3by1" item={item}>
+      list &&
+      list.items &&
+      list.items.map(item => (
+        <CarouselItem
+          key={item.id}
+          className="carousel__item image is-3by1"
+          item={item}
+        >
           {this.renderItemChildren(item)}
         </CarouselItem>
       ))

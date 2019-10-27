@@ -1,22 +1,22 @@
-import { Item, List } from '@lists';
+import { Item } from '@lists';
 import { Link } from '@router';
 import React from 'react';
 import ScrollHorizontal from '../helpers/ScrollHorizontal';
+import { NomralisedEntry } from '../models/pageEntryTemplates';
 
-class P2PageEntry extends React.PureComponent<List> {
+class P2PageEntry extends React.PureComponent<NomralisedEntry> {
   render() {
+    const { list } = this.props;
+
     return (
       <article className="content">
         <p className="column-header">
-          <Link
-            className="has-text-white is-capitalized"
-            href={this.props.path}
-          >
-            {this.props.title}
+          <Link className="has-text-white is-capitalized" href={list.path}>
+            {list.title}
           </Link>
         </p>
-        <ScrollHorizontal path={this.props.path} className="columns is-gapless">
-          {this.renderList(this.props.items)}
+        <ScrollHorizontal path={list.path} className="columns is-gapless">
+          {this.renderList(list.items)}
         </ScrollHorizontal>
         {/* <pre>{JSON.stringify(this.props, null, 2)}</pre> */}
       </article>

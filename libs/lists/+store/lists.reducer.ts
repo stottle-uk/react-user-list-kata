@@ -83,7 +83,7 @@ function updateLists(cachedLists: Dictionary<List>, ...lists: List[]) {
     }),
     cachedLists
   );
-  const updatedListIds = Object.keys(lists);
+  const updatedListIds = Object.keys(updatedLists);
   return { listIds: updatedListIds, lists: updatedLists };
 }
 

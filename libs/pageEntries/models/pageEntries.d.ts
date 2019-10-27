@@ -1,63 +1,31 @@
 import { Item, List } from '@lists';
+import { Entry, NomralisedEntry } from '@templateEntries';
 
 export interface Dictionary<T> {
   [key: string]: T;
 }
 
-export interface PageTemplateData {
+export interface PageTemplate {
   isLoading: boolean;
-  listsLoading: boolean;
-  pageEntry?: PageEntry;
-  lists: Dictionary<List>;
+  pageEntries: NomralisedEntry[];
+  template: string;
 }
 
-export interface PageEntry {
+export interface Page {
   id: string;
   isStatic: boolean;
   isSystemPage: boolean;
-  metadata: any;
+  metadata: Metadata;
   key: string;
   path: string;
   template: string;
   title: string;
   entries: Entry[];
-  list?: List;
   item?: Item;
+  list?: List;
 }
 
 export interface Metadata {
   description: string;
   keywords: string[];
-}
-
-export interface Images {
-  hero3x1?: string;
-  poster?: string;
-  wallpaper?: string;
-  logo?: string;
-  tile?: string;
-}
-
-export interface CustomFields2 {
-  customTagline?: string;
-  assetTitlePosition?: string;
-  moreLinkUrl?: string;
-}
-
-export interface Entry {
-  type:
-    | 'ItemEntry'
-    | 'ItemDetailEntry'
-    | 'ListEntry'
-    | 'ListDetailEntry'
-    | 'UserEntry'
-    | 'TextEntry'
-    | 'ImageEntry'
-    | 'CustomEntry'
-    | 'PeopleEntry';
-  id: string;
-  template: string;
-  title: string;
-  list: List;
-  customFields?: CustomFields2;
 }

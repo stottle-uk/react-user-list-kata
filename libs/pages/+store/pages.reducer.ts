@@ -1,9 +1,9 @@
-import { PageEntry } from '@pageEntries';
+import { Page } from '@pageEntries';
 import { PagesAction, PagesActionTypes } from './pages.actions';
 
 export interface PagesState {
   pageIds: string[];
-  pages: { [key: string]: PageEntry };
+  pages: { [key: string]: Page };
   isLoading: boolean;
   isLoaded: boolean;
   error?: any;

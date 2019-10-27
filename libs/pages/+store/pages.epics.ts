@@ -1,5 +1,5 @@
 import { List, ManageList } from '@lists';
-import { PageEntry } from '@pageEntries';
+import { Page } from '@pageEntries';
 import {
   GoSucess,
   InitFirstRouteSuccess,
@@ -25,18 +25,16 @@ export interface PagesEpicDependencies {
   pagesService: PagesService;
 }
 
-const findListsInPage = (pageEntry: PageEntry): Observable<List> => {
-  const entryLists = pageEntry.entries
-    ? pageEntry.entries
+const findListsInPage = (page: Page): Observable<List> => {
+  const entryLists = page.entries
+    ? page.entries
         .filter(e => e.list)
         .filter(e => e.type !== 'UserEntry')
-        .map(e => e.list)
+        .map(e => e.list as List)
     : [];
 
   const lists =
-    !!pageEntry.list && +pageEntry.list.id > 0
-      ? [pageEntry.list, ...entryLists]
-      : entryLists;
+    !!page.list && +page.list.id > 0 ? [page.list, ...entryLists] : entryLists;
 
   return from(lists);
 };
