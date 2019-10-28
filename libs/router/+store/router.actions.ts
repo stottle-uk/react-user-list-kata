@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { RouterConfigRoute } from '../models/router';
+import { RouteData, RouterConfigRoute } from '../models/router';
 
 export enum RouterActionTypes {
   InitRouterOnClient = '[Router] Init Router',
@@ -36,13 +36,13 @@ export class StartPopStateListner implements Action {
 export class AddRoutesStart implements Action {
   readonly type = RouterActionTypes.AddRoutesStart;
 
-  constructor(public payload: { routes: RouterConfigRoute<any>[] }) {}
+  constructor(public payload: { routes: RouterConfigRoute<RouteData>[] }) {}
 }
 
 export class AddRoutesSuccess implements Action {
   readonly type = RouterActionTypes.AddRoutesSuccess;
 
-  constructor(public payload: { routes: RouterConfigRoute<any>[] }) {}
+  constructor(public payload: { routes: RouterConfigRoute<RouteData>[] }) {}
 }
 
 export class AddRoutesFailure implements Action {
