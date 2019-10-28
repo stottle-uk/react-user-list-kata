@@ -1,4 +1,4 @@
-import { AllEntryTypes, Entry } from '@pageTemplateEntries';
+import { AllEntryTypes, PageEntryType } from '@pageTemplateEntries';
 import { RouteData } from '@router';
 import { RootState } from '@store';
 import React from 'react';
@@ -13,14 +13,17 @@ interface StoreProps {
 
 type AllProps = RouteData & StoreProps;
 
-export default function configPage<T extends Entry>(
+export default function templateRenderer(
   Page: React.FC<RouteData>,
   pageEntryTemplates: AllEntryTypes
 ): React.FC<RouteData> {
   const getTemplate = (template: string) =>
-    pageEntryTemplates[template] as React.ComponentType<T>;
+    pageEntryTemplates[template] as React.ComponentType<PageEntryType>;
 
-  const renderTemplate = (entry: T, Template: React.ComponentType<T>) => (
+  const renderTemplate = (
+    entry: PageEntryType,
+    Template: React.ComponentType<PageEntryType>
+  ) => (
     <div key={entry.id}>
       {Template ? (
         <Template {...entry} />
@@ -30,7 +33,7 @@ export default function configPage<T extends Entry>(
     </div>
   );
 
-  const renderEntries = (entries: T[]) =>
+  const renderEntries = (entries: PageEntryType[]) =>
     entries.map(entry => renderTemplate(entry, getTemplate(entry.template)));
 
   const mapStateToProps = ({

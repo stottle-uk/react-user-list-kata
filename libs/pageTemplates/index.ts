@@ -16,5 +16,3 @@ export const templateMap: Dictionary<React.ComponentType<RouteData>> = {
   [category]: Home,
   [movieDetail]: MovieDetail
 };
-
-export * from './utils/utils';

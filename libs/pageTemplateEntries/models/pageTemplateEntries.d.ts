@@ -1,5 +1,7 @@
 import { Images, List } from '@lists';
 
+type PageEntryType = ListEntry | ItemEntry | ImageEntry | TextEntry;
+
 export interface Entry {
   type:
     | 'ItemEntry'

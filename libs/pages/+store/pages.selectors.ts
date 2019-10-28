@@ -1,5 +1,10 @@
 import { getLists, List } from '@lists';
-import { Entry, ItemEntry, ListEntry } from '@pageTemplateEntries';
+import {
+  Entry,
+  ItemEntry,
+  ListEntry,
+  PageEntryType
+} from '@pageTemplateEntries';
 import { getCurrentPath } from '@router';
 import { createSelector } from 'reselect';
 import { Page, PageTemplate } from '../models/page';
@@ -44,10 +49,10 @@ function normaliseEntries(page: Page, lists: Dictionary<List>) {
         list: page.list
       } as ListEntry;
     }
-    return entry;
+    return entry as PageEntryType;
   };
 
-  const getEntry = (page: Page, entry: Entry): Entry => {
+  const getEntry = (page: Page, entry: Entry) => {
     const newEntry = buildEntry(page, entry);
     const foundList =
       newEntry.list && lists[newEntry.list.id]

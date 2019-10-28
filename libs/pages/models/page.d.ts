@@ -1,5 +1,5 @@
 import { Item, List } from '@lists';
-import { Entry, ItemEntry } from '@pageTemplateEntries';
+import { Entry, EntryListType } from '@pageTemplateEntries';
 import { Observable } from 'rxjs';
 
 export interface IGetPages {
@@ -7,7 +7,7 @@ export interface IGetPages {
 }
 
 export interface PageTemplate {
-  pageEntries: (ListEntry | ItemEntry)[];
+  pageEntries: EntryListType[];
   templateName: string;
 }
 
