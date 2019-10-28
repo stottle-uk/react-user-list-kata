@@ -16,7 +16,9 @@ const App: React.FC = () => {
           routeData={{ data: {} }}
           templateMap={templateMap}
           notFoundRender={getNotFound}
-        />
+        >
+          <span>Will display when there is no current route set</span>
+        </Router>
       </Container>
     </>
   );

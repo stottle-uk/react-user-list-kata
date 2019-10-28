@@ -13,6 +13,11 @@ export const getCurrentRoute = createSelector(
   state => state.currentRoute
 );
 
+export const getRouteNotFound = createSelector(
+  [getState],
+  state => state.routeNotFound
+);
+
 export const getCurrentPath = createSelector(
   [getCurrentRoute],
   route => (route ? route.path : '/')

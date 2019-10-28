@@ -1,7 +1,6 @@
 import { RootState } from '@store';
-import React, { Dispatch } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
-import { NavigateToPath, RouterAction } from '../+store/router.actions';
 import { getCurrentRoute } from '../+store/router.selectors';
 import { RouteData, RouterConfigRoute } from '../models/router';
 
@@ -9,43 +8,38 @@ interface RouterProps {
   routeData: RouteData;
   templateMap: Dictionary<React.ComponentType<RouteData>>;
   notFoundRender: (route: RouterConfigRoute) => React.ReactNode;
+  children?: React.ReactNode;
 }
 
 interface StoreProps {
   currentRoute?: RouterConfigRoute;
 }
 
-interface DispatchProps {
-  navigateUrl: (path: string) => void;
-}
-
-type AllProps = StoreProps & DispatchProps & RouterProps;
+type AllProps = StoreProps & RouterProps;
 
 export const Router: React.FC<AllProps> = ({
   routeData,
   notFoundRender,
   templateMap,
+  children,
   currentRoute
 }) => {
-  const Template = currentRoute && templateMap[currentRoute.template];
-  return Template ? (
-    <Template data={routeData.data} />
-  ) : (
-    <>{currentRoute && notFoundRender(currentRoute)}</>
-  );
+  const render = () => {
+    const Template = currentRoute && templateMap[currentRoute.template];
+    if (Template) {
+      return <Template data={routeData.data} />;
+    }
+    if (currentRoute) {
+      return notFoundRender(currentRoute);
+    }
+    return children;
+  };
+
+  return <>{render()}</>;
 };
 
 const mapStateToProps = ({ router }: RootState): StoreProps => ({
   currentRoute: getCurrentRoute(router)
 });
 
-const mapDispatchToProps = (
-  dispatch: Dispatch<RouterAction>
-): DispatchProps => ({
-  navigateUrl: (path: string) => dispatch(new NavigateToPath({ path }))
-});
-
-export default connect<StoreProps, DispatchProps, {}, RootState>(
-  mapStateToProps,
-  mapDispatchToProps
-)(Router);
+export default connect<StoreProps, {}, {}, RootState>(mapStateToProps)(Router);

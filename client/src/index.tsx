@@ -36,9 +36,7 @@ if (initialState === '{}') {
           new AddRoutesStart({ routes: mapSitemapToRoute(config.sitemap) })
         );
         store.dispatch(new AddNavigation({ navigation: config.navigation }));
-
         store.dispatch(new InitRouterOnClient());
-        // store.dispatch(new GetAllUsersStart());
       }),
       tap(() =>
         ReactDOM.render(
