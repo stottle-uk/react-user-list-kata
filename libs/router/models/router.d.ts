@@ -1,4 +1,4 @@
-export interface RouterConfigRoute<T> {
+export interface RouterConfigRoute {
   name: string;
   path: string;
   template: string;

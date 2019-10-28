@@ -12,7 +12,7 @@ interface RouterProps {
 }
 
 interface StoreProps {
-  currentRoute?: RouterConfigRoute<RouteData>;
+  currentRoute?: RouterConfigRoute;
 }
 
 interface DispatchProps {

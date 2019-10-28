@@ -1,5 +1,5 @@
 import { Action } from 'redux';
-import { RouteData, RouterConfigRoute } from '../models/router';
+import { RouterConfigRoute } from '../models/router';
 
 export enum RouterActionTypes {
   InitRouterOnClient = '[Router] Init Router',
@@ -36,13 +36,13 @@ export class StartPopStateListner implements Action {
 export class AddRoutesStart implements Action {
   readonly type = RouterActionTypes.AddRoutesStart;
 
-  constructor(public payload: { routes: RouterConfigRoute<RouteData>[] }) {}
+  constructor(public payload: { routes: RouterConfigRoute[] }) {}
 }
 
 export class AddRoutesSuccess implements Action {
   readonly type = RouterActionTypes.AddRoutesSuccess;
 
-  constructor(public payload: { routes: RouterConfigRoute<RouteData>[] }) {}
+  constructor(public payload: { routes: RouterConfigRoute[] }) {}
 }
 
 export class AddRoutesFailure implements Action {
@@ -60,7 +60,7 @@ export class InitFirstRouteStart implements Action {
 export class InitFirstRouteSuccess implements Action {
   readonly type = RouterActionTypes.InitFirstRouteSuccess;
 
-  constructor(public payload: { route: RouterConfigRoute<any> }) {}
+  constructor(public payload: { route: RouterConfigRoute }) {}
 }
 
 export class InitFirstRouteFailure implements Action {
@@ -78,7 +78,7 @@ export class PopStateStart implements Action {
 export class PopStateSuccess implements Action {
   readonly type = RouterActionTypes.PopStateSuccess;
 
-  constructor(public payload: { route: RouterConfigRoute<any> }) {}
+  constructor(public payload: { route: RouterConfigRoute }) {}
 }
 
 export class PopStateFailure implements Action {
@@ -96,7 +96,7 @@ export class GoStart implements Action {
 export class GoSucess implements Action {
   readonly type = RouterActionTypes.GoSucess;
 
-  constructor(public payload: { route: RouterConfigRoute<any> }) {}
+  constructor(public payload: { route: RouterConfigRoute }) {}
 }
 
 export class GoFailure implements Action {

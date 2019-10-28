@@ -30,7 +30,7 @@ import {
 
 export interface RouterEpicDependencies {
   browserHistory: BrowserHistory;
-  routeMatcher: RouteMatcher<any>;
+  routeMatcher: RouteMatcher;
 }
 
 const addRoutes = (action$: ActionsObservable<AddRoutesStart>) =>

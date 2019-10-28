@@ -25,7 +25,7 @@ export interface Item {
   offers?: Offer[];
   scopes?: string[];
   categories?: string[];
-  customFields?: any;
+  customFields?: Dictionary<string>;
   customId?: string;
   genres?: string[];
   id?: string;

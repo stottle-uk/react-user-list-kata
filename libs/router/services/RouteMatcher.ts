@@ -1,14 +1,14 @@
 import { RouterConfigRoute } from '../models/router';
 
-export class RouteMatcher<T> {
+export class RouteMatcher {
   matchRoute(
     path: string,
-    routes: RouterConfigRoute<T>[]
-  ): RouterConfigRoute<T> | undefined {
+    routes: RouterConfigRoute[]
+  ): RouterConfigRoute | undefined {
     return routes.find(r => this.findRoute(path, r));
   }
 
-  private findRoute(path: string, route: RouterConfigRoute<T>): boolean {
+  private findRoute(path: string, route: RouterConfigRoute): boolean {
     if (path.startsWith('/filme/') && route.path === '/filme/{id}') {
       return true;
     }

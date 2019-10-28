@@ -1,11 +1,11 @@
-import { RouteData, RouterConfigRoute } from '../models/router';
+import { RouterConfigRoute } from '../models/router';
 import { RouterAction, RouterActionTypes } from './router.actions';
 
 export interface RouterState {
-  routes: RouterConfigRoute<RouteData>[];
+  routes: RouterConfigRoute[];
   history: string[];
   requestedPath?: string;
-  currentRoute?: RouterConfigRoute<RouteData>;
+  currentRoute?: RouterConfigRoute;
   routeNotFound: boolean;
 }
 
