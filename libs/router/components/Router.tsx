@@ -8,7 +8,7 @@ import { RouteData, RouterConfigRoute } from '../models/router';
 interface RouterProps {
   routeData: RouteData;
   templateMap: Dictionary<React.ComponentType<RouteData>>;
-  children: React.ReactElement;
+  notFoundRender: (route: RouterConfigRoute) => React.ReactNode;
 }
 
 interface StoreProps {
@@ -23,12 +23,16 @@ type AllProps = StoreProps & DispatchProps & RouterProps;
 
 export const Router: React.FC<AllProps> = ({
   routeData,
-  children,
+  notFoundRender,
   templateMap,
   currentRoute
 }) => {
   const Template = currentRoute && templateMap[currentRoute.template];
-  return Template ? <Template data={routeData.data} /> : children;
+  return Template ? (
+    <Template data={routeData.data} />
+  ) : (
+    <>{currentRoute && notFoundRender(currentRoute)}</>
+  );
 };
 
 const mapStateToProps = ({ router }: RootState): StoreProps => ({
