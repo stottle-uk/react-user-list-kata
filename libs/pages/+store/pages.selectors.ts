@@ -1,8 +1,8 @@
 import { getLists, List } from '@lists';
 import { Entry, ItemEntry, ListEntry } from '@pageTemplateEntries';
-import { Page, PageTemplate } from '@pageTemplates';
 import { getCurrentPath } from '@router';
 import { createSelector } from 'reselect';
+import { Page, PageTemplate } from '../models/page';
 import { PagesState } from './pages.reducer';
 
 const getState = (state: PagesState) => state;

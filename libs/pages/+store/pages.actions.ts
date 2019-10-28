@@ -1,5 +1,5 @@
-import { Page } from '@pageTemplates';
 import { Action } from 'redux';
+import { Page } from '../models/page';
 
 export enum PagesActionTypes {
   CheckAndGetPageLists = '[Pages] Check And Get Page Lists',

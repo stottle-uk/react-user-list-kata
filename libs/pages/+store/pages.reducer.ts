@@ -1,4 +1,4 @@
-import { Page } from '@pageTemplates';
+import { Page } from '../models/page';
 import { PagesAction, PagesActionTypes } from './pages.actions';
 
 export interface PagesState {

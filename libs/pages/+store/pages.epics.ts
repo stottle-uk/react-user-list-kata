@@ -1,5 +1,4 @@
 import { List, ManageList } from '@lists';
-import { Page } from '@pageTemplates';
 import {
   GoSucess,
   InitFirstRouteSuccess,
@@ -10,6 +9,7 @@ import { RootState } from '@store';
 import { ActionsObservable, ofType } from 'redux-observable';
 import { from, Observable, of } from 'rxjs';
 import { catchError, filter, map, switchMap, take } from 'rxjs/operators';
+import { Page } from '../models/page';
 import { PagesService } from '../services/PagesService';
 import {
   CheckAndGetPageLists,
