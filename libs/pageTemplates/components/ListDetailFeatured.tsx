@@ -1,9 +1,9 @@
 import { pageTemplateEntries } from '@pageTemplateEntries';
+import { RouteData } from '@router';
 import React from 'react';
-import { PageTemplate } from '../models/pageEntries';
 import configPage from '../utils/templateRenderer';
 
-const ListDetailFeatured: React.FC<PageTemplate> = ({ children }) => {
+const ListDetailFeatured: React.FC<RouteData> = ({ children }) => {
   return <>{children}</>;
 };
 

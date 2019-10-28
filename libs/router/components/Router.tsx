@@ -1,19 +1,18 @@
-import { PageTemplate } from '@pageTemplates';
 import { RootState } from '@store';
 import React, { Dispatch } from 'react';
 import { connect } from 'react-redux';
 import { NavigateToPath, RouterAction } from '../+store/router.actions';
 import { getCurrentRoute } from '../+store/router.selectors';
-import { RouterConfigRoute } from '../models/router';
+import { RouteData, RouterConfigRoute } from '../models/router';
 
 interface RouterProps {
-  routeData: PageTemplate;
-  templateMap: { [key: string]: React.ComponentType<PageTemplate> };
+  routeData: RouteData;
+  templateMap: Dictionary<React.ComponentType<RouteData>>;
   children: React.ReactElement;
 }
 
 interface StoreProps {
-  currentRoute?: RouterConfigRoute<PageTemplate>;
+  currentRoute?: RouterConfigRoute<RouteData>;
 }
 
 interface DispatchProps {
@@ -23,22 +22,13 @@ interface DispatchProps {
 type AllProps = StoreProps & DispatchProps & RouterProps;
 
 export const Router: React.FC<AllProps> = ({
-  children,
   routeData,
+  children,
   templateMap,
   currentRoute
 }) => {
   const Template = currentRoute && templateMap[currentRoute.template];
-  return Template ? (
-    <>
-      {/* <div>
-        Template Name: {!!routeData.pageEntry && routeData.pageEntry.template}
-      </div> */}
-      <Template {...routeData} />
-    </>
-  ) : (
-    children
-  );
+  return Template ? <Template data={routeData.data} /> : children;
 };
 
 const mapStateToProps = ({ router }: RootState): StoreProps => ({

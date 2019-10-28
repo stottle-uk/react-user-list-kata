@@ -1,11 +1,22 @@
+import { getIsLoading, getPageEntries } from '@pages';
 import { AllEntryTypes, Entry } from '@pageTemplateEntries';
 import { PageTemplate } from '@pageTemplates';
+import { RouteData } from '@router';
+import { RootState } from '@store';
 import React from 'react';
+import { connect } from 'react-redux';
+
+interface StoreProps {
+  pageTemplate: PageTemplate;
+  isLoading: boolean;
+}
+
+type AllProps = RouteData & StoreProps;
 
 export default function configPage<T extends Entry>(
-  Page: React.FC<PageTemplate>,
+  Page: React.FC<RouteData>,
   pageEntryTemplates: AllEntryTypes
-): React.FC<PageTemplate> {
+): React.FC<RouteData> {
   const getTemplate = (template: string) =>
     pageEntryTemplates[template] as React.ComponentType<T>;
 
@@ -22,11 +33,21 @@ export default function configPage<T extends Entry>(
   const renderEntries = (entries: T[]) =>
     entries.map(entry => renderTemplate(entry, getTemplate(entry.template)));
 
-  return props => <Page {...props}>{renderEntries(props.pageEntries)}</Page>;
-}
+  const mapStateToProps = ({
+    pages,
+    router,
+    lists
+  }: RootState): StoreProps => ({
+    pageTemplate: getPageEntries({ ...pages, ...router, ...lists }),
+    isLoading: getIsLoading(pages)
+  });
 
-// return props.isLoading ? (
-//   <div>LOADING!!!!</div>
-// ) : (
-//   <Page {...props}>{renderEntries(props.pageEntries)}</Page>
-// );
+  const component = (props: AllProps) =>
+    props.isLoading ? (
+      <div>LOADING!!!!</div>
+    ) : (
+      <Page {...props}>{renderEntries(props.pageTemplate.pageEntries)}</Page>
+    );
+
+  return connect<StoreProps, {}, {}, RootState>(mapStateToProps)(component);
+}

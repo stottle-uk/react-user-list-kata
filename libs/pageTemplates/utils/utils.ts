@@ -1,9 +1,8 @@
 import { Sitemap } from '@config';
-import { RouterConfigRoute } from '@router';
+import { RouteData, RouterConfigRoute } from '@router';
 import Home from '../components/Home';
 import MovieDetail from '../components/ItemDetail';
 import ListDetailFeatured from '../components/ListDetailFeatured';
-import { PageTemplate } from '../models/pageEntries';
 
 const homeTemplate = 'Home';
 const listDetailTemplate = 'List Detail';
@@ -11,7 +10,7 @@ const listDetailFeaturedTemplate = 'List Detail Featured';
 const category = 'Category';
 const movieDetail = 'Movie Detail';
 
-export const templateMap: Dictionary<React.ComponentType<PageTemplate>> = {
+export const templateMap: Dictionary<React.ComponentType<RouteData>> = {
   [homeTemplate]: Home,
   [listDetailTemplate]: ListDetailFeatured,
   [listDetailFeaturedTemplate]: ListDetailFeatured,
@@ -21,7 +20,7 @@ export const templateMap: Dictionary<React.ComponentType<PageTemplate>> = {
 
 export const mapSitemapToRoute = (
   sitemap: Sitemap[]
-): RouterConfigRoute<PageTemplate>[] =>
+): RouterConfigRoute<RouteData>[] =>
   sitemap.map(s => ({
     name: s.title,
     path: s.path,

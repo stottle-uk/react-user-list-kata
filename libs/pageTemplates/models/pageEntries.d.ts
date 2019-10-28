@@ -2,7 +2,6 @@ import { Item, List } from '@lists';
 import { Entry, ItemEntry } from '@pageTemplateEntries';
 
 export interface PageTemplate {
-  isLoading: boolean;
   pageEntries: (ListEntry | ItemEntry)[];
   templateName: string;
 }

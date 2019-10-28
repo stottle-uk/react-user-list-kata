@@ -1,5 +1,6 @@
 import { Notification } from '@notifications';
-import { Page } from '@pages';
+import { templateMap } from '@pageTemplates';
+import { Router } from '@router';
 import { UserProfileModal } from '@users';
 import React from 'react';
 import { Container } from 'react-bulma-components';
@@ -11,7 +12,11 @@ const App: React.FC = () => {
     <>
       <Header />
       <Container className="no-margin is-fluid is-gapless">
-        <Page />
+        <Router routeData={{ data: {} }} templateMap={templateMap}>
+          <>
+            <h1>Not Found</h1>
+          </>
+        </Router>
       </Container>
       <UserProfileModal />
       <Notification />

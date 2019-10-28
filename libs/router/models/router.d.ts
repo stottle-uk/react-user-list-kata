@@ -3,3 +3,8 @@ export interface RouterConfigRoute<T> {
   path: string;
   template: string;
 }
+
+export interface RouteData {
+  data: Dictionary<string>;
+  children?: React.ReactNode;
+}
