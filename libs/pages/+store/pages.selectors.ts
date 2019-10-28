@@ -69,7 +69,5 @@ function normaliseEntries(page: Page, lists: Dictionary<List>) {
     }
   };
 
-  return !!page && !!page.entries
-    ? page.entries.map(entry => getEntry(page, entry))
-    : [];
+  return !!page ? page.entries.map(entry => getEntry(page, entry)) : [];
 }
