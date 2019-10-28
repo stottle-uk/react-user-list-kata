@@ -1,7 +1,6 @@
-import { App, configService, pagesService } from '@app';
+import { App, configService, mapSitemapToRoute, pagesService } from '@app';
 import { AddNavigation } from '@config';
 import { GetPageSuccess } from '@pages';
-import { mapSitemapToRoute } from '@pageTemplates';
 import { AddRoutesStart, InitFirstRouteStart } from '@router';
 import { configureStore } from '@store';
 import { Request, Response } from 'express';

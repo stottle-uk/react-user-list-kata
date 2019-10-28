@@ -1,7 +1,12 @@
-import { ConfigService } from '@config';
+import { ConfigService, Sitemap } from '@config';
 import { ListsService } from '@lists';
 import { PagesService } from '@pages';
-import { BrowserHistory, RouteMatcher } from '@router';
+import {
+  BrowserHistory,
+  RouteData,
+  RouteMatcher,
+  RouterConfigRoute
+} from '@router';
 import { HttpService } from '@shared/services/HttpService';
 import { UsersService } from '@users';
 
@@ -17,3 +22,12 @@ export const listsService = new ListsService(httpService);
 export const browserHistory = new BrowserHistory();
 export const routeMatcher = new RouteMatcher();
 export { default as App } from './components/App';
+
+export const mapSitemapToRoute = (
+  sitemap: Sitemap[]
+): RouterConfigRoute<RouteData>[] =>
+  sitemap.map(s => ({
+    name: s.title,
+    path: s.path,
+    template: s.template
+  }));

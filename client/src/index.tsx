@@ -1,7 +1,6 @@
-import { App, configService } from '@app';
+import { App, configService, mapSitemapToRoute } from '@app';
 import { AddNavigation, SetClientSide } from '@config';
 import { CheckAndGetPageLists } from '@pages';
-import { mapSitemapToRoute } from '@pageTemplates';
 import {
   AddRoutesStart,
   InitRouterOnClient,
