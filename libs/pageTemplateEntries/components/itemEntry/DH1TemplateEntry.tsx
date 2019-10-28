@@ -1,5 +1,5 @@
-import { ItemEntry } from '@pageTemplateEntries';
 import React from 'react';
+import { ItemEntry } from '../../models/pageTemplateEntries';
 
 const DH1TemplateEntry: React.FC<ItemEntry> = ({ item }) => (
   <div key={item.id}>

@@ -3,7 +3,7 @@ import { Link } from '@router';
 import React from 'react';
 import Carousel from '../../helpers/Carousel';
 import CarouselItem from '../../helpers/CarouselItem';
-import { ListEntry } from '../../models/pageEntryTemplates';
+import { ListEntry } from '../../models/pageTemplateEntries';
 
 class HeroStandard3x1 extends React.PureComponent<ListEntry> {
   render() {

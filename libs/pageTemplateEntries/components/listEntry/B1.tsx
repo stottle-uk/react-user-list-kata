@@ -2,7 +2,7 @@ import { Item } from '@lists';
 import { Link } from '@router';
 import React from 'react';
 import ScrollHorizontal from '../../helpers/ScrollHorizontal';
-import { ListEntry } from '../../models/pageEntryTemplates';
+import { ListEntry } from '../../models/pageTemplateEntries';
 
 class B1 extends React.PureComponent<ListEntry> {
   render() {

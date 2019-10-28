@@ -1,10 +1,10 @@
 import { getIsLoading, getPageEntries } from '@pages';
 import { AllEntryTypes, Entry } from '@pageTemplateEntries';
-import { PageTemplate } from '@pageTemplates';
 import { RouteData } from '@router';
 import { RootState } from '@store';
 import React from 'react';
 import { connect } from 'react-redux';
+import { PageTemplate } from '../models/pageTemplates';
 
 interface StoreProps {
   pageTemplate: PageTemplate;

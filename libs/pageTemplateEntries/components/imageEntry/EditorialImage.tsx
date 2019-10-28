@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageEntry } from '../../models/pageEntryTemplates';
+import { ImageEntry } from '../../models/pageTemplateEntries';
 
 const EditorialImage: React.FC<ImageEntry> = ({ images, customFields }) => {
   const caption = customFields ? customFields.caption : '';

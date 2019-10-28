@@ -11,9 +11,9 @@ import {
   ItemEntry,
   ListEntry,
   TextEntry
-} from './models/pageEntryTemplates.d';
+} from './models/pageTemplateEntries.d';
 
-export * from './models/pageEntryTemplates.d';
+export * from './models/pageTemplateEntries.d';
 
 type ListEntryType = React.ComponentType<ListEntry>;
 type ItemEntryType = React.ComponentType<ItemEntry>;

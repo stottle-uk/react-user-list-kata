@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextEntry } from '../../models/pageEntryTemplates';
+import { TextEntry } from '../../models/pageTemplateEntries';
 
 const TextHeading: React.FC<TextEntry> = ({ text }) => {
   console.log();

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListEntry } from '../../models/pageEntryTemplates';
+import { ListEntry } from '../../models/pageTemplateEntries';
 
 const LH1TemplateEntry: React.FC<ListEntry> = ({ list }) => (
   <div className="card">
